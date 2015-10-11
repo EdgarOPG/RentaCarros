@@ -16,6 +16,7 @@ public class Vehiculos extends javax.swing.JFrame {
      */
     public Vehiculos() {
         initComponents();
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**

@@ -16,6 +16,7 @@ public class Empleados extends javax.swing.JFrame {
      */
     public Empleados() {
         initComponents();
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
