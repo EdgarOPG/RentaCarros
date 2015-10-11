@@ -56,21 +56,21 @@ public class Vehiculos extends javax.swing.JFrame {
 
         jLabel1.setText("Vehiculos");
 
-        jLabel2.setText("Marca");
+        jLabel2.setText("Marca:");
 
-        jLabel3.setText("Modelo");
+        jLabel3.setText("Modelo:");
 
-        jLabel4.setText("Color");
+        jLabel4.setText("Color:");
 
-        jLabel5.setText("Transmision");
+        jLabel5.setText("Transmisión:");
 
-        jLabel6.setText("Estado");
+        jLabel6.setText("Estado:");
 
-        jLabel7.setText("Precio");
+        jLabel7.setText("Precio:");
 
-        jLabel8.setText("Tanque");
+        jLabel8.setText("Tanque:");
 
-        jLabel9.setText("Inventario");
+        jLabel9.setText("Inventario:");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,7 +162,7 @@ public class Vehiculos extends javax.swing.JFrame {
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 2, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

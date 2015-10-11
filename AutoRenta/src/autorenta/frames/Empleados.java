@@ -52,17 +52,17 @@ public class Empleados extends javax.swing.JFrame {
 
         jLabel1.setText("Clientes");
 
-        jLabel2.setText("Nombre");
+        jLabel2.setText("Nombre:");
 
-        jLabel3.setText("Fecha de Nacimento");
+        jLabel3.setText("Fecha de Nacimento:");
 
-        jLabel4.setText("Direccion");
+        jLabel4.setText("Dirección:");
 
-        jLabel5.setText("Email");
+        jLabel5.setText("Email:");
 
-        jLabel6.setText("Telefono");
+        jLabel6.setText("Telefono:");
 
-        jLabel7.setText("Telefono de Casa");
+        jLabel7.setText("Telefono de Casa:");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
