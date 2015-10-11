@@ -6,6 +6,11 @@
 package gui;
 
 import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,7 +29,7 @@ public class Inicio extends javax.swing.JFrame {
     }
     
      public static void obtenerCodigo(String codigo) {
-        jTextField1.setText(codigo);
+        frm_codigo.setText(codigo);
     }
 
     /**
@@ -37,7 +42,7 @@ public class Inicio extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        frm_codigo = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -52,14 +57,14 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel1.setText("Codigo:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        frm_codigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                frm_codigoActionPerformed(evt);
             }
         });
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        frm_codigo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField1KeyPressed(evt);
+                frm_codigoKeyPressed(evt);
             }
         });
 
@@ -108,6 +113,11 @@ public class Inicio extends javax.swing.JFrame {
         });
 
         jButton5.setText("Cobrar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,7 +130,7 @@ public class Inicio extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(frm_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -145,7 +155,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(frm_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -167,9 +177,9 @@ public class Inicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void frm_codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frm_codigoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_frm_codigoActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Clientes clientes = new Clientes();
@@ -195,13 +205,48 @@ public class Inicio extends javax.swing.JFrame {
         vehiculos.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+    private void frm_codigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_frm_codigoKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            Cobrar cobrar = new Cobrar();
-            cobrar.setLocationRelativeTo(cobrar);
-            cobrar.setVisible(true);
+            if (frm_codigo.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Introduzca un codigo");
+            } else {
+                DefaultTableModel venta = (DefaultTableModel) jTable1.getModel();
+                String codigo = frm_codigo.getText();
+                try {
+
+                    /*ResultSet prod = sql.Productos.getProducto(codigo);
+                    if (prod.next()) {
+                        art = prod.getString("DESCRIPCION");
+                        precio = prod.getDouble("P_VENTA");
+                        total = precio * cantidad;
+                        exist = prod.getDouble("EXISTENCIA");
+
+                        
+                            if (exist == 0) {
+                                JOptionPane.showMessageDialog(null, "Articulo agotado");
+                            }
+
+                            frm_codigo.setText("");
+                            frm_codigo.requestFocus();
+                            calcularTotal();
+
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "El codigo no existe");
+                    }*/
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
-    }//GEN-LAST:event_jTextField1KeyPressed
+    }//GEN-LAST:event_frm_codigoKeyPressed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        Cobrar cobrar = new Cobrar();
+        cobrar.setLocationRelativeTo(cobrar);
+        cobrar.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
      public static Double calcularTotal() {
         int x;
@@ -258,6 +303,7 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private static javax.swing.JTextField frm_codigo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -266,7 +312,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable jTable1;
-    private static javax.swing.JTextField jTextField1;
     private javax.swing.JLabel sasdad;
     static javax.swing.JLabel total_venta;
     // End of variables declaration//GEN-END:variables
