@@ -9,9 +9,9 @@ package gui;
 public class Launcher {
 
     public static void main(String[] args) {
-        Inicio frm = new Inicio();
-        frm.setLocationRelativeTo(frm);
-        frm.setVisible(true);
+        Login frmLogin = new Login();
+        frmLogin.setLocationRelativeTo(frmLogin);
+        frmLogin.setVisible(true);
 
     }
 

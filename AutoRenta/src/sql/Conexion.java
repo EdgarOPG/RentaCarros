@@ -13,26 +13,36 @@ import javax.swing.JOptionPane;
  */
 public class Conexion {
 
-    public String db = ""; //Nombre base de datos a usar
+    //Variables SQL
+    static Connection cn;
+    static Statement st;
+    static ResultSet rs;
+    
+    //Variables de Conexion
+    public String db = "RENTA"; //Nombre base de datos a usar
     public String url = "jdbc:mysql://localhost/" + db;
     public String user = "root";
-    public String pass = ""; //Contraseña para conexion
+    public String pass = "1234"; //Contraseña para conexion
 
     /**
      * Método para realizar la conexión a la base de datos.
-     * @return link.
+     * @return conexion.
      */
+    
     public Connection Conectar() {
 
-        Connection link = null;
+
+        cn = null;
 
         try {
             Class.forName("org.gjt.mm.mysql.Driver");
-            link = DriverManager.getConnection(this.url, this.user, this.pass);
+            cn = DriverManager.getConnection(this.url, this.user, this.pass);
+            System.out.println("Conexion Exitosa con Base de Datos");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
-        return link;
+        return cn;
     }
+
 
 }
