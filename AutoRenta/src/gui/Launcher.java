@@ -9,7 +9,7 @@ package gui;
 public class Launcher {
 
     public static void main(String[] args) {
-        Login frmLogin = new Login();
+        FrmLogin frmLogin = new FrmLogin();
         frmLogin.setLocationRelativeTo(frmLogin);
         frmLogin.setVisible(true);
 
