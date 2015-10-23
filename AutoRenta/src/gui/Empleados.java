@@ -61,6 +61,14 @@ public class Empleados extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Proyecto C.R.A.S.");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
+        addWindowStateListener(new java.awt.event.WindowStateListener() {
+            public void windowStateChanged(java.awt.event.WindowEvent evt) {
+                formWindowStateChanged(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de empleados", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
 
@@ -229,16 +237,14 @@ public class Empleados extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -274,6 +280,7 @@ public class Empleados extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
+            //Se agregan campos y valores a insertar en la tabla
             // TODO add your handling code here:
             PreparedStatement pst= cn.prepareStatement("INSERT INTO empleados (ROL,NOMBRE,FECHA_NACIMIENTO,DIRECCION,EMAIL,TELEFONO,TELEFONO_CASA,USUARIO,CONTRASENIA) VALUES(?,?,?,?,?,?,?,?,?)");
             if(jCheckBox1.isSelected()){
@@ -302,6 +309,10 @@ public class Empleados extends javax.swing.JFrame {
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
+
+    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowStateChanged
 
     /**
      * @param args the command line arguments
@@ -359,6 +370,7 @@ public class Empleados extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPwd;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
-Conexion cc= new Conexion();
+    //Se manda a llamar la conexion para probar la insercion de datos
+    Conexion cc= new Conexion();
 Connection cn = cc.Conectar();
 }

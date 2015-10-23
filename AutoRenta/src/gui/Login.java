@@ -36,7 +36,6 @@ public class Login extends javax.swing.JFrame {
         
         usuario = Usuario;
         contra = Contra;
-        
         try {
             String query = "SELECT * FROM EMPLEADOS WHERE usuario like ? AND contrasenia = ?";
             ResultSet rs = null;
@@ -52,12 +51,10 @@ public class Login extends javax.swing.JFrame {
             {
                 return false;
             }
-            
         } catch (SQLException e) {
             return false;
         }
     }
-    
      
        
     @SuppressWarnings("unchecked")
