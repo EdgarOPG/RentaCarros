@@ -27,19 +27,12 @@ public class Empleado {
     String TelefonoCasa;
     */
 
-    public Conexion getCn() {
-        return cn;
-    }
-
-    public void setCn(Conexion cn) {
-        this.cn = cn;
-    }
-    
     public void altaEmpleados(String usuario, String contra ,
                               String nombre, String fechaNacimiento,
                               String direccion, String email, 
                               String telefono, String telefonoCasa)
     {        
+        cn.Conectar();
         /*
         Nombre = nombre;
         FechaNacimieto = fechaNacimiento;

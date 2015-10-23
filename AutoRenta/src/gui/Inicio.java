@@ -193,9 +193,9 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpActionPerformed
-        Empleados empleados = new Empleados();
-        empleados.setLocationRelativeTo(this);
-        empleados.setVisible(true);
+        FrmEmpleado empleado = new FrmEmpleado();
+        empleado.setLocationRelativeTo(this);
+        empleado.setVisible(true);
     }//GEN-LAST:event_btnEmpActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -205,7 +205,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void frm_codigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_frm_codigoKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        /*if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (frm_codigo.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "Introduzca un codigo");
             } else {
@@ -213,7 +213,7 @@ public class Inicio extends javax.swing.JFrame {
                 String codigo = frm_codigo.getText();
                 try {
 
-                    /*ResultSet prod = sql.Productos.getProducto(codigo);
+                    ResultSet prod = sql.Productos.getProducto(codigo);
                     if (prod.next()) {
                         art = prod.getString("DESCRIPCION");
                         precio = prod.getDouble("P_VENTA");
@@ -232,13 +232,13 @@ public class Inicio extends javax.swing.JFrame {
                         }
                     } else {
                         JOptionPane.showMessageDialog(this, "El codigo no existe");
-                    }*/
+                    }
 
                 } catch (SQLException ex) {
                     Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        }
+        }*/
     }//GEN-LAST:event_frm_codigoKeyPressed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
