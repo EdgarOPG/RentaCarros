@@ -22,25 +22,22 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         cn = new Conexion();
-
     }
-    
-    String contra;
-    String usuario;
-    
-    //Variables SQL
-
+    /*
+    String Contra;
+    String Usuario;
+    */
     Inicio inicio = new Inicio();
     
-    boolean Ingresar(String Usuario,String Contra){
-        
-        usuario = Usuario;
-        contra = Contra;
-        
+    boolean Ingresar(String usuario,String contra){
+        /*
+        Usuario = usuario;
+        Contra = contra;
+        */
         try {
-            String query = "SELECT * FROM EMPLEADOS WHERE usuario like ? AND contrasenia = ?";
+            String Query = "SELECT * FROM EMPLEADOS WHERE usuario like ? AND contrasenia = ?";
             ResultSet rs = null;
-            PreparedStatement ps = cn.Conectar().prepareStatement(query);
+            PreparedStatement ps = cn.Conectar().prepareStatement(Query);
             ps.setString(1, usuario);
             ps.setString(2, contra);
             rs = ps.executeQuery();
@@ -68,7 +65,7 @@ public class Login extends javax.swing.JFrame {
         lblContra = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         txtContra = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        btnEntrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,12 +79,17 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        txtContra.setText("jPasswordField1");
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        txtContra.setText("jPass");
+        txtContra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                txtContraActionPerformed(evt);
+            }
+        });
+
+        btnEntrar.setText("Entrar");
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
             }
         });
 
@@ -96,22 +98,21 @@ public class Login extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addGap(84, 84, 84)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblContra)
                     .addComponent(lblUsuario))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtContra)
-                        .addComponent(txtUsuario)))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEntrar)
+                    .addComponent(txtContra)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(115, 115, 115)
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUsuario)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -120,8 +121,8 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(lblContra)
                     .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
-                .addComponent(jButton1)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(btnEntrar)
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         pack();
@@ -131,16 +132,21 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         if(Ingresar(txtUsuario.getText(), txtContra.getText()) == true){
             inicio.setVisible(true);
             this.dispose();
+            System.out.println("Logeo Exitoso");
        } 
        else
        {
            JOptionPane.showMessageDialog(null, "Contraseñia o usuario incorrecto");
        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnEntrarActionPerformed
+
+    private void txtContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,7 +184,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel lblContra;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JPasswordField txtContra;
