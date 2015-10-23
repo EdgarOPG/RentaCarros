@@ -83,6 +83,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         txtContra.setText("jPasswordField1");
+        txtContra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtContraActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -141,6 +146,10 @@ public class Login extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, "Contraseñia o usuario incorrecto");
        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraActionPerformed
 
     /**
      * @param args the command line arguments
