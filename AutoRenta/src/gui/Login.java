@@ -29,6 +29,7 @@ public class Login extends javax.swing.JFrame {
     */
     Inicio inicio = new Inicio();
     
+<<<<<<< HEAD
     boolean Ingresar(String usuario,String contra){
         /*
         Usuario = usuario;
@@ -36,6 +37,12 @@ public class Login extends javax.swing.JFrame {
         */
         String Query = "select * from EMPLEADOS where USUARIO like ? and CONTRASENIA = ?";
         ResultSet rs = null;
+=======
+    boolean Ingresar(String Usuario,String Contra){
+        
+        usuario = Usuario;
+        contra = Contra;
+>>>>>>> origin/master
         try {
             PreparedStatement ps = cn.Conectar().prepareStatement(Query);
             ps.setString(1, usuario);
@@ -48,12 +55,10 @@ public class Login extends javax.swing.JFrame {
             {
                 return false;
             }
-            
         } catch (SQLException e) {
             return false;
         }
     }
-    
      
        
     @SuppressWarnings("unchecked")
@@ -78,7 +83,11 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         txtContra.setText("jPass");
+=======
+        txtContra.setText("jPasswordField1");
+>>>>>>> origin/master
         txtContra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtContraActionPerformed(evt);
@@ -142,6 +151,10 @@ public class Login extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, "Contraseñia o usuario incorrecto");
        }
     }//GEN-LAST:event_btnEntrarActionPerformed
+
+    private void txtContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraActionPerformed
 
     private void txtContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraActionPerformed
         // TODO add your handling code here:
