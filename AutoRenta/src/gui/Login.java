@@ -34,15 +34,14 @@ public class Login extends javax.swing.JFrame {
         Usuario = usuario;
         Contra = contra;
         */
+        String Query = "select * from EMPLEADOS where USUARIO like ? and CONTRASENIA = ?";
+        ResultSet rs = null;
         try {
-            String Query = "SELECT * FROM EMPLEADOS WHERE usuario like ? AND contrasenia = ?";
-            ResultSet rs = null;
             PreparedStatement ps = cn.Conectar().prepareStatement(Query);
             ps.setString(1, usuario);
             ps.setString(2, contra);
             rs = ps.executeQuery();
             if(rs.next()){
-                
                 return true;
             }
             else
