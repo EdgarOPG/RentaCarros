@@ -27,6 +27,7 @@ public class BuscarVehiculo extends javax.swing.JFrame {
         listInfo("");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         txtBuscar.requestFocus();
+        this.setLocationRelativeTo(null);
     }
     
     /**

@@ -35,6 +35,7 @@ public class Inicio extends javax.swing.JFrame {
      */
     public Inicio() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     public static void obtenerCodigo(String codigo) {
