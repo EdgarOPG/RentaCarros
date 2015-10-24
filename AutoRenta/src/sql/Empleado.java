@@ -53,23 +53,26 @@ public class Empleado {
         }
     }
     
-    public boolean Ingresar(String usuario,String contra){
-        
+    /**
+     * Metodo para obtener usuario y contraseña del empleado para inicio de sesion
+     * @param usuario
+     * @param contra
+     * @return 
+     */
+    public static boolean ingresarUsuario(String usuario,String contra){
+        sql.Conexion mysql = new sql.Conexion();
+        Connection link = mysql.Conectar();
         String Query = "select * from EMPLEADOS where USUARIO like ? and CONTRASENIA = ?";
         ResultSet rs = null;
 
         try {
-            PreparedStatement ps = cn.Conectar().prepareStatement(Query);
-            ps.setString(1, usuario);
-            ps.setString(2, contra);
-            rs = ps.executeQuery();
-            if(rs.next()){
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+             PreparedStatement stat = link.prepareStatement(Query);
+
+            stat.setString(1, usuario);
+            stat.setString(2, contra);
+            
+            stat.executeUpdate();
+            return true;
         } catch (SQLException e) {
             return false;
         }
