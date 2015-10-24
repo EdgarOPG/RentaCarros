@@ -53,6 +53,28 @@ public class Empleado {
         }
     }
     
+    public boolean Ingresar(String usuario,String contra){
+        
+        String Query = "select * from EMPLEADOS where USUARIO like ? and CONTRASENIA = ?";
+        ResultSet rs = null;
+
+        try {
+            PreparedStatement ps = cn.Conectar().prepareStatement(Query);
+            ps.setString(1, usuario);
+            ps.setString(2, contra);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+    
     /**
      * Metodo para obtener el nombre de los empleados de la base de datos
      * @return true si el query se ejecuto correctamente
