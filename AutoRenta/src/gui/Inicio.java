@@ -20,15 +20,24 @@ import javax.swing.table.DefaultTableModel;
 public class Inicio extends javax.swing.JFrame {
 
     static Double totalNeto = 0.0;
-    
+    String marca;
+    String modelo;
+    String color;
+    String transmision;
+    float tanque;
+    int inventario;
+    int cantidad;
+    float total;
+    float precio;
+
     /**
      * Creates new form Inicio
      */
     public Inicio() {
         initComponents();
     }
-    
-     public static void obtenerCodigo(String codigo) {
+
+    public static void obtenerCodigo(String codigo) {
         frm_codigo.setText(codigo);
     }
 
@@ -52,6 +61,8 @@ public class Inicio extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        txtCantidad = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,13 +91,21 @@ public class Inicio extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Vehiculo", "Existencia", "Precio", "Total"
+                "Codigo", "Cantidad", "Marca", "Modelo", "Color", "Transmisión", "Tanque", "Existencial", "Total"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         sasdad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        sasdad.setText("Total: ");
+        sasdad.setText("Total Neto: ");
 
         total_venta.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         total_venta.setText("$0.00");
@@ -119,33 +138,53 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCantidadKeyPressed(evt);
+            }
+        });
+
+        jLabel2.setText("Cantidad:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(sasdad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(total_venta, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(frm_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(sasdad)
+                        .addGap(11, 11, 11)
+                        .addComponent(btnEmp)
+                        .addGap(10, 10, 10))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(total_venta, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,17 +194,19 @@ public class Inicio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(frm_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnEmp)
-                        .addGap(33, 33, 33)
+                        .addGap(29, 29, 29)
                         .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)))
-                .addGap(27, 27, 27)
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton4))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sasdad)
                     .addComponent(total_venta)
@@ -205,40 +246,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void frm_codigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_frm_codigoKeyPressed
-        /*if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (frm_codigo.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Introduzca un codigo");
-            } else {
-                DefaultTableModel venta = (DefaultTableModel) jTable1.getModel();
-                String codigo = frm_codigo.getText();
-                try {
 
-                    ResultSet prod = sql.Productos.getProducto(codigo);
-                    if (prod.next()) {
-                        art = prod.getString("DESCRIPCION");
-                        precio = prod.getDouble("P_VENTA");
-                        total = precio * cantidad;
-                        exist = prod.getDouble("EXISTENCIA");
-
-                        
-                            if (exist == 0) {
-                                JOptionPane.showMessageDialog(null, "Articulo agotado");
-                            }
-
-                            frm_codigo.setText("");
-                            frm_codigo.requestFocus();
-                            calcularTotal();
-
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(this, "El codigo no existe");
-                    }
-
-                } catch (SQLException ex) {
-                    Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }*/
     }//GEN-LAST:event_frm_codigoKeyPressed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -247,7 +255,83 @@ public class Inicio extends javax.swing.JFrame {
         cobrar.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
-     public static Double calcularTotal() {
+    private void txtCantidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (frm_codigo.getText().equals("") || txtCantidad.getText().equals("")) {
+                if (frm_codigo.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Introduzca un codigo");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Introduzca la cantidad");
+                }
+            } else {
+                DefaultTableModel venta = (DefaultTableModel) jTable1.getModel();
+                int codigo = Integer.parseInt(frm_codigo.getText());
+                cantidad = Integer.parseInt(txtCantidad.getText());
+                try {
+
+                    ResultSet prod = sql.Vehiculos.getVehiculos(codigo);
+                    if (prod.next()) {
+                        marca = prod.getString("MARCA");
+                        modelo = prod.getString("MODELO");
+                        color = prod.getString("COLOR");
+                        inventario = prod.getInt("INVENTARIO");
+                        transmision = prod.getString("TRANSMISION");
+                        tanque = prod.getFloat("TANQUE");
+                        precio = prod.getFloat("PRECIO_RENTA");
+                        total = cantidad * precio;
+
+                        if (inventario < cantidad) {
+                            if (inventario == 0) {
+                                JOptionPane.showMessageDialog(null, "Vehiculo agotado");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Vehiculos insuficientes");
+                                txtCantidad.setText("");
+                                txtCantidad.requestFocus();
+                            }
+                        } else {
+                            if (comprobarRepetidos() == false) {
+                                inventario = inventario - cantidad;
+                                venta.addRow(new Object[]{codigo,cantidad,marca, modelo, color, transmision, tanque, inventario,precio});
+                            }
+                            frm_codigo.setText("");
+                            txtCantidad.setText("");
+                            frm_codigo.requestFocus();
+                            calcularTotal();
+                        }
+                    }else {
+                        JOptionPane.showMessageDialog(this, "El codigo no existe");
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        }
+    }//GEN-LAST:event_txtCantidadKeyPressed
+
+    public boolean comprobarRepetidos() {
+        DefaultTableModel venta = (DefaultTableModel) jTable1.getModel();
+        int x = 0;
+        boolean bandera = false;
+
+        for (x = 0; x < venta.getRowCount(); x++) {
+            String tmpCodigo = String.valueOf(venta.getValueAt(x, 0));
+            String Chkcodigo = frm_codigo.getText();
+            if (Chkcodigo.equals(tmpCodigo)) {
+                bandera = true;
+                int temp = Integer.parseInt(venta.getValueAt(x, 1).toString());
+                cantidad = temp + cantidad;
+                float temp2 = Float.parseFloat(venta.getValueAt(x, 8).toString());
+                total = cantidad * temp2;
+                inventario = inventario - cantidad;
+                venta.setValueAt(cantidad, x, 1);
+                venta.setValueAt(total, x, 8);
+                venta.setValueAt(inventario, x, 7);
+            }
+        }
+        return bandera;
+    }
+    public static Double calcularTotal() {
         int x;
         totalNeto = 0.00;
         DefaultTableModel venta = (DefaultTableModel) jTable1.getModel();
@@ -255,7 +339,7 @@ public class Inicio extends javax.swing.JFrame {
             totalNeto = 0.00;
         } else {
             for (x = 0; x < venta.getRowCount(); x++) {
-                String tmpTotal = String.valueOf(venta.getValueAt(x, 4));
+                String tmpTotal = String.valueOf(venta.getValueAt(x, 8));
                 Double tmpTotal1 = Double.parseDouble(tmpTotal);
                 totalNeto = totalNeto + tmpTotal1;
 
@@ -265,7 +349,7 @@ public class Inicio extends javax.swing.JFrame {
         total_venta.setText(Format.Mxn(totalNeto));
         return totalNeto;
     }
-     
+
     /**
      * @param args the command line arguments
      */
@@ -309,9 +393,11 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable jTable1;
     private javax.swing.JLabel sasdad;
     static javax.swing.JLabel total_venta;
+    private javax.swing.JTextField txtCantidad;
     // End of variables declaration//GEN-END:variables
 }

@@ -65,17 +65,17 @@ public class Vehiculos {
      *
      * @return
      */
-    public static ResultSet getVehiculos() {
+    public static ResultSet getVehiculos(int i) {
         ResultSet val = null;
         sql.Conexion mysql = new sql.Conexion();
         Connection link = mysql.Conectar();
         String Query;
 
-        Query = "SELECT * FROM VEHICULOS";
+        Query = "SELECT * FROM VEHICULO WHERE ID_VEHICULO=?";
 
         try {
             PreparedStatement stat = link.prepareStatement(Query);
-
+            stat.setInt(1, i);
             val = stat.executeQuery();
 
             return val;
@@ -105,7 +105,7 @@ public class Vehiculos {
         Connection link = mysql.Conectar();
         String Query;
 
-        Query = "UPDATE VEHICULOS SET  MARCA=?, MODELO=?, COLOR=?, TRANSMISION=?, "
+        Query = "UPDATE VEHICULO SET  MARCA=?, MODELO=?, COLOR=?, TRANSMISION=?, "
                 + "PRECIO=?,AÑO=?, TANQUE=?, INVENTARION=? WHERE ID_VEHICULO=?";
         try {
             PreparedStatement stat = link.prepareStatement(Query);
