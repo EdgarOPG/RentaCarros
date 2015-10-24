@@ -29,10 +29,10 @@ public class Empleado {
         sql.Conexion mysql = new sql.Conexion();
         Connection link = mysql.Conectar();
         String Query = "insert into EMPLEADOS(USUARIO, CONTRASENIA,"
-                + " NOMBRE, FECHA_NACIMIENTO,"
-                + " DIRECCION, EMAIL,"
-                + "TELEFONO, TELEFONO_CASA)"
-                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                        + " NOMBRE, FECHA_NACIMIENTO,"
+                        + " DIRECCION, EMAIL,"
+                        + "TELEFONO, TELEFONO_CASA)"
+                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
 
             PreparedStatement stat = link.prepareStatement(Query);

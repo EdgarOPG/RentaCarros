@@ -248,7 +248,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
         String nombre = txtNombre.getText();
         String direccion = txtDireccion.getText();
         Date date = dchFechaNacimiento.getDate();
-        SimpleDateFormat formatDateJava = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatDateJava = new SimpleDateFormat("yy-MM-dd");
         String fechaNacimiento = formatDateJava.format(date);
         String email = txtEmail.getText();
         String telefono = txtTelefono.getText();
