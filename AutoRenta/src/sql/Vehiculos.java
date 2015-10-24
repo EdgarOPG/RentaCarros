@@ -150,5 +150,49 @@ public class Vehiculos {
             return false;
         }
     }
+    
+    public static ResultSet buscarVehiculo(String x) {
+        String Query;
+        sql.Conexion mysql = new sql.Conexion();
+        Connection link = mysql.Conectar();
+
+        Query = "SELECT * FROM VEHICULO WHERE MARCA LIKE ?";
+
+        try {
+            PreparedStatement stat = link.prepareStatement(Query);
+            stat.setString(1, x + "%");
+            ResultSet busqueda = stat.executeQuery();
+            return busqueda;
+        } catch (SQLException ex) {
+            Logger.getLogger(Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public static String codigo(String descripcion) {
+        sql.Conexion mysql = new sql.Conexion();
+        Connection link = mysql.Conectar();
+        String Query;
+        String Codigo;
+
+        Query = "SELECT ID_VEHICULO FROM VEHICULO WHERE MARCA = ?";
+
+        try {
+            PreparedStatement stat = link.prepareStatement(Query);
+            stat.setString(1, descripcion);
+            ResultSet codigo = stat.executeQuery();
+            if (codigo.next()) {
+                Codigo = codigo.getString("ID_VEHICULO");
+                return Codigo;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
 
 }

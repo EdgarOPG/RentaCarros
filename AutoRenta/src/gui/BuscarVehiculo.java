@@ -24,30 +24,36 @@ public class BuscarVehiculo extends javax.swing.JFrame {
      */
     public BuscarVehiculo() {
         initComponents();
+        listInfo("");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        txtBuscar.requestFocus();
     }
     
     /**
      * Metodo para enlistar los vehiculos, faltan las busquedas sql
      */
-    /* private void listInfo(String x) {
+    private void listInfo(String x) {
         int y;
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel modelo1 = (DefaultTableModel) jTable1.getModel();
         for (y = jTable1.getRowCount() - 1; y >= 0; y--) {
-            modelo.removeRow(y);
+            modelo1.removeRow(y);
         }
-        ResultSet data = sql.Productos.buscarProd(x);
+        ResultSet data = sql.Vehiculos.buscarVehiculo(x);
         try {
             while (data.next()) {
-                String codigo = data.getString("CODIGO");
-                String nombre = data.getString("DESCRIPCION");
-                Double pVenta = data.getDouble("P_VENTA");
-                modelo.addRow(new Object[]{codigo, nombre, pVenta});
+                int codigo = data.getInt("ID_VEHICULO");
+                String marca = data.getString("MARCA");
+                String modelo = data.getString("MODELO");
+                String color = data.getString("COLOR");
+                String transmision = data.getString("TRANSMISION");
+                float precio = data.getFloat("PRECIO_RENTA");
+                float tanque = data.getFloat("TANQUE");
+                modelo1.addRow(new Object[]{codigo, marca, modelo, color, transmision, tanque, precio});
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BuscarVehiculo.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }*/
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,11 +79,11 @@ public class BuscarVehiculo extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Articulo", "Precio"
+                "Código", "Marca", "Modelo", "Color", "Transmision", "Tanque", "Precio"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -119,14 +125,14 @@ public class BuscarVehiculo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(Nombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton7))))
+                        .addComponent(jButton7))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1)
+                            .addComponent(txtBuscar))
+                        .addContainerGap(12, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,7 +145,7 @@ public class BuscarVehiculo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                 .addGap(6, 6, 6))
         );
 
@@ -153,8 +159,8 @@ public class BuscarVehiculo extends javax.swing.JFrame {
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
             String nombre = (String) modelo.getValueAt(row, 1);
 //            System.out.println(modelo.getValueAt(row, 1));
-            //String codigo = sql.Productos.codigo(nombre);
-            //Inicio.obtenerCodigo(codigo);
+            String codigo = sql.Vehiculos.codigo(nombre);
+            Inicio.obtenerCodigo(codigo);
             this.dispose();
             count = 0;
         }
@@ -166,7 +172,7 @@ public class BuscarVehiculo extends javax.swing.JFrame {
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         String texto = txtBuscar.getText();
-        //listInfo(texto);
+        listInfo(texto);
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
