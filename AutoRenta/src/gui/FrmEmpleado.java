@@ -18,7 +18,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
 
     public FrmEmpleado() {
         initComponents();
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -252,12 +252,10 @@ public class FrmEmpleado extends javax.swing.JFrame {
         String email = txtEmail.getText();
         String telefono = txtTelefono.getText();
         String telefonoCasa = txtTelefonoCasa.getText();
-        System.out.println(fechaNacimiento);
         if (sql.Empleado.validarContrasenia(contra, contraRepet)) {
             //Validar Fecha
             if (sql.Empleado.addEmpleados(usuario, contra, nombre, fechaNacimiento, direccion, email, telefono, telefonoCasa)) {
                 JOptionPane.showMessageDialog(this, "Empleado registrado");
-                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Ha ocurrido un error al tratar de registrar al empleado");
             }
