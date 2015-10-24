@@ -253,8 +253,18 @@ public class FrmClientes extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       guardar();
+      vaciarText();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void vaciarText(){
+        txtName.setText("");
+        txtCity.setText("");
+        txtAddress.setText("");
+        txtRef.setText("");
+        txtLic.setText("");
+        dchFechaNacimiento.setDate(null);
+        txtPhone.setText("");
+    }
     public void guardar(){
         String nombre = txtName.getText();
         String ciudad = txtCity.getText();
