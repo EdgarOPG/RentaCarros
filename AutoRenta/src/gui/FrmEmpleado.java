@@ -70,7 +70,14 @@ public class FrmEmpleado extends javax.swing.JFrame {
 
         lblContra.setText("Contraseña");
 
+        txtUsuario.setText("1");
+
         pswContra1.setText("jPassw");
+        pswContra1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pswContra1ActionPerformed(evt);
+            }
+        });
 
         pswContra2.setText("jPassw");
 
@@ -78,10 +85,13 @@ public class FrmEmpleado extends javax.swing.JFrame {
 
         jLabel3.setText("Nombre");
 
+        txtNombre.setText("1");
+
         jLabel5.setText("Fecha de Nacimiento");
 
         jLabel6.setText("Direccion");
 
+        txtDireccion.setText("1");
         txtDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDireccionActionPerformed(evt);
@@ -92,6 +102,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
 
         jLabel7.setText("Email");
 
+        txtEmail.setText("1");
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
@@ -100,6 +111,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
 
         jLabel8.setText("Celular");
 
+        txtTelefono.setText("1");
         txtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefonoActionPerformed(evt);
@@ -247,6 +259,10 @@ public class FrmEmpleado extends javax.swing.JFrame {
     private void txtTelefonoCasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoCasaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefonoCasaActionPerformed
+
+    private void pswContra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswContra1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pswContra1ActionPerformed
 
     /**
      * @param args the command line arguments

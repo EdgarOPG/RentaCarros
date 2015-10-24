@@ -16,35 +16,17 @@ public class Empleado {
     public Empleado() {
     cn = new Conexion();    
     }
-    
-        //Variables Query
-    /*
-    String Nombre;
-    Date FechaNacimieto;
-    String Direccion;
-    String Email;
-    String Telefono;
-    String TelefonoCasa;
-    */
 
     public void altaEmpleados(String usuario, String contra ,
                               String nombre, String fechaNacimiento,
                               String direccion, String email, 
                               String telefono, String telefonoCasa)
-    {        
-        cn.Conectar();
-        /*
-        Nombre = nombre;
-        FechaNacimieto = fechaNacimiento;
-        Direccion = direccion;
-        Email = email;
-        Telefono = telefono;
-        TelefonoCasa = telefonoCasa;
-        */
-        
-        String Query = "insert into EMPLEADOS(USUARIO, CONTRASENIA, NOMBRE, "
-                     + "FECHA_NACIMIENTO, DIRECCION, EMAIL, TELEFONO, TELEFONO_CASA) "
-                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    {
+        String Query = "insert into EMPLEADOS(USUARIO, CONTRASENIA,"
+                                            + " NOMBRE, FECHA_NACIMIENTO,"
+                                            + " DIRECCION, EMAIL,"
+                                            + "TELEFONO, TELEFONO_CASA)"
+                                            + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         ResultSet rs = null;
         try {
             PreparedStatement ps = cn.Conectar().prepareStatement(Query);
@@ -56,8 +38,7 @@ public class Empleado {
             ps.setString(6, email);
             ps.setString(7, telefono);
             ps.setString(8, telefonoCasa);
-            rs = ps.executeQuery();
-            if(rs.next())
+            if(ps.execute())
             {
                 JOptionPane.showMessageDialog(null, "Datos correctamente guardados");
             }

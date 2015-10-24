@@ -181,7 +181,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_frm_codigoActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Clientes clientes = new Clientes();
+        FrmClientes clientes = new FrmClientes();
         clientes.setLocationRelativeTo(this);
         clientes.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -199,7 +199,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEmpActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Vehiculos vehiculos = new Vehiculos();
+        FrmVehiculos vehiculos = new FrmVehiculos();
         vehiculos.setLocationRelativeTo(this);
         vehiculos.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
