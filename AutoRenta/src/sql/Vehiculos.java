@@ -146,7 +146,7 @@ public class Vehiculos {
             stat.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(Empleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
