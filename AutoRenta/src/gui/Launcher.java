@@ -4,7 +4,7 @@ package gui;
  * Clase principal, se utiliza como lanzador para el programa principal
  * incializar aqui los componentes del programa
  *
- * @author Adrian Flores Pizarro
+ * @author Daniela Santillanes Castro
  */
 public class Launcher {
 

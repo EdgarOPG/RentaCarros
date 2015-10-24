@@ -22,7 +22,7 @@ public class Conexion {
     public String db = "RENTA"; //Nombre base de datos a usar
     public String url = "jdbc:mysql://localhost/" + db;
     public String user = "root";
-    public String pass = "1234"; //Contraseña para conexion
+    public String pass = "soojung"; //Contraseña para conexion
 
     /**
      * Método para realizar la conexión a la base de datos.

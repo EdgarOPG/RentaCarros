@@ -271,7 +271,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         /*try {*/
-            vehiculos.AltaVehiculos(txtBrand.getText(), Integer.parseInt(txtModel.getText()),
+            vehiculos.addVehiculos(txtBrand.getText(), Integer.parseInt(txtModel.getText()),
                                     txtColor.getText(), txtTrans.getText(),
                                     Float.parseFloat(txtPrice.getText()), Float.parseFloat(txtFuel.getText()),
                                     Integer.parseInt(txtStock.getText()));
