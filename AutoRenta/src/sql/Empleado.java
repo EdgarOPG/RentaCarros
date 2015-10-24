@@ -1,7 +1,6 @@
-
 package sql;
 
-
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,65 +8,107 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 public class Empleado {
 
-    Conexion cn;
-    public Empleado() {
-    cn = new Conexion();    
-    }
+    /**
+     * Metodo para agregar empleados a la base de datos.
+     * @param usuario
+     * @param contra
+     * @param nombre
+     * @param fechaNacimiento
+     * @param direccion
+     * @param email
+     * @param telefono
+     * @param telefonoCasa
+     * @return 
+     */
+    public static boolean addEmpleados(String usuario, String contra, String nombre,
+            String fechaNacimiento, String direccion, String email, String telefono, String telefonoCasa) {
 
-    public void altaEmpleados(String usuario, String contra ,
-                              String nombre, String fechaNacimiento,
-                              String direccion, String email, 
-                              String telefono, String telefonoCasa)
-    {
+        sql.Conexion mysql = new sql.Conexion();
+        Connection link = mysql.Conectar();
         String Query = "insert into EMPLEADOS(USUARIO, CONTRASENIA,"
-                                            + " NOMBRE, FECHA_NACIMIENTO,"
-                                            + " DIRECCION, EMAIL,"
-                                            + "TELEFONO, TELEFONO_CASA)"
-                                            + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        ResultSet rs = null;
+                + " NOMBRE, FECHA_NACIMIENTO,"
+                + " DIRECCION, EMAIL,"
+                + "TELEFONO, TELEFONO_CASA)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
-            PreparedStatement ps = cn.Conectar().prepareStatement(Query);
-            ps.setString(1, usuario);
-            ps.setString(2, contra);
-            ps.setString(3, nombre);
-            ps.setString(4, fechaNacimiento);
-            ps.setString(5, direccion);
-            ps.setString(6, email);
-            ps.setString(7, telefono);
-            ps.setString(8, telefonoCasa);
-            if(ps.execute())
-            {
-                JOptionPane.showMessageDialog(null, "Datos correctamente guardados");
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "No se pudo guardar el registro");
-            }
+
+            PreparedStatement stat = link.prepareStatement(Query);
+
+            stat.setString(1, usuario);
+            stat.setString(2, contra);
+            stat.setString(3, nombre);
+            stat.setString(4, fechaNacimiento);
+            stat.setString(5, direccion);
+            stat.setString(6, email);
+            stat.setString(7, telefono);
+            stat.setString(8, telefonoCasa);
+            stat.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(Empleado.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-    };
+    }
+    
+    /**
+     * Metodo para obtener el nombre de los empleados de la base de datos
+     * @return true si el query se ejecuto correctamente
+     */
+    public static ResultSet getEmpleados(){
+        sql.Conexion mysql = new sql.Conexion();
+        Connection link = mysql.Conectar();
+        ResultSet val = null;
+        String Query = "SELECT NOMBRE FROM EMPLEADOS";
 
-    public boolean validarContrasenia(String contra1,String contra2){
-        if(contra2.equals(contra1))
-        {
-            if(contra1.length() <= 15 && contra1.length() >= 5)
-            {
+        try {
+            PreparedStatement stat = link.prepareStatement(Query);
+            val = stat.executeQuery();
+
+            return val;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Empleado.class.getName()).log(Level.SEVERE, null, ex);
+            return val;
+        }
+    }
+    
+    /**
+     * Metodo para borrar empleados de la base de datos mediante su nombre
+     * @param nombre que es el nombre del empleados
+     * @return true si el query se ejecuto correctamente
+     */
+    public static boolean borrarEmpleado(String nombre){
+        sql.Conexion mysql = new sql.Conexion();
+        Connection link = mysql.Conectar();
+        String Query;
+
+        Query = "DELETE FROM EMPLEADOS WHERE NOMBRE = ?";
+        try {
+            PreparedStatement stat = link.prepareStatement(Query);
+
+            stat.setString(1, nombre);
+
+            stat.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Empleado.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    public static boolean validarContrasenia(String contra1, String contra2) {
+        if (contra2.equals(contra1)) {
+            if (contra1.length() <= 15 && contra1.length() >= 5) {
                 System.out.println("Contraseña de longitud correcta");
                 return true;
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null,"La contraseña debe tener una longitud de entre 5 y 15 caracteres.");
+            } else {
+                JOptionPane.showMessageDialog(null, "La contraseña debe tener una longitud de entre 5 y 15 caracteres.");
                 return false;
             }
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden");
+        } else {
+            JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
             return false;
         }
     }
