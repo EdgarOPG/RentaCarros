@@ -12,6 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import sql.Conexion;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Edgar
@@ -23,7 +25,7 @@ public class FrmClientes extends javax.swing.JFrame {
      */
     public FrmClientes() {
         initComponents();
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -44,7 +46,6 @@ public class FrmClientes extends javax.swing.JFrame {
         txtName = new javax.swing.JTextField();
         txtLic = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtBirth = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtRef = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -53,6 +54,7 @@ public class FrmClientes extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        dchFechaNacimiento = new com.toedter.calendar.JDateChooser();
 
         jTextField8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,12 +106,6 @@ public class FrmClientes extends javax.swing.JFrame {
 
         jLabel3.setText("Telefono:");
 
-        txtBirth.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBirthActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Dirección:");
 
         txtRef.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +135,8 @@ public class FrmClientes extends javax.swing.JFrame {
             }
         });
 
+        dchFechaNacimiento.setDateFormatString("yy-MM-dd");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -162,9 +160,9 @@ public class FrmClientes extends javax.swing.JFrame {
                     .addComponent(txtAddress, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtPhone)
                     .addComponent(txtCity)
-                    .addComponent(txtBirth)
                     .addComponent(txtRef)
-                    .addComponent(txtLic)))
+                    .addComponent(txtLic)
+                    .addComponent(dchFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel5)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -188,10 +186,10 @@ public class FrmClientes extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dchFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,10 +239,6 @@ public class FrmClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCityActionPerformed
 
-    private void txtBirthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBirthActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBirthActionPerformed
-
     private void txtRefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRefActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRefActionPerformed
@@ -258,22 +252,26 @@ public class FrmClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField8ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            // TODO add your handling code here:
-            PreparedStatement pst= cn.prepareStatement("INSERT INTO renta.clientes (NOMBRE,TELEFONO,DIRECCION,CIUDAD,FECHA_NACIMIENTO,REFERENCIA,NUMERO_DE_LICENCIA) VALUES(?,?,?,?,?,?,?)");
-            pst.setString(1, txtName.getText());
-            pst.setString(2, txtPhone.getText());
-            pst.setString(3, txtAddress.getText());
-            pst.setString(4, txtCity.getText());
-            pst.setString(5, txtBirth.getText());
-            pst.setString(6, txtRef.getText());
-            pst.setString(7, txtLic.getText());
-            pst.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmClientes.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      guardar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void guardar(){
+        String nombre = txtName.getText();
+        String ciudad = txtCity.getText();
+        String direccion = txtAddress.getText();
+        String referencia = txtRef.getText();
+        String numLic = txtLic.getText();
+        java.util.Date date = dchFechaNacimiento.getDate();
+        SimpleDateFormat formatDateJava = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaNacimiento = formatDateJava.format(date);
+        String telefono = txtPhone.getText();
+        
+            if (sql.Cliente.addCliente(nombre, ciudad, referencia, fechaNacimiento, direccion, telefono, numLic)) {
+                JOptionPane.showMessageDialog(this, "Cliente registrado");
+            } else {
+                JOptionPane.showMessageDialog(this, "Ha ocurrido un error al tratar de registrar al cliente");
+            }
+    }
     /**
      * @param args the command line arguments
      */
@@ -311,6 +309,7 @@ public class FrmClientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser dchFechaNacimiento;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -323,7 +322,6 @@ public class FrmClientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtBirth;
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtLic;
     private javax.swing.JTextField txtName;

@@ -98,9 +98,9 @@
                       <Component id="txtAddress" alignment="1" max="32767" attributes="0"/>
                       <Component id="txtPhone" max="32767" attributes="0"/>
                       <Component id="txtCity" max="32767" attributes="0"/>
-                      <Component id="txtBirth" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtRef" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtLic" alignment="0" max="32767" attributes="0"/>
+                      <Component id="dchFechaNacimiento" alignment="0" pref="246" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <Group type="102" attributes="0">
@@ -132,10 +132,10 @@
                       <Component id="txtCity" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtBirth" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel6" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel6" min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="dchFechaNacimiento" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -185,11 +185,6 @@
             <Property name="text" type="java.lang.String" value="Telefono:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtBirth">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBirthActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
             <Property name="text" type="java.lang.String" value="Direcci&#xf3;n:"/>
@@ -232,6 +227,11 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="dchFechaNacimiento">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="yy-MM-dd"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
