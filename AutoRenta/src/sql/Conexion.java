@@ -1,6 +1,8 @@
 package sql;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -44,5 +46,12 @@ public class Conexion {
         return cn;
     }
 
-
+    public Connection Desconectar(){
+        try {
+            cn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    } 
 }

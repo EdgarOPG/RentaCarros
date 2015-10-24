@@ -227,7 +227,7 @@
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="dchFechaNacimiento">
       <Properties>
-        <Property name="dateFormatString" type="java.lang.String" value="yy-MM-dd"/>
+        <Property name="dateFormatString" type="java.lang.String" value="yy-MM-dd" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">

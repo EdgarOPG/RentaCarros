@@ -8,7 +8,7 @@ package gui;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
-import sql.Empleado;
+import sql.Empleados;
 
 /**
  *
@@ -16,11 +16,11 @@ import sql.Empleado;
  */
 public class FrmEmpleado extends javax.swing.JFrame {
 
-    Empleado empleado;
+    Empleados empleados;
     
     public FrmEmpleado() {
         initComponents();
-        empleado = new Empleado();
+        empleados = new Empleados();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
@@ -98,7 +98,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
             }
         });
 
-        dchFechaNacimiento.setDateFormatString("yy-MM-dd");
+        dchFechaNacimiento.setDateFormatString("yy-MM-dd"); // NOI18N
 
         jLabel7.setText("Email");
 
@@ -232,15 +232,15 @@ public class FrmEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(empleado.validarContrasenia(pswContra1.getText(), pswContra2.getText()))
+        if(empleados.validarContrasenia(pswContra1.getText(), pswContra2.getText()))
         {
             //Validar Fecha
             Date date = dchFechaNacimiento.getDate();
-            String fecha = new SimpleDateFormat("YY-MM-DD").format(date);
-            empleado.altaEmpleados(txtUsuario.getText(), pswContra1.getText(),
-                                   txtNombre.getText(), fecha, 
-                                   txtDireccion.getText(), txtEmail.getText(), 
-                                   txtTelefono.getText(), txtTelefonoCasa.getText());
+            String fecha = new SimpleDateFormat("yy-MM-dd").format(date);
+            empleados.altaEmpleados(txtUsuario.getText(), pswContra1.getText(),
+                                    txtNombre.getText(), fecha, 
+                                    txtDireccion.getText(), txtEmail.getText(), 
+                                    txtTelefono.getText(), txtTelefonoCasa.getText());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

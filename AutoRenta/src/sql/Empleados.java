@@ -10,12 +10,35 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
-public class Empleado {
+public class Empleados {
 
     Conexion cn;
-    public Empleado() {
+    public Empleados() {
     cn = new Conexion();    
     }
+    
+    public boolean Ingresar(String usuario,String contra){
+        
+        String Query = "select * from EMPLEADOS where USUARIO like ? and CONTRASENIA = ?";
+        ResultSet rs = null;
+
+        try {
+            PreparedStatement ps = cn.Conectar().prepareStatement(Query);
+            ps.setString(1, usuario);
+            ps.setString(2, contra);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
 
     public void altaEmpleados(String usuario, String contra ,
                               String nombre, String fechaNacimiento,
@@ -25,7 +48,7 @@ public class Empleado {
         String Query = "insert into EMPLEADOS(USUARIO, CONTRASENIA,"
                                             + " NOMBRE, FECHA_NACIMIENTO,"
                                             + " DIRECCION, EMAIL,"
-                                            + "TELEFONO, TELEFONO_CASA)"
+                                            + " TELEFONO, TELEFONO_CASA)"
                                             + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         ResultSet rs = null;
         try {
@@ -40,14 +63,15 @@ public class Empleado {
             ps.setString(8, telefonoCasa);
             if(ps.execute())
             {
-                JOptionPane.showMessageDialog(null, "Datos correctamente guardados");
+                JOptionPane.showMessageDialog(null, "No se pudo guardar el registro");
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "No se pudo guardar el registro");
+                JOptionPane.showMessageDialog(null, "Datos correctamente guardados");
             }
+            cn.Desconectar();
         } catch (SQLException ex) {
-            Logger.getLogger(Empleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Empleados.class.getName()).log(Level.SEVERE, null, ex);
         }
     };
 
