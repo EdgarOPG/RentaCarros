@@ -26,6 +26,7 @@ public class FrmClientes extends javax.swing.JFrame {
     public FrmClientes() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
     }
 
     /**

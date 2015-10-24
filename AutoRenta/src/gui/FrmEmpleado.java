@@ -5,10 +5,10 @@
  */
 package gui;
 
+import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *
@@ -19,6 +19,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
     public FrmEmpleado() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
     }
 
     /**

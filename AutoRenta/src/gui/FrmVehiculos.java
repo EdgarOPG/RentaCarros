@@ -18,6 +18,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
     public FrmVehiculos() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
     }
 
     /**
