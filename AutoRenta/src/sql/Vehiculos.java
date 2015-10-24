@@ -31,8 +31,8 @@ public class Vehiculos {
      * @param inventario
      * @return
      */
-    public static boolean addVehiculos(String marca, int modelo, String color,
-            String transmision, Float precio, Float tanque, int inventario) {
+    public static boolean addVehiculos(String marca, String modelo, String color,
+            String transmision, float precio, float tanque, int inventario) {
         sql.Conexion mysql = new sql.Conexion();
         Connection link = mysql.Conectar();
         String Query = "insert into VEHICULO(MARCA, MODELO,"
@@ -45,7 +45,7 @@ public class Vehiculos {
             PreparedStatement stat = link.prepareStatement(Query);
 
             stat.setString(1, marca);
-            stat.setInt(2, modelo);
+            stat.setString(2, modelo);
             stat.setString(3, color);
             stat.setString(4, transmision);
             stat.setFloat(5, precio);

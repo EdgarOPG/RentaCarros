@@ -5,12 +5,7 @@
  */
 package gui;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import sql.Conexion;
+import javax.swing.JOptionPane;
 import sql.Vehiculos;
 /**
  *
@@ -22,8 +17,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
             
     public FrmVehiculos() {
         initComponents();
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        vehiculos = new Vehiculos();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -270,26 +264,35 @@ public class FrmVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtStockActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        /*try {*/
-            vehiculos.addVehiculos(txtBrand.getText(), Integer.parseInt(txtModel.getText()),
-                                    txtColor.getText(), txtTrans.getText(),
-                                    Float.parseFloat(txtPrice.getText()), Float.parseFloat(txtFuel.getText()),
-                                    Integer.parseInt(txtStock.getText()));
-            
-            /*PreparedStatement pst= cn.prepareStatement("INSERT INTO vehiculo (MARCA,MODELO,COLOR,TRANSMISION,ESTADO,PRECIO_RENTA,TANQUE,INVENTARIO) VALUES(?,?,?,?,?,?,?,?)");
-            pst.setString(1, txtBrand.getText());
-            pst.setString(2, txtModel.getText());
-            pst.setString(3, txtColor.getText());
-            pst.setString(4, txtTrans.getText());
-            pst.setString(6, txtPrice.getText());
-            pst.setString(7, txtFuel.getText());
-            pst.setString(8, txtStock.getText());
-            pst.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmVehiculos.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+       guardar();
+       vaciarText();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+     public void vaciarText(){
+        txtBrand.setText("");
+        txtModel.setText("");
+        txtColor.setText("");
+        txtTrans.setText("");
+        txtPrice.setText("");
+        txtFuel.setText("");
+        txtStock.setText("");
+    }
+     
+    public void guardar(){
+        String marca = txtBrand.getText();
+        String modelo = txtModel.getText();
+        String color = txtColor.getText();
+        String transmision = txtTrans.getText();
+        float precio = Float.parseFloat(txtPrice.getText());
+        float tanque = Float.parseFloat(txtFuel.getText());
+        int inventario = Integer.parseInt(txtStock.getText());
+        
+            if (sql.Vehiculos.addVehiculos(marca, modelo, color, transmision, precio, tanque, inventario)) {
+                JOptionPane.showMessageDialog(this, "Vehiculo Agregado");
+            } else {
+                JOptionPane.showMessageDialog(this, "Ha ocurrido un error al tratar de agregar el vehiculo");
+            }
+    }
     /**
      * @param args the command line arguments
      */
@@ -347,6 +350,5 @@ public class FrmVehiculos extends javax.swing.JFrame {
     private javax.swing.JTextField txtStock;
     private javax.swing.JTextField txtTrans;
     // End of variables declaration//GEN-END:variables
-Conexion cc= new Conexion();
-Connection cn = cc.Conectar();
+
 }
