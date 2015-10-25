@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 public class Empleado {
     
     static boolean isAdmin = false;
+    static String nombreEmpleado;
 
     /**
      * Metodo para agregar empleados a la base de datos.
@@ -73,11 +74,15 @@ public class Empleado {
             stat.setString(1, usuario);
             stat.setString(2, contra);
             
-            stat.executeUpdate();
+            stat.executeQuery();
             return true;
         } catch (SQLException e) {
             return false;
         }
+    }
+    
+    public static String getNombre() {
+        return nombreEmpleado;
     }
     
     /**
