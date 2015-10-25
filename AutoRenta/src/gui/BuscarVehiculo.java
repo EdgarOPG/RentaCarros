@@ -85,7 +85,7 @@ public class BuscarVehiculo extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true, true, true
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -159,9 +159,12 @@ public class BuscarVehiculo extends javax.swing.JFrame {
         if (count == 2) {
             int row = jTable1.getSelectedRow();
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-            String nombre = (String) modelo.getValueAt(row, 1);
+            String marca = (String) modelo.getValueAt(row, 1);
+            String modelo1 = (String) modelo.getValueAt(row, 2);
+            String color = (String) modelo.getValueAt(row, 3);
+            float precio = (Float) modelo.getValueAt(row, 6);
 //            System.out.println(modelo.getValueAt(row, 1));
-            String codigo = sql.Vehiculos.codigo(nombre);
+            String codigo = sql.Vehiculos.codigo(marca, modelo1, color, precio);
             Inicio.obtenerCodigo(codigo);
             this.dispose();
             count = 0;

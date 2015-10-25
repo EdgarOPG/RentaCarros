@@ -166,17 +166,21 @@ public class Vehiculos {
         }
     }
     
-    public static String codigo(String descripcion) {
+    public static String codigo(String marca, String modelo, String color, float precio ) {
         sql.Conexion mysql = new sql.Conexion();
         Connection link = mysql.Conectar();
         String Query;
         String Codigo;
 
-        Query = "SELECT ID_VEHICULO FROM VEHICULO WHERE MARCA = ?";
+        Query = "SELECT ID_VEHICULO FROM VEHICULO WHERE MARCA = ? AND MODELO = ?"
+                + "AND COLOR = ? AND PRECIO_RENTA = ? ";
 
         try {
             PreparedStatement stat = link.prepareStatement(Query);
-            stat.setString(1, descripcion);
+            stat.setString(1, marca);
+            stat.setString(2, modelo);
+            stat.setString(3, color);
+            stat.setFloat(4, precio);
             ResultSet codigo = stat.executeQuery();
             if (codigo.next()) {
                 Codigo = codigo.getString("ID_VEHICULO");
