@@ -20,28 +20,35 @@ public class Cobrar extends javax.swing.JFrame {
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         inicio = new Inicio();
         //Aqui asignamos el valor de la variable Total declarada mas abajo al label que muestra el Total.
-        //txtTotal.setText(String.valueOf(Total));
+        txtTotal.setText(String.valueOf(Total));
     } 
     //Declaramos esta varianble para almacenar el valor que regresa el metodo calcularTotal().
-    //double Total = Inicio.calcularTotal()
-    double entregado=0;
+    double Total = Inicio.calcularTotal();
+    double entregado = 0;
     String ent="";
     
     public void cambio(){  
 
         Double cambio = 0.00;
-        if (!(txtEntregado.getText().equals(""))) {
+        //Evalua si la caja de texto del dinero entregado es igual a vacio.
+        if (!(txtEntregado.getText().equals(""))) 
+        {
             entregado = Double.parseDouble(txtEntregado.getText());
-            double total = Double.parseDouble(txtTotal.getText().substring(1, txtTotal.getText().length()));
-            if (entregado >= total) {
-                cambio = entregado - total;
+            //double total = Double.parseDouble(txtTotal.getText().substring(1, txtTotal.getText().length()));
+            if (entregado >= Total) 
+            {
+                cambio = entregado - Total;
                 frmCambio.setText(Format.Mxn(cambio));
                 frmCobrar.setEnabled(true);
-            } else {
+            } 
+            else 
+            {
                 frmCambio.setText(Format.Mxn(0));
                 frmCobrar.setEnabled(false);
             }
-        } else {
+        } 
+        else 
+        {
             frmCambio.setText(Format.Mxn(0));
             frmCobrar.setEnabled(false);
         }
