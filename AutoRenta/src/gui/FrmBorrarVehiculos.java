@@ -81,7 +81,7 @@ public class FrmBorrarVehiculos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Marca", "Modelo", "Color", "Transmision", "Tanque", "Precio"
+                "ID", "Marca", "Modelo", "Color", "Transmision", "Tanque", "Precio"
             }
         ) {
             boolean[] canEdit = new boolean [] {

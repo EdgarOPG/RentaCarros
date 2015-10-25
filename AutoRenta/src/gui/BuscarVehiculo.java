@@ -74,18 +74,18 @@ public class BuscarVehiculo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Nombre.setText("Producto:");
+        Nombre.setText("Marca del Vehiculo:");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Código", "Marca", "Modelo", "Color", "Transmision", "Tanque", "Precio"
+                "ID", "Marca", "Modelo", "Color", "Transmision", "Tanque", "Precio"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true, true, true
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
