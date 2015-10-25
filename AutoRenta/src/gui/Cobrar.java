@@ -16,6 +16,7 @@ public class Cobrar extends javax.swing.JFrame {
      */
     public Cobrar() {
         initComponents();
+        setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
     } 
 
     double entregado=0;
@@ -24,9 +25,9 @@ public class Cobrar extends javax.swing.JFrame {
     public void cambio(){  
 
         Double cambio = 0.00;
-        if (!(frmEntregado.getText().equals(""))) {
-            entregado = Double.parseDouble(frmEntregado.getText());
-            double total=Double.parseDouble(frmtotal.getText().substring(1, frmtotal.getText().length()));
+        if (!(txtEntregado.getText().equals(""))) {
+            entregado = Double.parseDouble(txtEntregado.getText());
+            double total=Double.parseDouble(txtTotal.getText().substring(1, txtTotal.getText().length()));
             if (entregado >= total) {
                 cambio = entregado - total;
                 frmCambio.setText(Format.Mxn(cambio));
@@ -56,9 +57,9 @@ public class Cobrar extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        frmtotal = new javax.swing.JLabel();
+        txtTotal = new javax.swing.JLabel();
         frmCambio = new javax.swing.JLabel();
-        frmEntregado = new javax.swing.JTextField();
+        txtEntregado = new javax.swing.JTextField();
         frmCobrar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -78,15 +79,15 @@ public class Cobrar extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Cambio:");
 
-        frmtotal.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        frmtotal.setText("$ 0.00");
+        txtTotal.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtTotal.setText("$ 0.00");
 
         frmCambio.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         frmCambio.setText("$ 0.00");
 
-        frmEntregado.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtEntregado.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                frmEntregadoKeyReleased(evt);
+                txtEntregadoKeyReleased(evt);
             }
         });
 
@@ -110,7 +111,7 @@ public class Cobrar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(frmEntregado, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtEntregado, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +119,7 @@ public class Cobrar extends javax.swing.JFrame {
                                 .addComponent(frmCambio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                                 .addComponent(frmCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(frmtotal))))
+                            .addComponent(txtTotal))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -127,11 +128,11 @@ public class Cobrar extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(frmtotal))
+                    .addComponent(txtTotal))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(frmEntregado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEntregado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -151,9 +152,9 @@ public class Cobrar extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_frmCobrarActionPerformed
 
-    private void frmEntregadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_frmEntregadoKeyReleased
+    private void txtEntregadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEntregadoKeyReleased
         cambio();
-    }//GEN-LAST:event_frmEntregadoKeyReleased
+    }//GEN-LAST:event_txtEntregadoKeyReleased
 
     /**
      * @param args the command line arguments
@@ -193,12 +194,12 @@ public class Cobrar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel frmCambio;
     private javax.swing.JButton frmCobrar;
-    private javax.swing.JTextField frmEntregado;
-    private javax.swing.JLabel frmtotal;
     private javax.swing.JLabel frmtotal1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField txtEntregado;
+    private javax.swing.JLabel txtTotal;
     // End of variables declaration//GEN-END:variables
 }
