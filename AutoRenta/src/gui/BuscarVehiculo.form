@@ -81,10 +81,10 @@
                 <Column editable="false" title="C&#xf3;digo" type="java.lang.Object"/>
                 <Column editable="false" title="Marca" type="java.lang.Object"/>
                 <Column editable="false" title="Modelo" type="java.lang.Object"/>
-                <Column editable="true" title="Color" type="java.lang.Object"/>
-                <Column editable="true" title="Transmision" type="java.lang.Object"/>
-                <Column editable="true" title="Tanque" type="java.lang.Object"/>
-                <Column editable="true" title="Precio" type="java.lang.Object"/>
+                <Column editable="false" title="Color" type="java.lang.Object"/>
+                <Column editable="false" title="Transmision" type="java.lang.Object"/>
+                <Column editable="false" title="Tanque" type="java.lang.Object"/>
+                <Column editable="false" title="Precio" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
