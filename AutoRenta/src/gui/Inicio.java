@@ -42,6 +42,7 @@ public class Inicio extends javax.swing.JFrame {
 
     public static void obtenerCodigo(String codigo) {
         frm_codigo.setText(codigo);
+        frm_codigo.requestFocus();
     }
     
     /**
@@ -63,8 +64,6 @@ public class Inicio extends javax.swing.JFrame {
         sasdad = new javax.swing.JLabel();
         total_venta = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
-        txtCantidad = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         tbpAdmin = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         btnEmp = new javax.swing.JButton();
@@ -75,6 +74,7 @@ public class Inicio extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         tgbAdmin = new javax.swing.JToggleButton();
+        jButton8 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -102,7 +102,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Buscar");
+        jButton1.setText("Busca Vehiculor");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -139,16 +139,6 @@ public class Inicio extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-
-        txtCantidad.setEnabled(false);
-        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCantidadKeyPressed(evt);
-            }
-        });
-
-        jLabel2.setText("Cantidad:");
-        jLabel2.setEnabled(false);
 
         btnEmp.setText("Agregar Empleado");
         btnEmp.addActionListener(new java.awt.event.ActionListener() {
@@ -246,6 +236,8 @@ public class Inicio extends javax.swing.JFrame {
 
         tgbAdmin.setText("Admin");
 
+        jButton8.setText("Buscar Cliente");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -265,15 +257,12 @@ public class Inicio extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(frm_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                                    .addComponent(frm_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tbpAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -289,11 +278,10 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(frm_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton1)
+                                .addComponent(jButton8))
+                            .addComponent(frm_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(tgbAdmin, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -380,7 +368,6 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                                 venta.addRow(new Object[]{codigo, marca, modelo, color, transmision, tanque, precio});
                             /*}*/
                             frm_codigo.setText("");
-                            txtCantidad.setText("");
                             frm_codigo.requestFocus();
                             calcularTotal();
                             
@@ -401,10 +388,6 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
         cobrar.setLocationRelativeTo(cobrar);
         cobrar.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void txtCantidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyPressed
-        
-    }//GEN-LAST:event_txtCantidadKeyPressed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         FrmBorrarEmpleados borrarEmpleados = new FrmBorrarEmpleados();
@@ -512,8 +495,8 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -524,6 +507,5 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
     private javax.swing.JPanel tbpBajas;
     private javax.swing.JToggleButton tgbAdmin;
     static javax.swing.JLabel total_venta;
-    private javax.swing.JTextField txtCantidad;
     // End of variables declaration//GEN-END:variables
 }
