@@ -34,14 +34,18 @@ import java.util.regex.Pattern;
     return cant;
     }
  
+    //Mediante Expresiones Regulares evalua si un String es un Email o no.
     public boolean isEmail(String email) {
+        //Las siguientes dos clases son instanseadas de la libreria de Expresiones Regulares de Java.
         Pattern pat = null;
         Matcher mat = null;        
+        //Aqui se declara el patron que se utilizara para identificar si es un Email
         pat = Pattern.compile("^([0-9a-zA-Z]([_.w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-w]*[0-9a-zA-Z].)+([a-zA-Z]{2,9}.)+[a-zA-Z]{2,3})$");
         mat = pat.matcher(email);
+        //Si cumple la condicion regresa true, de otra manera falso.
         if (mat.find()) 
         {
-            System.out.println("[" + mat.group() + "]");
+            //System.out.println("[" + mat.group() + "]");
             return true;
         }
         else

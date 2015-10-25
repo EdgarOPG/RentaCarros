@@ -124,6 +124,8 @@ public class Empleado {
         }
     }
 
+        //Compara dos String en este caso el contenido de una caja de contraseñas contra otro que debe ser igual,
+        //Y evalua si la longitud esta entre 5 y 15, las rechaza si no cumple con alguna de estas condiciones.
     public static boolean validarContrasenia(String contra1, String contra2) {
         if (contra2.equals(contra1)) {
             if (contra1.length() <= 15 && contra1.length() >= 5) {
