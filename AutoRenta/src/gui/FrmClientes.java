@@ -273,6 +273,9 @@ public class FrmClientes extends javax.swing.JFrame {
         String referencia = txtRef.getText();
         String numLic = txtLic.getText();
         java.util.Date date = dchFechaNacimiento.getDate();
+        //El formato de fecha "yy-MM-dd" declarado aqui y el que tiene el objeto JDateChooser 
+        //de la libreria JCalendar en su propiedad "dateFormatString"
+        //debe coincidir con el que usa MySQL para sus columnas DATE.
         SimpleDateFormat formatDateJava = new SimpleDateFormat("yy-MM-dd");
         String fechaNacimiento = formatDateJava.format(date);
         String telefono = txtPhone.getText();

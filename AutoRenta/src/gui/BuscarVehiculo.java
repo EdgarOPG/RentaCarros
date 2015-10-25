@@ -36,7 +36,8 @@ public class BuscarVehiculo extends javax.swing.JFrame {
     private void listInfo(String x) {
         int y;
         DefaultTableModel modelo1 = (DefaultTableModel) jTable1.getModel();
-        for (y = jTable1.getRowCount() - 1; y >= 0; y--) {
+        for (y = jTable1.getRowCount() - 1; y >= 0; y--) 
+        {
             modelo1.removeRow(y);
         }
         ResultSet data = sql.Vehiculos.buscarVehiculo(x);

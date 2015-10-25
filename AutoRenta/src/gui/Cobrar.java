@@ -11,14 +11,19 @@ package gui;
  */
 public class Cobrar extends javax.swing.JFrame {
 
+    Inicio inicio;
     /**
      * Creates new form Cobrar
      */
     public Cobrar() {
         initComponents();
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
+        inicio = new Inicio();
+        //Aqui asignamos el valor de la variable Total declarada mas abajo al label que muestra el Total.
+        //txtTotal.setText(String.valueOf(Total));
     } 
-
+    //Declaramos esta varianble para almacenar el valor que regresa el metodo calcularTotal().
+    //double Total = Inicio.calcularTotal()
     double entregado=0;
     String ent="";
     
@@ -27,7 +32,7 @@ public class Cobrar extends javax.swing.JFrame {
         Double cambio = 0.00;
         if (!(txtEntregado.getText().equals(""))) {
             entregado = Double.parseDouble(txtEntregado.getText());
-            double total=Double.parseDouble(txtTotal.getText().substring(1, txtTotal.getText().length()));
+            double total = Double.parseDouble(txtTotal.getText().substring(1, txtTotal.getText().length()));
             if (entregado >= total) {
                 cambio = entregado - total;
                 frmCambio.setText(Format.Mxn(cambio));
@@ -42,6 +47,8 @@ public class Cobrar extends javax.swing.JFrame {
         }
         
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

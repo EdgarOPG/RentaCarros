@@ -31,7 +31,7 @@ public class Empleado {
         String Query = "insert into EMPLEADOS(USUARIO, CONTRASENIA,"
                         + " NOMBRE, FECHA_NACIMIENTO,"
                         + " DIRECCION, EMAIL,"
-                        + "TELEFONO, TELEFONO_CASA)"
+                        + " TELEFONO, TELEFONO_CASA)"
                         + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
 
