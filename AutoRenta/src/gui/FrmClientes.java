@@ -273,7 +273,7 @@ public class FrmClientes extends javax.swing.JFrame {
         String referencia = txtRef.getText();
         String numLic = txtLic.getText();
         java.util.Date date = dchFechaNacimiento.getDate();
-        SimpleDateFormat formatDateJava = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatDateJava = new SimpleDateFormat("yy-MM-dd");
         String fechaNacimiento = formatDateJava.format(date);
         String telefono = txtPhone.getText();
         

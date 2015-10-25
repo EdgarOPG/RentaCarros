@@ -16,8 +16,10 @@ import javax.swing.JOptionPane;
  */
 public class FrmEmpleado extends javax.swing.JFrame {
 
+    Format format;
     public FrmEmpleado() {
         initComponents();
+        format = new Format();
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
     }
@@ -253,15 +255,33 @@ public class FrmEmpleado extends javax.swing.JFrame {
         String email = txtEmail.getText();
         String telefono = txtTelefono.getText();
         String telefonoCasa = txtTelefonoCasa.getText();
-        if (sql.Empleado.validarContrasenia(contra, contraRepet)) {
-            //Validar Fecha
-            if (sql.Empleado.addEmpleados(usuario, contra, nombre, fechaNacimiento, direccion, email, telefono, telefonoCasa)) {
-                JOptionPane.showMessageDialog(this, "Empleado registrado");
-            } else {
-                JOptionPane.showMessageDialog(this, "Ha ocurrido un error al tratar de registrar al empleado");
+        if (sql.Empleado.validarContrasenia(contra, contraRepet)) 
+        {
+            //Validar correo
+            if(format.isEmail(txtEmail.getText()))
+            {
+                //Validar Fecha
+                if (sql.Empleado.addEmpleados(usuario, contra,
+                                              nombre, fechaNacimiento, 
+                                              direccion, email, 
+                                              telefono, telefonoCasa)) 
+                {
+                    JOptionPane.showMessageDialog(this, "Empleado registrado");
+                }
+                else 
+                {
+                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error al tratar de registrar al empleado");
+                }
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden");
+            else
+            {
+                JOptionPane.showMessageDialog(this, "Ingrese una direccion de Email Valida");
+            }
+            
+        } 
+        else 
+        {
+            JOptionPane.showMessageDialog(this, "Las contraeñas no coinciden");
         }
     }
 
