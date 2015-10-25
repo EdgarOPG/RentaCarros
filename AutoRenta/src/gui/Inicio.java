@@ -205,6 +205,11 @@ public class Inicio extends javax.swing.JFrame {
         });
 
         jButton6.setText("Borrar Clientes");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Borrar Vehiculos");
 
@@ -401,6 +406,12 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
         borrarEmpleados.setVisible(true);
         borrarEmpleados.setLocationRelativeTo(borrarEmpleados);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        FrmBorrarCliente borrarClientes = new FrmBorrarCliente();
+        borrarClientes.setVisible(true);
+        borrarClientes.setLocationRelativeTo(borrarClientes);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     public boolean comprobarRepetidos() {
         DefaultTableModel venta = (DefaultTableModel) jTable1.getModel();

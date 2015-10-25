@@ -9,7 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import sql.Cliente;
 
 /**
  *
@@ -40,17 +42,14 @@ public class FrmBorrarCliente extends javax.swing.JFrame {
         {
             modelo1.removeRow(y);
         }
-        ResultSet data = sql.Vehiculos.buscarVehiculo(x);
+        ResultSet data = sql.Cliente.buscarCliente(x);
         try {
             while (data.next()) {
-                int codigo = data.getInt("ID_VEHICULO");
-                String marca = data.getString("MARCA");
-                String modelo = data.getString("MODELO");
-                String color = data.getString("COLOR");
-                String transmision = data.getString("TRANSMISION");
-                float precio = data.getFloat("PRECIO_RENTA");
-                float tanque = data.getFloat("TANQUE");
-                modelo1.addRow(new Object[]{codigo, marca, modelo, color, transmision, tanque, precio});
+                int codigo = data.getInt("ID_CLIENTE");
+                String nombre = data.getString("NOMBRE");
+                String noLic = data.getString("NUMERO_DE_LICENCIA");
+                
+                modelo1.addRow(new Object[]{codigo, nombre, noLic});
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmBorrarCliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,18 +73,18 @@ public class FrmBorrarCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Nombre.setText("Producto:");
+        Nombre.setText("Nombre del Cliente:");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Código", "Marca", "Modelo", "Color", "Transmision", "Tanque", "Precio"
+                "ID", "Nombre", "No. De Licencia"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -159,15 +158,14 @@ public class FrmBorrarCliente extends javax.swing.JFrame {
         if (count == 2) {
             int row = jTable1.getSelectedRow();
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-            String marca = (String) modelo.getValueAt(row, 1);
-            String modelo1 = (String) modelo.getValueAt(row, 2);
-            String color = (String) modelo.getValueAt(row, 3);
-            float precio = (Float) modelo.getValueAt(row, 6);
-//            System.out.println(modelo.getValueAt(row, 1));
-            String codigo = sql.Vehiculos.codigo(marca, modelo1, color, precio);
-            Inicio.obtenerCodigo(codigo);
-            this.dispose();
+            String nombre = (String) modelo.getValueAt(row, 1);
+            if(Cliente.borrarCliente(nombre)){
+                JOptionPane.showMessageDialog(this, "Cliente eliminado.");
+                listInfo("");
             count = 0;
+            }else{
+                JOptionPane.showMessageDialog(this, "Error al tratar de eliminar cliente.");
+            }
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
