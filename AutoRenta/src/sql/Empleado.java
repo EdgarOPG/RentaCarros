@@ -140,4 +140,22 @@ public class Empleado {
             return false;
         }
     }
+    
+    public static ResultSet buscarEmpleado(String x) {
+        String Query;
+        sql.Conexion mysql = new sql.Conexion();
+        Connection link = mysql.Conectar();
+
+        Query = "SELECT * FROM EMPLEADOS WHERE NOMBRE LIKE ? ";
+
+        try {
+            PreparedStatement stat = link.prepareStatement(Query);
+            stat.setString(1, x + "%");
+            ResultSet busqueda = stat.executeQuery();
+            return busqueda;
+        } catch (SQLException ex) {
+            Logger.getLogger(Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }

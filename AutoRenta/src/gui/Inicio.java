@@ -71,6 +71,9 @@ public class Inicio extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         tbpBajas = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         tgbAdmin = new javax.swing.JToggleButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -194,15 +197,39 @@ public class Inicio extends javax.swing.JFrame {
 
         tbpAdmin.addTab("Altas", jPanel3);
 
+        jButton2.setText("Borrar Empleados");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Borrar Clientes");
+
+        jButton7.setText("Borrar Vehiculos");
+
         javax.swing.GroupLayout tbpBajasLayout = new javax.swing.GroupLayout(tbpBajas);
         tbpBajas.setLayout(tbpBajasLayout);
         tbpBajasLayout.setHorizontalGroup(
             tbpBajasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 144, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tbpBajasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tbpBajasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         tbpBajasLayout.setVerticalGroup(
             tbpBajasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 118, Short.MAX_VALUE)
+            .addGroup(tbpBajasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         tbpAdmin.addTab("Bajas", tbpBajas);
@@ -369,6 +396,12 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
         
     }//GEN-LAST:event_txtCantidadKeyPressed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        FrmBorrarEmpleados borrarEmpleados = new FrmBorrarEmpleados();
+        borrarEmpleados.setVisible(true);
+        borrarEmpleados.setLocationRelativeTo(borrarEmpleados);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public boolean comprobarRepetidos() {
         DefaultTableModel venta = (DefaultTableModel) jTable1.getModel();
         int x = 0;
@@ -451,9 +484,12 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
     private javax.swing.JButton btnEmp;
     private static javax.swing.JTextField frm_codigo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
