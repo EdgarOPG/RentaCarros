@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Empleado {
+    
+    static boolean isAdmin = false;
 
     /**
      * Metodo para agregar empleados a la base de datos.
@@ -157,5 +159,53 @@ public class Empleado {
             Logger.getLogger(Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+    }
+    
+    public static boolean validarUsuario(String usr, String pass) {
+
+        sql.Conexion mysql = new sql.Conexion();
+        Connection link = mysql.Conectar();
+        String Query;
+        ResultSet val = null;
+
+        Query = "SELECT * FROM EMPLEADOS WHERE USUARIO=? AND CONTRASENIA=?";
+
+        try {
+            PreparedStatement stat = link.prepareStatement(Query);
+
+            stat.setString(1, usr);
+            stat.setString(2, pass);
+
+            val = stat.executeQuery();
+
+            if (val.next()) {
+               
+                if (val.getInt("ROL_DEFNITION")==1){
+                     Empleado.setIsAdmin(true);
+                }
+                else{
+                    Empleado.setIsAdmin(false);
+
+                }
+                
+                return true;
+            }
+            else{
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Empleado.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+
+
+    }
+    
+    public static boolean isAdmin() {
+        return isAdmin;
+    }
+    
+    public static void setIsAdmin(boolean isAdmin) {
+        Empleado.isAdmin = isAdmin;
     }
 }

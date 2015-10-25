@@ -12,6 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import jdk.nashorn.internal.runtime.regexp.joni.Syntax;
+import sql.Empleado;
 
 /**
  *
@@ -37,6 +39,7 @@ public class Inicio extends javax.swing.JFrame {
     public Inicio() {
         initComponents();
         this.setLocationRelativeTo(null);
+        visibilidad();
 
     }
 
@@ -448,6 +451,20 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
         }
         total_venta.setText(Format.Mxn(totalNeto));
         return totalNeto;
+    }
+    
+    public void visibilidad(){
+        if(Empleado.isAdmin()){
+            tbpAdmin.setEnabled(true);
+        }else{
+            tbpAdmin.setEnabled(false);
+            btnEmp.setEnabled(false);
+            jButton3.setEnabled(false);
+            jButton4.setEnabled(false);
+            jButton2.setEnabled(false);
+            jButton6.setEnabled(false);
+            jButton7.setEnabled(false);
+        }
     }
 
     /**
