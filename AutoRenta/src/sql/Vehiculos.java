@@ -32,14 +32,14 @@ public class Vehiculos {
      * @return
      */
     public static boolean addVehiculos(String marca, String modelo, String color,
-            String transmision, float precio, float tanque, int inventario) {
+            String transmision, float precio, float tanque) {
         sql.Conexion mysql = new sql.Conexion();
         Connection link = mysql.Conectar();
         String Query = "insert into VEHICULO(MARCA, MODELO,"
                 + " COLOR, TRANSMISION,"
                 + " PRECIO_RENTA, TANQUE,"
-                + " INVENTARIO)"
-                + " VALUES (?, ?, ?, ?, ?, ?, ?)";
+                + " ESTADO)"
+                + " VALUES (?, ?, ?, ?, ?, ?, 1)";
 
         try {
             PreparedStatement stat = link.prepareStatement(Query);
@@ -50,7 +50,6 @@ public class Vehiculos {
             stat.setString(4, transmision);
             stat.setFloat(5, precio);
             stat.setFloat(6, tanque);
-            stat.setInt(7, inventario);
             stat.executeUpdate();
             return true;
 
@@ -71,7 +70,7 @@ public class Vehiculos {
         Connection link = mysql.Conectar();
         String Query;
 
-        Query = "SELECT * FROM VEHICULO WHERE ID_VEHICULO=?";
+        Query = "SELECT * FROM VEHICULO WHERE ID_VEHICULO = ?";
 
         try {
             PreparedStatement stat = link.prepareStatement(Query);
@@ -96,17 +95,16 @@ public class Vehiculos {
      * @param tanque
      * @param inventario
      * @param codVehiculo
-     * @param año
      * @return 
      */
     public static boolean modificarVehiculos(String marca, String modelo, String color,
-            String transmision, Float precio, Float tanque, int inventario, int codVehiculo, int año) {
+            String transmision, Float precio, Float tanque, String estado, int codVehiculo) {
     sql.Conexion mysql = new sql.Conexion();
         Connection link = mysql.Conectar();
         String Query;
 
-        Query = "UPDATE VEHICULO SET  MARCA=?, MODELO=?, COLOR=?, TRANSMISION=?, "
-                + "PRECIO=?,AÑO=?, TANQUE=?, INVENTARION=? WHERE ID_VEHICULO=?";
+        Query = "UPDATE VEHICULO SET MARCA=?, MODELO=?, COLOR=?, TRANSMISION=?, "
+                + "PRECIO=?, TANQUE=?, ESTADO=? WHERE ID_VEHICULO=?";
         try {
             PreparedStatement stat = link.prepareStatement(Query);
 
@@ -115,10 +113,9 @@ public class Vehiculos {
             stat.setString(3, color);
             stat.setString(4, transmision);
             stat.setDouble(5, precio);
-            stat.setInt(6, año);
-            stat.setFloat(7, tanque);
-            stat.setInt(8, inventario);
-            stat.setInt(8, codVehiculo);
+            stat.setFloat(6, tanque);
+            stat.setString(7, estado);
+            stat.setInt(9, codVehiculo);
             stat.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -156,7 +153,7 @@ public class Vehiculos {
         sql.Conexion mysql = new sql.Conexion();
         Connection link = mysql.Conectar();
 
-        Query = "SELECT * FROM VEHICULO WHERE MARCA LIKE ?";
+        Query = "SELECT * FROM VEHICULO WHERE MARCA LIKE ? AND ESTADO = 1";
 
         try {
             PreparedStatement stat = link.prepareStatement(Query);
