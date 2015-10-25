@@ -134,7 +134,7 @@ public class Vehiculos {
         Connection link = mysql.Conectar();
         String Query;
 
-        Query = "DELETE FROM VEHICULOS WHERE ID_VEHICULO= ?";
+        Query = "DELETE FROM VEHICULO WHERE ID_VEHICULO= ?";
         try {
             PreparedStatement stat = link.prepareStatement(Query);
 

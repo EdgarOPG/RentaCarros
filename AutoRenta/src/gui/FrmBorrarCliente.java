@@ -18,7 +18,7 @@ import sql.Cliente;
  * @author Dani
  */
 public class FrmBorrarCliente extends javax.swing.JFrame {
-    
+
     int count = 0;
 
     /**
@@ -31,15 +31,14 @@ public class FrmBorrarCliente extends javax.swing.JFrame {
         txtBuscar.requestFocus();
         this.setLocationRelativeTo(null);
     }
-    
+
     /**
      * Metodo para enlistar los vehiculos, faltan las busquedas sql
      */
     private void listInfo(String x) {
         int y;
         DefaultTableModel modelo1 = (DefaultTableModel) jTable1.getModel();
-        for (y = jTable1.getRowCount() - 1; y >= 0; y--) 
-        {
+        for (y = jTable1.getRowCount() - 1; y >= 0; y--) {
             modelo1.removeRow(y);
         }
         ResultSet data = sql.Cliente.buscarCliente(x);
@@ -48,7 +47,7 @@ public class FrmBorrarCliente extends javax.swing.JFrame {
                 int codigo = data.getInt("ID_CLIENTE");
                 String nombre = data.getString("NOMBRE");
                 String noLic = data.getString("NUMERO_DE_LICENCIA");
-                
+
                 modelo1.addRow(new Object[]{codigo, nombre, noLic});
             }
         } catch (SQLException ex) {
@@ -159,18 +158,20 @@ public class FrmBorrarCliente extends javax.swing.JFrame {
             int row = jTable1.getSelectedRow();
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
             String nombre = (String) modelo.getValueAt(row, 1);
-            if(Cliente.borrarCliente(nombre)){
+            if (Cliente.borrarCliente(nombre)) {
                 JOptionPane.showMessageDialog(this, "Cliente eliminado.");
                 listInfo("");
-            count = 0;
-            }else{
+                txtBuscar.setText(null);
+                txtBuscar.requestFocus();
+                count = 0;
+            } else {
                 JOptionPane.showMessageDialog(this, "Error al tratar de eliminar cliente.");
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void txtBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyPressed
-       
+
     }//GEN-LAST:event_txtBuscarKeyPressed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
@@ -179,11 +180,11 @@ public class FrmBorrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
-      
+
     }//GEN-LAST:event_txtBuscarKeyTyped
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-       
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     /**

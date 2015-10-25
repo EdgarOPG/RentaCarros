@@ -212,6 +212,11 @@ public class Inicio extends javax.swing.JFrame {
         });
 
         jButton7.setText("Borrar Vehiculos");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout tbpBajasLayout = new javax.swing.GroupLayout(tbpBajas);
         tbpBajas.setLayout(tbpBajasLayout);
@@ -412,6 +417,12 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
         borrarClientes.setVisible(true);
         borrarClientes.setLocationRelativeTo(borrarClientes);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        FrmBorrarVehiculos borrar = new FrmBorrarVehiculos();
+        borrar.setVisible(true);
+        borrar.setLocationRelativeTo(borrar);
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     public boolean comprobarRepetidos() {
         DefaultTableModel venta = (DefaultTableModel) jTable1.getModel();

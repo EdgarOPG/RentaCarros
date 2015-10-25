@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Dani
  */
 public class FrmBorrarVehiculos extends javax.swing.JFrame {
-    
+
     int count = 0;
 
     /**
@@ -29,15 +30,14 @@ public class FrmBorrarVehiculos extends javax.swing.JFrame {
         txtBuscar.requestFocus();
         this.setLocationRelativeTo(null);
     }
-    
+
     /**
      * Metodo para enlistar los vehiculos, faltan las busquedas sql
      */
     private void listInfo(String x) {
         int y;
         DefaultTableModel modelo1 = (DefaultTableModel) jTable1.getModel();
-        for (y = jTable1.getRowCount() - 1; y >= 0; y--) 
-        {
+        for (y = jTable1.getRowCount() - 1; y >= 0; y--) {
             modelo1.removeRow(y);
         }
         ResultSet data = sql.Vehiculos.buscarVehiculo(x);
@@ -74,7 +74,7 @@ public class FrmBorrarVehiculos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Nombre.setText("Producto:");
+        Nombre.setText("Marca del Vehiculo:");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -159,20 +159,21 @@ public class FrmBorrarVehiculos extends javax.swing.JFrame {
         if (count == 2) {
             int row = jTable1.getSelectedRow();
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-            String marca = (String) modelo.getValueAt(row, 1);
-            String modelo1 = (String) modelo.getValueAt(row, 2);
-            String color = (String) modelo.getValueAt(row, 3);
-            float precio = (Float) modelo.getValueAt(row, 6);
-//            System.out.println(modelo.getValueAt(row, 1));
-            String codigo = sql.Vehiculos.codigo(marca, modelo1, color, precio);
-            Inicio.obtenerCodigo(codigo);
-            this.dispose();
-            count = 0;
+            int id = (Integer) modelo.getValueAt(row, 0);
+            if (sql.Vehiculos.borrarVehiculo(id)) {
+                JOptionPane.showMessageDialog(this, "Vehiculo eliminado.");
+                listInfo("");
+                txtBuscar.setText(null);
+                txtBuscar.requestFocus();
+                count = 0;
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al tratar de eliminar vehiculo.");
+            }
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void txtBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyPressed
-       
+
     }//GEN-LAST:event_txtBuscarKeyPressed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
@@ -181,11 +182,11 @@ public class FrmBorrarVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
-      
+
     }//GEN-LAST:event_txtBuscarKeyTyped
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-       
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
