@@ -156,12 +156,18 @@ public class BuscarVehiculo extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         count++;
+        //Evalua si el renglon de la tabla es clickeado dos veces.
         if (count == 2) {
             int row = jTable1.getSelectedRow();
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-            String nombre = (String) modelo.getValueAt(row, 1);
+            //Toma el valor del String en la posicion 1 del renglon, es decir el nombre y obtiene el Id 
+            //con el metodo obtenerCodigo que esta en la clase Inicio.
+            String marca = (String) modelo.getValueAt(row, 1);
+            String modelo1 = (String) modelo.getValueAt(row, 2);
+            String color = (String) modelo.getValueAt(row, 3);
+            float precio = (Float) modelo.getValueAt(row, 6);
 //            System.out.println(modelo.getValueAt(row, 1));
-            String codigo = sql.Vehiculos.codigo(nombre);
+            String codigo = sql.Vehiculos.codigo(marca, modelo1, color, precio);
             Inicio.obtenerCodigo(codigo);
             this.dispose();
             count = 0;
