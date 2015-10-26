@@ -18,7 +18,7 @@ import sql.Conexion;
  */
 public class FrmLogin extends javax.swing.JFrame {
 
-    String user;
+    String usr;
     String pass;
 
     /**
@@ -120,17 +120,20 @@ public class FrmLogin extends javax.swing.JFrame {
         }// TODO add your handling code here:
     }//GEN-LAST:event_txtContraKeyPressed
 
-    public void validar() {
-        user = txtUsuario.getText();
+   public void validar() {
+        usr = txtUsuario.getText();
         pass = txtContra.getText();
-        if (sql.Empleado.ingresarUsuario(user, pass)) {
-            Inicio inicio = new Inicio();
-            inicio.setVisible(true);
-            inicio.setLocationRelativeTo(this);
+
+        if (sql.Empleado.validarUsuario(usr, pass)) {
+            Inicio main = new Inicio();
+            main.setVisible(true);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Usuario/Contraseña incorrecta");
-        }
-    }
+            txtContra.setText("");
+            txtUsuario.setText("");
+         }
+   }
 
     /**
      * @param args the command line arguments
