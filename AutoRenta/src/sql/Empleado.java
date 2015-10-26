@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 public class Empleado {
     
     static boolean isAdmin = false;
+    static String nombreUsuario;
 
     /**
      * Metodo para agregar empleados a la base de datos.
@@ -208,4 +209,44 @@ public class Empleado {
     public static void setIsAdmin(boolean isAdmin) {
         Empleado.isAdmin = isAdmin;
     }
+    
+    public static void setNombreEmpleado(String user) {
+        nombreUsuario = user;
+    }
+    
+    public static String nombreEmpleado() {
+        return nombreUsuario;
+    }
+    
+    public static boolean nombreUser(String user) {
+
+        sql.Conexion mysql = new sql.Conexion();
+        Connection link = mysql.Conectar();
+        String Query;
+        ResultSet val = null;
+
+        Query = "SELECT NOMBRE FROM EMPLEADOS WHERE USUARIO=?";
+
+        try {
+            PreparedStatement stat = link.prepareStatement(Query);
+
+            stat.setString(1, user);
+            
+            val = stat.executeQuery();
+
+            if (val.next()) {
+                setNombreEmpleado(val.getString("NOMBRE"));
+                return true;
+            } else {
+                return false;
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Empleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+    
 }

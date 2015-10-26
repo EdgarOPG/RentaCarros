@@ -220,5 +220,42 @@ public class Vehiculos {
         }
     }
 
+    public static boolean devolverVehiculo(int idVehiculo)
+    {
+        sql.Conexion mysql = new sql.Conexion();
+        Connection link = mysql.Conectar();
+        String Query;
 
+        Query = "UPDATE VEHICULO SET ESTADO=1 WHERE ID_VEHICULO=?";
+        try {
+            PreparedStatement stat = link.prepareStatement(Query);
+
+            stat.setInt(1, idVehiculo);
+            
+
+            stat.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+  public static ResultSet buscarVehiculoRentado(String marca) {
+        String Query;
+        sql.Conexion mysql = new sql.Conexion();
+        Connection link = mysql.Conectar();
+
+        Query = "SELECT * FROM VEHICULO WHERE MARCA LIKE ? AND ESTADO = 0";
+
+        try {
+            PreparedStatement stat = link.prepareStatement(Query);
+            stat.setString(1, marca + "%");
+            ResultSet busqueda = stat.executeQuery();
+            return busqueda;
+        } catch (SQLException ex) {
+            Logger.getLogger(Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }

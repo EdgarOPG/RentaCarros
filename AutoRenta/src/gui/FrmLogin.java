@@ -125,6 +125,7 @@ public class FrmLogin extends javax.swing.JFrame {
         pass = txtContra.getText();
 
         if (sql.Empleado.validarUsuario(usr, pass)) {
+            sql.Empleado.nombreUser(usr);
             Inicio main = new Inicio();
             main.setVisible(true);
             this.dispose();
