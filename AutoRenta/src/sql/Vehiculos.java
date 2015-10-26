@@ -70,7 +70,7 @@ public class Vehiculos {
         Connection link = mysql.Conectar();
         String Query;
 
-        Query = "SELECT * FROM VEHICULO WHERE ID_VEHICULO = ?";
+        Query = "SELECT * FROM VEHICULO WHERE ID_VEHICULO = ? AND ESTADO = 1";
 
         try {
             PreparedStatement stat = link.prepareStatement(Query);
@@ -199,7 +199,7 @@ public class Vehiculos {
      * Metodo cambiar el estado de un vehiculo de la base de datos mediante su id.
      * @param idVehiculo 
      */
-    public void rentarVehiculos(int idVehiculo)
+    public void rentarVehiculo(int idVehiculo)
     {
         String Query;
         sql.Conexion mysql = new sql.Conexion();
