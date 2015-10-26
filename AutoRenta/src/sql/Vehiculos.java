@@ -199,22 +199,24 @@ public class Vehiculos {
      * Metodo cambiar el estado de un vehiculo de la base de datos mediante su id.
      * @param idVehiculo 
      */
-    public void rentarVehiculo(int idVehiculo)
+    public static boolean rentarVehiculo(int idVehiculo)
     {
-        String Query;
         sql.Conexion mysql = new sql.Conexion();
         Connection link = mysql.Conectar();
-        Query = "UPDATE VEHICULO SET ESTADO = 0 WHERE ID_VEHICULO = ?";
-        PreparedStatement stat;
-        try 
-        {
-            stat = link.prepareStatement(Query);
+        String Query;
+
+        Query = "UPDATE VEHICULO SET ESTADO=0 WHERE ID_VEHICULO=?";
+        try {
+            PreparedStatement stat = link.prepareStatement(Query);
+
             stat.setInt(1, idVehiculo);
+            
+
             stat.executeUpdate();
-        } 
-        catch (SQLException ex) 
-        {
+            return true;
+        } catch (SQLException ex) {
             Logger.getLogger(Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
 

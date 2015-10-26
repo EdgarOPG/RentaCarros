@@ -20,7 +20,6 @@ import sql.Vehiculos;
  */
 public class Inicio extends javax.swing.JFrame {
 
-    Vehiculos vehiculos;
     static Double totalNeto = 0.0;
     String marca;
     String modelo;
@@ -32,7 +31,7 @@ public class Inicio extends javax.swing.JFrame {
     int cantidad;
     float total;
     float precio;
-    
+
     /**
      * Creates new form Inicio
      */
@@ -40,14 +39,14 @@ public class Inicio extends javax.swing.JFrame {
         initComponents();
         visibilidad();
         this.setLocationRelativeTo(null);
-        vehiculos = new Vehiculos();
+
     }
-    
+
     public static void obtenerCodigo(String codigo) {
         frm_codigo.setText(codigo);
         frm_codigo.requestFocus();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -357,14 +356,12 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void frm_codigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_frm_codigoKeyPressed
-if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (frm_codigo.getText().equals("")) {
-                
-                    JOptionPane.showMessageDialog(null, "Introduzca un codigo");
-                
-            } 
-            else 
-            {
+
+                JOptionPane.showMessageDialog(null, "Introduzca un codigo");
+
+            } else {
                 DefaultTableModel venta = (DefaultTableModel) jTable1.getModel();
                 int codigo = Integer.parseInt(frm_codigo.getText());
 
@@ -384,39 +381,36 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                         total = /*cantidad **/ precio;
 
                         /*if (inventario < cantidad) {
-                            if (inventario == 0) {
-                                JOptionPane.showMessageDialog(null, "Vehiculo agotado");
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Vehiculos insuficientes");
-                                txtCantidad.setText("");
-                                txtCantidad.requestFocus();
-                            }
-                        } else {
-                            if (comprobarRepetidos() == false) {
-                                inventario = inventario - cantidad;*/
-                                venta.addRow(new Object[]{codigo, marca, modelo, color, transmision, tanque, precio});
-                            /*}*/
-                            frm_codigo.setText("");
-                            frm_codigo.requestFocus();
-                            calcularTotal();
-                            
-                            /*}
-                    }else {
-                        JOptionPane.showMessageDialog(this, "El codigo no existe");
-                        */}
+                         if (inventario == 0) {
+                         JOptionPane.showMessageDialog(null, "Vehiculo agotado");
+                         } else {
+                         JOptionPane.showMessageDialog(null, "Vehiculos insuficientes");
+                         txtCantidad.setText("");
+                         txtCantidad.requestFocus();
+                         }
+                         } else {
+                         if (comprobarRepetidos() == false) {
+                         inventario = inventario - cantidad;*/
+                        venta.addRow(new Object[]{codigo, marca, modelo, color, transmision, tanque, precio});
+                        /*}*/
+                        frm_codigo.setText("");
+                        frm_codigo.requestFocus();
+                        calcularTotal();
+
+                        /*}
+                         }else {
+                         JOptionPane.showMessageDialog(this, "El codigo no existe");
+                         */                    }
                 } catch (SQLException ex) {
                     Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                
+
             }
         }
     }//GEN-LAST:event_frm_codigoKeyPressed
 
     private void btnCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarActionPerformed
-        Cobrar cobrar = new Cobrar();
-        cobrar.setLocationRelativeTo(cobrar);
-        cobrar.setVisible(true);
+
         rentar();
     }//GEN-LAST:event_btnCobrarActionPerformed
 
@@ -466,7 +460,7 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
         }
         return bandera;
     }
-    
+
     public static Double calcularTotal() {
         int x;
         totalNeto = 0.00;
@@ -487,23 +481,28 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
         total_venta.setText(Format.Mxn(totalNeto));
         return totalNeto;
     }
-    
-    public void rentar()
-    {
+
+    public void rentar() {
         int x = 0;
         DefaultTableModel renta = (DefaultTableModel) jTable1.getModel();
-        for (x = 0; x < renta.getRowCount(); x++) 
-        {
-            int Codigo = (int) renta.getValueAt(x , 0);
-            System.out.println(Codigo);
-            vehiculos.rentarVehiculo(Codigo);
+        for (x = 0; x < renta.getRowCount(); x++) {
+            int Codigo = (int) renta.getValueAt(x, 0);
+            
+            if (sql.Vehiculos.rentarVehiculo(Codigo)) {
+                System.out.println(Codigo);
+                Cobrar cobrar = new Cobrar();
+                cobrar.setLocationRelativeTo(cobrar);
+                cobrar.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "Error al tratar de rentar el vehiculo.");
+            }
         }
     }
-    
-     public void visibilidad(){
-        if(sql.Empleado.isAdmin()){
+
+    public void visibilidad() {
+        if (sql.Empleado.isAdmin()) {
             tbpAdmin.setEnabled(true);
-        }else{
+        } else {
             tbpAdmin.setEnabled(false);
             btnEmp.setEnabled(false);
             jButton4.setEnabled(false);
@@ -512,8 +511,8 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             jButton7.setEnabled(false);
         }
     }
-     
-     public static void obtenerNombreCliente(String nombre) {
+
+    public static void obtenerNombreCliente(String nombre) {
         lblNombreCliente.setText(nombre);
     }
 
