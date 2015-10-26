@@ -5,16 +5,12 @@
  */
 package gui;
 
-import javax.swing.table.DefaultTableModel;
-import sql.Vehiculos;
-
 /**
  *
  * @author Dani
  */
 public class Cobrar extends javax.swing.JFrame {
 
-    
     Inicio inicio;
     /**
      * Creates new form Cobrar
@@ -59,6 +55,8 @@ public class Cobrar extends javax.swing.JFrame {
         
     }
     
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
