@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,41 +17,15 @@ import sql.Conexion;
  * @author eopg9
  */
 public class FrmLogin extends javax.swing.JFrame {
-    
-    Conexion cn;
+
+    String user;
+    String pass;
+
     /**
      * Creates new form FrmLogin
      */
     public FrmLogin() {
         initComponents();
-        cn = new Conexion();
-    }
-    
-    Inicio inicio = new Inicio();
-    
-    boolean Ingresar(String usuario,String contra){
-        /*
-        Usuario = usuario;
-        Contra = contra;
-        */
-        String Query = "select * from EMPLEADOS where USUARIO like ? and CONTRASENIA = ?";
-        ResultSet rs = null;
-
-        try {
-            PreparedStatement ps = cn.Conectar().prepareStatement(Query);
-            ps.setString(1, usuario);
-            ps.setString(2, contra);
-            rs = ps.executeQuery();
-            if(rs.next()){
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        } catch (SQLException e) {
-            return false;
-        }
     }
 
     /**
@@ -66,7 +41,7 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnAceptar = new javax.swing.JButton();
         txtUsuario = new javax.swing.JTextField();
-        txtContra = new javax.swing.JTextField();
+        txtContra = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,26 +62,30 @@ public class FrmLogin extends javax.swing.JFrame {
             }
         });
 
+        txtContra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContraKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(41, 41, 41))
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                    .addComponent(txtContra))
+                .addGap(24, 24, 24))
             .addGroup(layout.createSequentialGroup()
                 .addGap(83, 83, 83)
                 .addComponent(btnAceptar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,29 +98,39 @@ public class FrmLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(btnAceptar)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-                if(Ingresar(txtUsuario.getText(), txtContra.getText()) == true){
-            inicio.setVisible(true);
-            this.dispose();
-            System.out.println("Logeo Exitoso");
-       } 
-       else
-       {
-           JOptionPane.showMessageDialog(null, "Contraseñia o usuario incorrecto");
-       }
+        validar();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void txtContraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            validar();
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_txtContraKeyPressed
+
+    public void validar() {
+        user = txtUsuario.getText();
+        pass = txtContra.getText();
+        if (sql.Empleado.ingresarUsuario(user, pass)) {
+            Inicio inicio = new Inicio();
+            inicio.setVisible(true);
+            inicio.setLocationRelativeTo(this);
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuario/Contraseña incorrecta");
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -182,7 +171,7 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField txtContra;
+    private javax.swing.JPasswordField txtContra;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
