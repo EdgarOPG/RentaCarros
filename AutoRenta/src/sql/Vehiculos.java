@@ -148,7 +148,7 @@ public class Vehiculos {
         }
     }
     
-    public static ResultSet buscarVehiculo(String x) {
+    public static ResultSet buscarVehiculo(String marca) {
         String Query;
         sql.Conexion mysql = new sql.Conexion();
         Connection link = mysql.Conectar();
@@ -157,7 +157,7 @@ public class Vehiculos {
 
         try {
             PreparedStatement stat = link.prepareStatement(Query);
-            stat.setString(1, x + "%");
+            stat.setString(1, marca + "%");
             ResultSet busqueda = stat.executeQuery();
             return busqueda;
         } catch (SQLException ex) {
@@ -193,7 +193,30 @@ public class Vehiculos {
             Logger.getLogger(Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-
     }
+    
+     /**
+     * Metodo cambiar el estado de un vehiculo de la base de datos mediante su id.
+     * @param idVehiculo 
+     */
+    public void rentarVehiculos(int idVehiculo)
+    {
+        String Query;
+        sql.Conexion mysql = new sql.Conexion();
+        Connection link = mysql.Conectar();
+        Query = "UPDATE VEHICULO SET ESTADO = 0 WHERE ID_VEHICULO = ?";
+        PreparedStatement stat;
+        try 
+        {
+            stat = link.prepareStatement(Query);
+            stat.setInt(1, idVehiculo);
+            stat.executeUpdate();
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 
 }
