@@ -22,11 +22,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
         format = new Format();
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
-        
-
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,7 +46,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        campobello = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
         dchFechaNacimiento = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
@@ -58,8 +54,6 @@ public class FrmEmpleado extends javax.swing.JFrame {
         txtTelefono = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtTelefonoCasa = new javax.swing.JTextField();
-        rdbAdmin = new javax.swing.JRadioButton();
-        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,24 +70,9 @@ public class FrmEmpleado extends javax.swing.JFrame {
 
         lblContra.setText("Contraseña");
 
-        txtUsuario.setText("edgar");
-        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsuarioActionPerformed(evt);
-            }
-        });
-
-        pswContra1.setText("12345");
         pswContra1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pswContra1ActionPerformed(evt);
-            }
-        });
-
-        pswContra2.setText("12345");
-        pswContra2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pswContra2ActionPerformed(evt);
             }
         });
 
@@ -101,20 +80,13 @@ public class FrmEmpleado extends javax.swing.JFrame {
 
         jLabel3.setText("Nombre");
 
-        txtNombre.setText("edgar");
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
-            }
-        });
-
         jLabel5.setText("Fecha de Nacimiento");
 
         jLabel6.setText("Direccion");
 
-        campobello.addActionListener(new java.awt.event.ActionListener() {
+        txtDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campobelloActionPerformed(evt);
+                txtDireccionActionPerformed(evt);
             }
         });
 
@@ -122,7 +94,6 @@ public class FrmEmpleado extends javax.swing.JFrame {
 
         jLabel7.setText("Email");
 
-        txtEmail.setText("edgar@gmail.com");
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
@@ -131,7 +102,6 @@ public class FrmEmpleado extends javax.swing.JFrame {
 
         jLabel8.setText("Celular");
 
-        txtTelefono.setText("123");
         txtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefonoActionPerformed(evt);
@@ -140,17 +110,9 @@ public class FrmEmpleado extends javax.swing.JFrame {
 
         jLabel9.setText("Telefono Fijo");
 
-        txtTelefonoCasa.setText("123");
         txtTelefonoCasa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefonoCasaActionPerformed(evt);
-            }
-        });
-
-        rdbAdmin.setText("Administrador");
-        rdbAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdbAdminActionPerformed(evt);
             }
         });
 
@@ -173,11 +135,18 @@ public class FrmEmpleado extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
-                        .addComponent(campobello))
+                        .addComponent(txtDireccion))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(20, 20, 20)
+                        .addComponent(pswContra2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dchFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
+                        .addComponent(dchFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
@@ -196,18 +165,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
                         .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pswContra1)
-                            .addComponent(txtUsuario)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1)
-                            .addComponent(rdbAdmin))
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(pswContra2))))
+                            .addComponent(txtUsuario))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -227,11 +185,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pswContra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdbAdmin)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -243,7 +197,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campobello, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -259,7 +213,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -269,9 +223,9 @@ public class FrmEmpleado extends javax.swing.JFrame {
         guardar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void campobelloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campobelloActionPerformed
+    private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campobelloActionPerformed
+    }//GEN-LAST:event_txtDireccionActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
@@ -289,43 +243,25 @@ public class FrmEmpleado extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pswContra1ActionPerformed
 
-    private void rdbAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbAdminActionPerformed
-        isAdmin();
-    }//GEN-LAST:event_rdbAdminActionPerformed
-
-    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsuarioActionPerformed
-
-    private void pswContra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswContra2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pswContra2ActionPerformed
-
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
-
     public void guardar() {
         String usuario = txtUsuario.getText();
         String contra = pswContra1.getText();
         String contraRepet = pswContra2.getText();
         String nombre = txtNombre.getText();
-        String direccion = campobello.getText();
+        String direccion = txtDireccion.getText();
         Date date = dchFechaNacimiento.getDate();
         SimpleDateFormat formatDateJava = new SimpleDateFormat("yy-MM-dd");
         String fechaNacimiento = formatDateJava.format(date);
         String email = txtEmail.getText();
         String telefono = txtTelefono.getText();
         String telefonoCasa = txtTelefonoCasa.getText();
-        int rol = isAdmin();
-        
         if (sql.Empleado.validarContrasenia(contra, contraRepet)) 
         {
             //Validar correo
             if(format.isEmail(txtEmail.getText()))
             {
                 //Validar Fecha
-                if (sql.Empleado.addEmpleados(usuario, contra, rol,
+                if (sql.Empleado.addEmpleados(usuario, contra,
                                               nombre, fechaNacimiento, 
                                               direccion, email, 
                                               telefono, telefonoCasa)) 
@@ -348,19 +284,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Las contraeñas no coinciden");
         }
     }
-    
-    public int isAdmin(){
-        if(rdbAdmin.isSelected())
-            {
-                jLabel10.setText("si");
-            return 1;
-            }
-        else 
-            {
-                jLabel10.setText("no");
-            return 0;
-            }
-    }
+
     /**
      * @param args the command line arguments
      */
@@ -397,11 +321,9 @@ public class FrmEmpleado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField campobello;
     private com.toedter.calendar.JDateChooser dchFechaNacimiento;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -414,7 +336,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel lblContra;
     private javax.swing.JPasswordField pswContra1;
     private javax.swing.JPasswordField pswContra2;
-    private javax.swing.JRadioButton rdbAdmin;
+    private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;

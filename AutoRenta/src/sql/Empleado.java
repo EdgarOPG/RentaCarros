@@ -16,7 +16,6 @@ public class Empleado {
      * @param usuario
      * @param contra
      * @param nombre
-     * @param rol
      * @param fechaNacimiento
      * @param direccion
      * @param email
@@ -24,29 +23,28 @@ public class Empleado {
      * @param telefonoCasa
      * @return 
      */
-    public static boolean addEmpleados(String usuario, String contra, int rol, String nombre, 
+    public static boolean addEmpleados(String usuario, String contra, String nombre,
             String fechaNacimiento, String direccion, String email, String telefono, String telefonoCasa) {
 
         sql.Conexion mysql = new sql.Conexion();
         Connection link = mysql.Conectar();
-        String Query = "insert into EMPLEADOS(USUARIO, CONTRASENIA, ROL_DEFINITION,"
+        String Query = "insert into EMPLEADOS(USUARIO, CONTRASENIA,"
                         + " NOMBRE, FECHA_NACIMIENTO,"
                         + " DIRECCION, EMAIL,"
                         + " TELEFONO, TELEFONO_CASA)"
-                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
 
             PreparedStatement stat = link.prepareStatement(Query);
 
             stat.setString(1, usuario);
             stat.setString(2, contra);
-            stat.setInt(3, rol);
-            stat.setString(4, nombre);
-            stat.setString(5, fechaNacimiento);
-            stat.setString(6, direccion);
-            stat.setString(7, email);
-            stat.setString(8, telefono);
-            stat.setString(9, telefonoCasa);
+            stat.setString(3, nombre);
+            stat.setString(4, fechaNacimiento);
+            stat.setString(5, direccion);
+            stat.setString(6, email);
+            stat.setString(7, telefono);
+            stat.setString(8, telefonoCasa);
             stat.executeUpdate();
             return true;
         } catch (SQLException ex) {

@@ -41,7 +41,6 @@ public class FrmLogin extends javax.swing.JFrame {
             ps.setString(1, usuario);
             ps.setString(2, contra);
             rs = ps.executeQuery();
-            rs.getInt(contra);
             if(rs.next()){
                 return true;
             }
@@ -53,8 +52,6 @@ public class FrmLogin extends javax.swing.JFrame {
             return false;
         }
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
