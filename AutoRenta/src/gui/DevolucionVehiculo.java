@@ -43,14 +43,13 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
         ResultSet data = sql.Vehiculos.buscarVehiculoRentado(x);
         try {
             while (data.next()) {
-                int codigo = data.getInt("ID_VEHICULO");
-                String marca = data.getString("MARCA");
-                String modelo = data.getString("MODELO");
-                String color = data.getString("COLOR");
-                String transmision = data.getString("TRANSMISION");
-                float tanque = data.getFloat("TANQUE");
+                int codigo = data.getInt("VEHICULO.ID_VEHICULO");
+                String nombre = data.getString("CLIENTES.NOMBRE");
+                String fecha = data.getString("FACTURAS.FECHA");
+                String fechaEntrega = data.getString("FACTURAS.FECHA_ENTREGA");
+               
                 //float multa = data.getFloat("MULTA");
-                modelo1.addRow(new Object[]{codigo, marca, modelo, color, transmision, tanque});
+                modelo1.addRow(new Object[]{codigo, nombre, fecha, fechaEntrega});
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmBorrarVehiculos.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,11 +80,11 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Marca", "Modelo", "Color", "Transmision", "Tanque", "Multa"
+                "ID Vehiculo", "Nombre del Cliente", "Fecha de Renta", "Fecha de Entrega", "Multa"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -131,10 +130,10 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton7))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
                             .addComponent(txtBuscar))
-                        .addContainerGap(12, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
