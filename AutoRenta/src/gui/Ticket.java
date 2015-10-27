@@ -18,7 +18,7 @@ public class Ticket extends javax.swing.JFrame {
         initComponents();
         LlenarTicket();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        
+        lblTotalCobro.setText(String.valueOf(Cobrar.getCobro()));
     }
 
     /**
@@ -38,6 +38,8 @@ public class Ticket extends javax.swing.JFrame {
         lblNomEmpTicket = new javax.swing.JLabel();
         lblDiasRenta = new javax.swing.JLabel();
         lblFechaHoy = new javax.swing.JLabel();
+        lblTotalCobro = new javax.swing.JLabel();
+        sasdad = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -85,22 +87,34 @@ public class Ticket extends javax.swing.JFrame {
 
         lblFechaHoy.setText("Fecha Hoy:");
 
+        lblTotalCobro.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        lblTotalCobro.setText("$0.00");
+
+        sasdad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        sasdad.setText("Total: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNomEmpTicket)
-                            .addComponent(lblNomClienTicket)
-                            .addComponent(lblDiasRenta))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(lblNomEmpTicket)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblNomClienTicket)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblDiasRenta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(sasdad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTotalCobro, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(222, 222, 222)
@@ -117,10 +131,15 @@ public class Ticket extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(lblNomClienTicket)
-                .addGap(18, 18, 18)
-                .addComponent(lblDiasRenta)
-                .addGap(31, 31, 31))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblNomClienTicket)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblDiasRenta)
+                        .addGap(31, 31, 31))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(sasdad)
+                        .addComponent(lblTotalCobro))))
         );
 
         pack();
@@ -177,5 +196,7 @@ public class Ticket extends javax.swing.JFrame {
     public static javax.swing.JLabel lblFechaHoy;
     public static javax.swing.JLabel lblNomClienTicket;
     public static javax.swing.JLabel lblNomEmpTicket;
+    static javax.swing.JLabel lblTotalCobro;
+    private javax.swing.JLabel sasdad;
     // End of variables declaration//GEN-END:variables
 }

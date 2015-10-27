@@ -14,6 +14,7 @@ import sql.Vehiculos;
  */
 public class Cobrar extends javax.swing.JFrame {
 
+    static double Cobro;
     
     Inicio inicio;
     /**
@@ -29,7 +30,7 @@ public class Cobrar extends javax.swing.JFrame {
     //Declaramos esta varianble para almacenar el valor que regresa el metodo calcularTotal().
     double Total = Inicio.calcularTotal();
     int DiasRenta = Inicio.getDiasRenta();
-    double TotalNeto = Total * DiasRenta;
+    public double TotalNeto = Total * DiasRenta;
     double entregado = 0;
     String ent="";
     
@@ -59,6 +60,14 @@ public class Cobrar extends javax.swing.JFrame {
             frmCobrar.setEnabled(false);
         }
         
+    }
+    
+    public static void setCobro(double totalCobrar) {
+        Cobro = totalCobrar;
+    }
+    
+    public static double getCobro() {
+        return Cobro;
     }
     
     /**
@@ -167,9 +176,11 @@ public class Cobrar extends javax.swing.JFrame {
 
     private void frmCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmCobrarActionPerformed
         Inicio.calcularTotal();
+        setCobro(TotalNeto);
         Ticket ticket = new Ticket();
         ticket.setLocationRelativeTo(this);
         ticket.setVisible(true);
+    
         this.dispose();
     }//GEN-LAST:event_frmCobrarActionPerformed
 
