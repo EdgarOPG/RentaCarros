@@ -6,11 +6,15 @@
 package gui;
 
 import java.awt.event.KeyEvent;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import sql.Vehiculos;
 
@@ -32,7 +36,7 @@ public class Inicio extends javax.swing.JFrame {
     float total;
     float precio;
     String nombreEmpleado;
-
+    String nombreCliente;
     /**
      * Creates new form Inicio
      */
@@ -41,13 +45,20 @@ public class Inicio extends javax.swing.JFrame {
         visibilidad();
         this.setLocationRelativeTo(null);
         obtenerNombreEmpleado();
-
+        cmbDiasRenta.addItem(1);
+        cmbDiasRenta.addItem(2);
+        cmbDiasRenta.addItem(3);
+        cmbDiasRenta.addItem(4);
+        cmbDiasRenta.addItem(5);
     }
 
     public static void obtenerCodigo(String codigo) {
         frm_codigo.setText(codigo);
         frm_codigo.requestFocus();
     }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,10 +92,10 @@ public class Inicio extends javax.swing.JFrame {
         lblNombreCliente = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        dchFechaNacimiento = new com.toedter.calendar.JDateChooser();
-        jLabel5 = new javax.swing.JLabel();
+        lblNombCliente = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        cmbDiasRenta = new javax.swing.JComboBox();
         jButton5 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         lblNombreEmpleado = new javax.swing.JLabel();
@@ -141,7 +152,7 @@ public class Inicio extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         sasdad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        sasdad.setText("Total Neto: ");
+        sasdad.setText("Total x dia: ");
 
         total_venta.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         total_venta.setText("$0.00");
@@ -241,11 +252,9 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel3.setText("Rango de Renta:");
 
-        jLabel4.setText("Hasta:");
+        jLabel4.setText("Numero de Dias:");
 
-        dchFechaNacimiento.setDateFormatString("yy-MM-dd");
-
-        jLabel5.setText("No se ha seleccionado ningun cliente.");
+        lblNombCliente.setText("No se ha seleccionado ningun cliente.");
 
         jButton8.setText("Buscar Cliente");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -271,7 +280,7 @@ public class Inicio extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
+                        .addComponent(lblNombCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -281,8 +290,8 @@ public class Inicio extends javax.swing.JFrame {
                                 .addGap(229, 229, 229)
                                 .addComponent(lblNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(dchFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbDiasRenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -296,19 +305,19 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel5)
+                    .addComponent(lblNombCliente)
                     .addComponent(jButton8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(dchFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(cmbDiasRenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addComponent(lblNombreCliente)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 31, Short.MAX_VALUE))
         );
 
         jButton5.setText("Devolución De Vehiculos");
@@ -377,7 +386,7 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(tbpAdmin))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -475,7 +484,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_frm_codigoKeyPressed
 
     private void btnCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarActionPerformed
-        rentar();
+         rentar();
     }//GEN-LAST:event_btnCobrarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -503,7 +512,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-         DevolucionVehiculo vehiculos = new DevolucionVehiculo();
+        DevolucionVehiculo vehiculos = new DevolucionVehiculo();
         vehiculos.setLocationRelativeTo(this);
         vehiculos.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -559,10 +568,10 @@ public class Inicio extends javax.swing.JFrame {
             int Codigo = (int) renta.getValueAt(x, 0);
             
             if (sql.Vehiculos.rentarVehiculo(Codigo)) {
-                System.out.println(Codigo);
                 Cobrar cobrar = new Cobrar();
-                cobrar.setLocationRelativeTo(cobrar);
+                cobrar.setLocationRelativeTo(this);
                 cobrar.setVisible(true);
+                System.out.println(Codigo);
             }else{
                 JOptionPane.showMessageDialog(this, "Error al tratar de rentar el vehiculo.");
             }
@@ -583,12 +592,32 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     public static void obtenerNombreCliente(String nombre) {
-        jLabel5.setText(nombre);
+        lblNombCliente.setText(nombre);
     }
     
     public static void obtenerNombreEmpleado() {
         lblNombreEmpleado.setText(sql.Empleado.nombreEmpleado());
     }
+    
+    public static int getDiasRenta(){
+        int Dias = (int) cmbDiasRenta.getSelectedItem();
+        return Dias;
+    }
+     
+    public static void setFechaRegreso()
+    {
+        java.util.Date ahora = new java.util.Date();
+        Fechas.sumarFechasDias(ahora, getDiasRenta());
+    }
+    
+//    public static void asignarDiferenciaFechas(){
+//        java.util.Date ahora = new java.util.Date();
+//        int DiasRenta = Fechas.diferenciasDeFechas2(ahora, dchFechaEntrega.getDate());
+//        lblDiasRenta.setText(String.valueOf(DiasRenta));
+//    }
+    
+    
+    
 
     /**
      * @param args the command line arguments
@@ -628,7 +657,7 @@ public class Inicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCobrar;
     private javax.swing.JButton btnEmp;
-    private com.toedter.calendar.JDateChooser dchFechaNacimiento;
+    public static javax.swing.JComboBox cmbDiasRenta;
     private static javax.swing.JTextField frm_codigo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -642,7 +671,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private static javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -650,6 +678,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     public static javax.swing.JTable jTable1;
+    private static javax.swing.JLabel lblNombCliente;
     private static javax.swing.JLabel lblNombreCliente;
     private static javax.swing.JLabel lblNombreEmpleado;
     private javax.swing.JLabel sasdad;

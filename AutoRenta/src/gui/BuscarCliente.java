@@ -18,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
 public class BuscarCliente extends javax.swing.JFrame {
     
     int count = 0;
+    static String nombreCliente;
+    
 
     /**
      * Creates new form BuscarVehiculo
@@ -29,6 +31,7 @@ public class BuscarCliente extends javax.swing.JFrame {
         txtBuscar.requestFocus();
         this.setLocationRelativeTo(null);
     }
+    
     
     /**
      * Metodo para enlistar los vehiculos, faltan las busquedas sql
@@ -159,7 +162,7 @@ public class BuscarCliente extends javax.swing.JFrame {
             //Toma el valor del String en la posicion 1 del renglon, es decir el nombre y obtiene el Id 
             //con el metodo obtenerCodigo que esta en la clase Inicio.
             String nombre = (String) modelo.getValueAt(row, 1);
-            
+            setNombreCliente(nombre);
             Inicio.obtenerNombreCliente(nombre);
             this.dispose();
             count = 0;
@@ -183,6 +186,13 @@ public class BuscarCliente extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    public static void setNombreCliente(String nombre) {
+        nombreCliente = nombre;
+    }
+    
+    public static String getNombreCliente() {
+        return nombreCliente;
+    }
     /**
      * @param args the command line arguments
      */

@@ -24,10 +24,12 @@ public class Cobrar extends javax.swing.JFrame {
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         inicio = new Inicio();
         //Aqui asignamos el valor de la variable Total declarada mas abajo al label que muestra el Total.
-        txtTotal.setText(String.valueOf(Total));
+        txtTotal.setText(String.valueOf(TotalNeto));
     } 
     //Declaramos esta varianble para almacenar el valor que regresa el metodo calcularTotal().
     double Total = Inicio.calcularTotal();
+    int DiasRenta = Inicio.getDiasRenta();
+    double TotalNeto = Total * DiasRenta;
     double entregado = 0;
     String ent="";
     
@@ -39,9 +41,9 @@ public class Cobrar extends javax.swing.JFrame {
         {
             entregado = Double.parseDouble(txtEntregado.getText());
             //double total = Double.parseDouble(txtTotal.getText().substring(1, txtTotal.getText().length()));
-            if (entregado >= Total) 
+            if (entregado >= TotalNeto) 
             {
-                cambio = entregado - Total;
+                cambio = entregado - TotalNeto;
                 frmCambio.setText(Format.Mxn(cambio));
                 frmCobrar.setEnabled(true);
             } 
@@ -165,6 +167,9 @@ public class Cobrar extends javax.swing.JFrame {
 
     private void frmCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmCobrarActionPerformed
         Inicio.calcularTotal();
+        Ticket ticket = new Ticket();
+        ticket.setLocationRelativeTo(this);
+        ticket.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_frmCobrarActionPerformed
 
