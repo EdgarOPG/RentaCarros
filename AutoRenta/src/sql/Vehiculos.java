@@ -246,7 +246,10 @@ public class Vehiculos {
         sql.Conexion mysql = new sql.Conexion();
         Connection link = mysql.Conectar();
 
-        Query = "SELECT * FROM VEHICULO WHERE MARCA LIKE ? AND ESTADO = 0";
+        Query = "select empleados.NOMBRE, vehiculo.ID_VEHICULO, facturas.FECHA, facturas.FECHA_ENTREGA, clientes.nombre from facturas\n" +
+"inner join empleados on empleados.ID_EMPLEADO = facturas.ID_EMPLEADO\n" +
+"inner join vehiculo on vehiculo.ID_VEHICULO = facturas.ID_VEHICULO\n" +
+"inner join clientes on clientes.ID_CLIENTE = facturas.ID_CLIENTE WHERE clientes.nombre like ?";
 
         try {
             PreparedStatement stat = link.prepareStatement(Query);
