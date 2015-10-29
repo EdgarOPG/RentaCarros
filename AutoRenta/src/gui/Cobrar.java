@@ -15,6 +15,7 @@ import sql.Vehiculos;
 public class Cobrar extends javax.swing.JFrame {
 
     static double Cobro;
+    static double Dias;
     
     Inicio inicio;
     /**
@@ -68,6 +69,14 @@ public class Cobrar extends javax.swing.JFrame {
     
     public static double getCobro() {
         return Cobro;
+    }
+    
+    public static void setDias(double dias) {
+        Dias = dias;
+    }
+    
+    public static double getDias() {
+        return Dias;
     }
     
     /**
@@ -177,6 +186,7 @@ public class Cobrar extends javax.swing.JFrame {
     private void frmCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmCobrarActionPerformed
         Inicio.calcularTotal();
         setCobro(TotalNeto);
+        setDias(DiasRenta);
         Ticket ticket = new Ticket();
         ticket.setLocationRelativeTo(this);
         ticket.setVisible(true);

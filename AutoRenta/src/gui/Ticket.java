@@ -149,7 +149,7 @@ public class Ticket extends javax.swing.JFrame {
     lblNomEmpTicket.setText("Le Atendio: " + sql.Empleado.nombreEmpleado());
     lblNomClienTicket.setText("Sr(a): " + BuscarCliente.getNombreCliente());
     lblFechaHoy.setText("Ticket expedido el: " + Fechas.getFechaActual());
-    lblDiasRenta.setText("Rentado(s) por: " + String.valueOf(Inicio.getDiasRenta()) +" dias.");
+    lblDiasRenta.setText("Rentado(s) por: " + String.valueOf(Cobrar.getDias()) +" dias.");
     }
     
     /**
