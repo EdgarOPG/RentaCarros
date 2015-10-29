@@ -52,10 +52,12 @@ public class Fechas {
         return ((int) dias);
     }
     
-    public static Date sumarFechasDias(Date fecha, int dias) {
+    public static String sumarFechasDias(Date fecha, int dias) {
         Calendar cal = new GregorianCalendar();
         cal.setTimeInMillis(fecha.getTime());
         cal.add(Calendar.DATE, dias);
-        return new Date(cal.getTimeInMillis());
+        SimpleDateFormat formateador = new SimpleDateFormat("yy-MM-dd");
+        String FechaFinal = formateador.format(cal.getTime());
+        return FechaFinal;
     }
 }

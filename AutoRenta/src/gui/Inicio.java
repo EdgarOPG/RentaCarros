@@ -96,6 +96,7 @@ public class Inicio extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         cmbDiasRenta = new javax.swing.JComboBox();
+        lblFechaEntrega = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         lblNombreEmpleado = new javax.swing.JLabel();
@@ -270,6 +271,14 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        cmbDiasRenta.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbDiasRentaItemStateChanged(evt);
+            }
+        });
+
+        lblFechaEntrega.setText("Fecha entrega:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -291,7 +300,9 @@ public class Inicio extends javax.swing.JFrame {
                                 .addComponent(lblNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(cmbDiasRenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cmbDiasRenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblFechaEntrega)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -314,7 +325,8 @@ public class Inicio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(cmbDiasRenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbDiasRenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFechaEntrega))
                 .addGap(9, 9, 9)
                 .addComponent(lblNombreCliente)
                 .addGap(0, 31, Short.MAX_VALUE))
@@ -517,6 +529,10 @@ public class Inicio extends javax.swing.JFrame {
         vehiculos.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void cmbDiasRentaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDiasRentaItemStateChanged
+        setFechaRegreso();
+    }//GEN-LAST:event_cmbDiasRentaItemStateChanged
+
     public boolean comprobarRepetidos() {
         DefaultTableModel venta = (DefaultTableModel) jTable1.getModel();
         int x = 0;
@@ -606,8 +622,9 @@ public class Inicio extends javax.swing.JFrame {
      
     public static void setFechaRegreso()
     {
-        java.util.Date ahora = new java.util.Date();
-        Fechas.sumarFechasDias(ahora, getDiasRenta());
+    java.util.Date ahora = new java.util.Date();
+    String Regreso = Fechas.sumarFechasDias(ahora, getDiasRenta());
+    lblFechaEntrega.setText("Fecha de entrega:" + Regreso);
     }
     
 //    public static void asignarDiferenciaFechas(){
@@ -678,6 +695,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     public static javax.swing.JTable jTable1;
+    public static javax.swing.JLabel lblFechaEntrega;
     private static javax.swing.JLabel lblNombCliente;
     private static javax.swing.JLabel lblNombreCliente;
     private static javax.swing.JLabel lblNombreEmpleado;
