@@ -199,7 +199,9 @@ public class BuscarCliente extends javax.swing.JFrame {
             //Toma el valor del String en la posicion 1 del renglon, es decir el nombre y obtiene el Id 
             //con el metodo obtenerCodigo que esta en la clase Inicio.
             String nombre = (String) modelo.getValueAt(row, 1);
+            int Id = (int) modelo.getValueAt(row, 0);
             setNombreCliente(nombre);
+            setIdCliente(Id);
             Inicio.obtenerNombreCliente(nombre);
             JOptionPane.showMessageDialog(this, "Cliente seleccionado exitosamente.");
             this.dispose();

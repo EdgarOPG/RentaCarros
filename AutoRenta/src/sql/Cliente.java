@@ -108,7 +108,6 @@ public class Cliente {
             PreparedStatement stat = link.prepareStatement(Query);
             stat.setString(1, x + "%");
             ResultSet busqueda = stat.executeQuery();
-            //gui.BuscarCliente.setIdCliente(busqueda.getInt("ID_CLIENTE"));
             return busqueda;
         } catch (SQLException ex) {
             Logger.getLogger(Vehiculos.class.getName()).log(Level.SEVERE, null, ex);

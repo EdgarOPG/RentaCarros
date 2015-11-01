@@ -46,17 +46,14 @@ public class Inicio extends javax.swing.JFrame {
         cmbDiasRenta.addItem(3);
         cmbDiasRenta.addItem(4);
         cmbDiasRenta.addItem(5);
-        //setFechaRegreso(Regreso);
+        //setFechaRegreso(Regreso);    
     }
-
+    
     public static void obtenerCodigo(String codigo) {
         frm_codigo.setText(codigo);
         frm_codigo.requestFocus();
     }
     
-    
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -527,7 +524,10 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void cmbDiasRentaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDiasRentaItemStateChanged
-        calcularFechaRegreso();
+        java.util.Date ahora = new java.util.Date();
+        String Regreso = Fechas.sumarFechasDias(ahora, getDiasRenta());
+        setFechaRegreso(Regreso);
+        mostrarFechaRegreso(Regreso);
     }//GEN-LAST:event_cmbDiasRentaItemStateChanged
 
     public boolean comprobarRepetidos() {
@@ -617,7 +617,7 @@ public class Inicio extends javax.swing.JFrame {
         return Dias;
     }
      
-    public static void setFechaRegreso(String fecha) {
+    public static void setFechaRegreso(String fecha){
         fechaRegreso = fecha;
     }
     
@@ -625,17 +625,17 @@ public class Inicio extends javax.swing.JFrame {
         return fechaRegreso;
     }
     
-    public static void mostrarFechaRegreso(String regreso)
+    public static void mostrarFechaRegreso(String fecha)
     {
-    lblFechaEntrega.setText("Fecha de entrega: " + regreso);
+    lblFechaEntrega.setText("Fecha de entrega: " + fecha);
     }
     
     public static void calcularFechaRegreso()
     {
         java.util.Date ahora = new java.util.Date();
         String Regreso = Fechas.sumarFechasDias(ahora, getDiasRenta());
-        mostrarFechaRegreso(Regreso);
         setFechaRegreso(Regreso);
+        mostrarFechaRegreso(Regreso);
     }
     
     

@@ -29,16 +29,16 @@ public class Facturas {
         Connection link = mysql.Conectar();
         String Query = "insert into FACTURAS(ID_EMPLEADO, ID_CLIENTE, ID_VEHICULO,"
                         + " FECHA, FECHA_ENTREGA) "
-                        + " VALUES(?, 1, 1, ?, ?)";
+                        + " VALUES(?, ?, ?, ?, ?)";
         try {
 
             PreparedStatement stat = link.prepareStatement(Query);
 
             stat.setInt(1, idEmpleado);
-//            stat.setInt(2, idCliente);
-//            stat.setInt(3, idVehiculo);
-            stat.setString(2, fechaRenta);
-            stat.setString(3, fechaEntrega);
+            stat.setInt(2, idCliente);
+            stat.setInt(3, idVehiculo);
+            stat.setString(4, fechaRenta);
+            stat.setString(5, fechaEntrega);
             stat.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Empleado.class.getName()).log(Level.SEVERE, null, ex);
