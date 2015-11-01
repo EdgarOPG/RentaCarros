@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import sql.Vehiculos;
 
@@ -187,6 +188,7 @@ public class Cobrar extends javax.swing.JFrame {
         Inicio.calcularTotal();
         setCobro(TotalNeto);
         setDias(DiasRenta);
+        sql.Facturas.RegistrarRenta(sql.Empleado.getIdEmpleado(), DiasRenta, WIDTH, Fechas.getFechaActual(), Inicio.getFechaRegreso());
         Ticket ticket = new Ticket();
         ticket.setLocationRelativeTo(this);
         ticket.setVisible(true);

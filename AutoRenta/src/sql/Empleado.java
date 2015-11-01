@@ -13,6 +13,7 @@ public class Empleado {
     
     static boolean isAdmin = false;
     static String nombreUsuario;
+    static int IdEmpleado;
 
     /**
      * Metodo para agregar empleados a la base de datos.
@@ -218,6 +219,14 @@ public class Empleado {
         return nombreUsuario;
     }
     
+    public static void setIdEmpleado(int id) {
+        IdEmpleado = id;
+    }
+    
+    public static int getIdEmpleado() {
+        return IdEmpleado;
+    }
+    
     public static boolean nombreUser(String user) {
 
         sql.Conexion mysql = new sql.Conexion();
@@ -236,6 +245,7 @@ public class Empleado {
 
             if (val.next()) {
                 setNombreEmpleado(val.getString("NOMBRE"));
+                setIdEmpleado(val.getInt("ID_EMPLEADO"));
                 return true;
             } else {
                 return false;
