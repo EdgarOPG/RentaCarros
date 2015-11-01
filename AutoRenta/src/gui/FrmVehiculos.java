@@ -5,8 +5,10 @@
  */
 package gui;
 
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import sql.Vehiculos;
+
 /**
  *
  * @author Edgar
@@ -14,7 +16,9 @@ import sql.Vehiculos;
 public class FrmVehiculos extends javax.swing.JFrame {
 
     Vehiculos vehiculos;
-            
+    float precio;
+    float tanque;
+
     public FrmVehiculos() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -85,6 +89,11 @@ public class FrmVehiculos extends javax.swing.JFrame {
         txtFuel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFuelActionPerformed(evt);
+            }
+        });
+        txtFuel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFuelKeyPressed(evt);
             }
         });
 
@@ -242,11 +251,20 @@ public class FrmVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField8ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       guardar();
-       vaciarText();
+        if (guardar()) {
+            vaciarText();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-     public void vaciarText(){
+    private void txtFuelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFuelKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (guardar()) {
+                vaciarText();
+            }
+        }
+    }//GEN-LAST:event_txtFuelKeyPressed
+
+    public void vaciarText() {
         txtBrand.setText("");
         txtModel.setText("");
         txtColor.setText("");
@@ -254,21 +272,58 @@ public class FrmVehiculos extends javax.swing.JFrame {
         txtPrice.setText("");
         txtFuel.setText("");
     }
-     
-    public void guardar(){
+
+    public boolean guardar() {
         String marca = txtBrand.getText();
         String modelo = txtModel.getText();
         String color = txtColor.getText();
         String transmision = txtTrans.getText();
-        float precio = Float.parseFloat(txtPrice.getText());
-        float tanque = Float.parseFloat(txtFuel.getText());
-        
-            if (sql.Vehiculos.addVehiculos(marca, modelo, color, transmision, precio, tanque)) {
-                JOptionPane.showMessageDialog(this, "Vehiculo Agregado");
+        try {
+            float precio = Float.parseFloat(txtPrice.getText());
+            float tanque = Float.parseFloat(txtFuel.getText());
+        } catch (NumberFormatException e) {
+            
+        }
+
+        if (!marca.equals("")) {
+            if (!modelo.equals("")) {
+                if (!color.equals("")) {
+                    if (!transmision.equals("")) {
+                        if (!txtPrice.getText().equals("")) {
+                            if (!txtFuel.getText().equals("")) {
+                                if (sql.Vehiculos.addVehiculos(marca, modelo, color, transmision, precio, tanque)) {
+                                    JOptionPane.showMessageDialog(this, "Vehiculo Agregado");
+                                    return true;
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error al tratar de agregar el vehiculo");
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Debe de ingresar que tanque tiene el vehiculo.");
+                                txtFuel.requestFocus();
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Debe de ingresar el precio del vehiculo.");
+                            txtPrice.requestFocus();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Debe de ingresar la transmisión del vehiculo.");
+                        txtTrans.requestFocus();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Debe de ingresar el color del vehiculo.");
+                    txtColor.requestFocus();
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Ha ocurrido un error al tratar de agregar el vehiculo");
+                JOptionPane.showMessageDialog(this, "Debe de ingresar el modelo del vehiculo.");
+                txtModel.requestFocus();
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe de ingresar la marca del vehiculo.");
+            txtBrand.requestFocus();
+        }
+        return false;
     }
+
     /**
      * @param args the command line arguments
      */

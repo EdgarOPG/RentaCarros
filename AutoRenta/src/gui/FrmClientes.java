@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -14,11 +15,14 @@ import sql.Conexion;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author Edgar
  */
 public class FrmClientes extends javax.swing.JFrame {
+
+    String fechaNacimiento;
 
     /**
      * Creates new form Rentas
@@ -102,6 +106,11 @@ public class FrmClientes extends javax.swing.JFrame {
         txtLic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLicActionPerformed(evt);
+            }
+        });
+        txtLic.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtLicKeyPressed(evt);
             }
         });
 
@@ -253,11 +262,20 @@ public class FrmClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField8ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      guardar();
-      vaciarText();
+        if(guardar()){
+        vaciarText();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void vaciarText(){
+    private void txtLicKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLicKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (guardar()) {
+                vaciarText();
+            }
+        }
+    }//GEN-LAST:event_txtLicKeyPressed
+
+    public void vaciarText() {
         txtName.setText("");
         txtCity.setText("");
         txtAddress.setText("");
@@ -266,26 +284,67 @@ public class FrmClientes extends javax.swing.JFrame {
         dchFechaNacimiento.setDate(null);
         txtPhone.setText("");
     }
-    public void guardar(){
+
+    public boolean guardar() {
         String nombre = txtName.getText();
         String ciudad = txtCity.getText();
         String direccion = txtAddress.getText();
         String referencia = txtRef.getText();
         String numLic = txtLic.getText();
-        java.util.Date date = dchFechaNacimiento.getDate();
-        //El formato de fecha "yy-MM-dd" declarado aqui y el que tiene el objeto JDateChooser 
-        //de la libreria JCalendar en su propiedad "dateFormatString"
-        //debe coincidir con el que usa MySQL para sus columnas DATE.
-        SimpleDateFormat formatDateJava = new SimpleDateFormat("yy-MM-dd");
-        String fechaNacimiento = formatDateJava.format(date);
+        try {
+            java.util.Date date = dchFechaNacimiento.getDate();
+            //El formato de fecha "yy-MM-dd" declarado aqui y el que tiene el objeto JDateChooser 
+            //de la libreria JCalendar en su propiedad "dateFormatString"
+            //debe coincidir con el que usa MySQL para sus columnas DATE.
+            SimpleDateFormat formatDateJava = new SimpleDateFormat("yy-MM-dd");
+            fechaNacimiento = formatDateJava.format(date);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "Debe de seleccionar una fecha.");
+            dchFechaNacimiento.requestFocus();
+        }
         String telefono = txtPhone.getText();
-        
-            if (sql.Cliente.addCliente(nombre, ciudad, referencia, fechaNacimiento, direccion, telefono, numLic)) {
-                JOptionPane.showMessageDialog(this, "Cliente registrado");
+
+        if (!nombre.equals("")) {
+            if (!ciudad.equals("")) {
+                if (!direccion.equals("")) {
+                    if (!referencia.equals("")) {
+                        if (!numLic.equals("")) {
+                            if (!fechaNacimiento.equals("")) {
+                                if (!telefono.equals("")) {
+                                    if (sql.Cliente.addCliente(nombre, ciudad, referencia, fechaNacimiento, direccion, telefono, numLic)) {
+                                        JOptionPane.showMessageDialog(this, "Cliente registrado");
+                                        return true;
+                                    } else {
+                                        JOptionPane.showMessageDialog(this, "Ha ocurrido un error al tratar de registrar al cliente");
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "Debe de ingresar un telefono.");
+                                    txtPhone.requestFocus();
+                                }
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Debe de ingresar un numero de licencia.");
+                            txtLic.requestFocus();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Debe de ingresar una referencia.");
+                        txtRef.requestFocus();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Debe de ingresar una dirección.");
+                    txtPhone.requestFocus();
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Ha ocurrido un error al tratar de registrar al cliente");
+                JOptionPane.showMessageDialog(this, "Debe de ingresar una ciudad.");
+                txtCity.requestFocus();
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe de ingresar un nombre.");
+            txtName.requestFocus();
+        }
+        return false;
     }
+
     /**
      * @param args the command line arguments
      */
@@ -313,7 +372,7 @@ public class FrmClientes extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-       
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -342,6 +401,6 @@ public class FrmClientes extends javax.swing.JFrame {
     private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtRef;
     // End of variables declaration//GEN-END:variables
-Conexion cc= new Conexion();
-Connection cn = cc.Conectar();
+Conexion cc = new Conexion();
+    Connection cn = cc.Conectar();
 }

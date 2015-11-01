@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,16 +18,15 @@ import javax.swing.JOptionPane;
 public class FrmEmpleado extends javax.swing.JFrame {
 
     Format format;
+    String fechaNacimiento;
+
     public FrmEmpleado() {
         initComponents();
         format = new Format();
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
-        
 
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,7 +50,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        campobello = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
         dchFechaNacimiento = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
@@ -112,9 +112,9 @@ public class FrmEmpleado extends javax.swing.JFrame {
 
         jLabel6.setText("Direccion");
 
-        campobello.addActionListener(new java.awt.event.ActionListener() {
+        txtDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campobelloActionPerformed(evt);
+                txtDireccionActionPerformed(evt);
             }
         });
 
@@ -146,6 +146,11 @@ public class FrmEmpleado extends javax.swing.JFrame {
                 txtTelefonoCasaActionPerformed(evt);
             }
         });
+        txtTelefonoCasa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTelefonoCasaKeyPressed(evt);
+            }
+        });
 
         rdbAdmin.setText("Administrador");
         rdbAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +178,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
-                        .addComponent(campobello))
+                        .addComponent(txtDireccion))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -243,7 +248,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campobello, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -266,12 +271,14 @@ public class FrmEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        guardar();
+        if(guardar()){
+            vaciarText();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void campobelloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campobelloActionPerformed
+    private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campobelloActionPerformed
+    }//GEN-LAST:event_txtDireccionActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
@@ -305,62 +312,121 @@ public class FrmEmpleado extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
-    public void guardar() {
+    private void txtTelefonoCasaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoCasaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if(guardar()){
+                vaciarText();
+            }
+        }
+    }//GEN-LAST:event_txtTelefonoCasaKeyPressed
+
+    public void vaciarText() {
+        txtDireccion.setText("");
+        pswContra1.setText("");
+        pswContra2.setText("");
+        txtEmail.setText("");
+        txtNombre.setText("");
+        txtTelefono.setText("");
+        txtTelefonoCasa.setText("");
+        dchFechaNacimiento.setDate(null);
+        txtUsuario.setText("");
+        rdbAdmin.setSelected(false);
+    }
+    
+    public boolean guardar() {
         String usuario = txtUsuario.getText();
         String contra = pswContra1.getText();
         String contraRepet = pswContra2.getText();
         String nombre = txtNombre.getText();
-        String direccion = campobello.getText();
-        Date date = dchFechaNacimiento.getDate();
-        SimpleDateFormat formatDateJava = new SimpleDateFormat("yy-MM-dd");
-        String fechaNacimiento = formatDateJava.format(date);
+        String direccion = txtDireccion.getText();
+        try {
+            Date date = dchFechaNacimiento.getDate();
+            SimpleDateFormat formatDateJava = new SimpleDateFormat("yy-MM-dd");
+            fechaNacimiento = formatDateJava.format(date);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "Debe de seleccionar una fecha.");
+        }
         String email = txtEmail.getText();
         String telefono = txtTelefono.getText();
         String telefonoCasa = txtTelefonoCasa.getText();
         int rol = isAdmin();
-        
-        if (sql.Empleado.validarContrasenia(contra, contraRepet)) 
-        {
-            //Validar correo
-            if(format.isEmail(txtEmail.getText()))
-            {
-                //Validar Fecha
-                if (sql.Empleado.addEmpleados(usuario, contra, rol,
-                                              nombre, fechaNacimiento, 
-                                              direccion, email, 
-                                              telefono, telefonoCasa)) 
-                {
-                    JOptionPane.showMessageDialog(this, "Empleado registrado");
+
+        if (!usuario.equals("")) {
+            if (!contra.equals("")) {
+                if (!contraRepet.equals("")) {
+                    if (!nombre.equals("")) {
+                        if (!fechaNacimiento.equals("")) {
+                            if (!direccion.equals("")) {
+                                if (!email.equals("")) {
+                                    if (!telefono.equals("")) {
+                                        if (!telefonoCasa.equals("")) {
+                                            if (sql.Empleado.validarContrasenia(contra, contraRepet)) {
+                                                //Validar correo
+                                                if (format.isEmail(txtEmail.getText())) {
+                                                    //Validar Fecha
+                                                    if (sql.Empleado.addEmpleados(usuario, contra, rol,
+                                                            nombre, fechaNacimiento,
+                                                            direccion, email,
+                                                            telefono, telefonoCasa)) {
+                                                        JOptionPane.showMessageDialog(this, "Empleado registrado");
+                                                        return true;
+                                                    } else {
+                                                        JOptionPane.showMessageDialog(this, "Ha ocurrido un error al tratar de registrar al empleado");
+                                                    }
+                                                } else {
+                                                    JOptionPane.showMessageDialog(this, "Ingrese una direccion de Email Valida");
+                                                }
+
+                                            } else {
+                                                JOptionPane.showMessageDialog(this, "Las contraeñas no coinciden");
+                                            }
+                                        } else {
+                                            JOptionPane.showMessageDialog(this, "Debe de ingresar un telefono fijo.");
+                                            txtTelefonoCasa.requestFocus();
+                                        }
+                                    } else {
+                                        JOptionPane.showMessageDialog(this, "Debe de ingresar un telefono.");
+                                        txtTelefono.requestFocus();
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "Debe de ingresar un email.");
+                                    txtEmail.requestFocus();
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Debe de ingresar una direccion.");
+                                txtDireccion.requestFocus();
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Debe de ingresar un nombre.");
+                        txtNombre.requestFocus();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Debe de repetir su contraseña.");
+                    pswContra2.requestFocus();
                 }
-                else 
-                {
-                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error al tratar de registrar al empleado");
-                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Debe de ingresar una contraseña.");
+                pswContra1.requestFocus();
+                pswContra2.setText(null);
             }
-            else
-            {
-                JOptionPane.showMessageDialog(this, "Ingrese una direccion de Email Valida");
-            }
-            
-        } 
-        else 
-        {
-            JOptionPane.showMessageDialog(this, "Las contraeñas no coinciden");
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe de ingresar un usuario.");
+            txtUsuario.requestFocus();
+        }
+        return false;
+    }
+
+    public int isAdmin() {
+        if (rdbAdmin.isSelected()) {
+            jLabel10.setText("si");
+            return 1;
+        } else {
+            jLabel10.setText("no");
+            return 0;
         }
     }
-    
-    public int isAdmin(){
-        if(rdbAdmin.isSelected())
-            {
-                jLabel10.setText("si");
-            return 1;
-            }
-        else 
-            {
-                jLabel10.setText("no");
-            return 0;
-            }
-    }
+
     /**
      * @param args the command line arguments
      */
@@ -397,7 +463,6 @@ public class FrmEmpleado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField campobello;
     private com.toedter.calendar.JDateChooser dchFechaNacimiento;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -415,6 +480,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
     private javax.swing.JPasswordField pswContra1;
     private javax.swing.JPasswordField pswContra2;
     private javax.swing.JRadioButton rdbAdmin;
+    private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
