@@ -49,14 +49,7 @@ public class Inicio extends javax.swing.JFrame {
         cmbDiasRenta.addItem(4);
         cmbDiasRenta.addItem(5);
         //setFechaRegreso(Regreso);
-                dim=super.getToolkit().getScreenSize();
-
-        super.setSize(dim);
-
-        super.setUndecorated(true);
-
-        super.setVisible(true);
-        
+               
     }
     
     public static void obtenerCodigo(String codigo) {

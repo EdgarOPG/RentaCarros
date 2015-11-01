@@ -6,6 +6,7 @@
 package gui;
 
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sql.Vehiculos;
 
@@ -17,8 +18,9 @@ public class Cobrar extends javax.swing.JFrame {
 
     static double Cobro;
     static double Dias;
-    
+
     Inicio inicio;
+
     /**
      * Creates new form Cobrar
      */
@@ -28,58 +30,52 @@ public class Cobrar extends javax.swing.JFrame {
         inicio = new Inicio();
         //Aqui asignamos el valor de la variable Total declarada mas abajo al label que muestra el Total.
         txtTotal.setText(String.valueOf(TotalNeto));
-    } 
+    }
     //Declaramos esta varianble para almacenar el valor que regresa el metodo calcularTotal().
     double Total = Inicio.calcularTotal();
     int DiasRenta = Inicio.getDiasRenta();
     public double TotalNeto = Total * DiasRenta;
     double entregado = 0;
-    String ent="";
-    
-    public void cambio(){  
+    String ent = "";
+
+    public void cambio() {
 
         Double cambio = 0.00;
         //Evalua si la caja de texto del dinero entregado es igual a vacio.
-        if (!(txtEntregado.getText().equals(""))) 
-        {
+        if (!(txtEntregado.getText().equals(""))) {
             entregado = Double.parseDouble(txtEntregado.getText());
             //double total = Double.parseDouble(txtTotal.getText().substring(1, txtTotal.getText().length()));
-            if (entregado >= TotalNeto) 
-            {
+            if (entregado >= TotalNeto) {
                 cambio = entregado - TotalNeto;
                 frmCambio.setText(Format.Mxn(cambio));
                 frmCobrar.setEnabled(true);
-            } 
-            else 
-            {
+            } else {
                 frmCambio.setText(Format.Mxn(0));
                 frmCobrar.setEnabled(false);
             }
-        } 
-        else 
-        {
+        } else {
             frmCambio.setText(Format.Mxn(0));
             frmCobrar.setEnabled(false);
         }
-        
+
     }
-    
+
     public static void setCobro(double totalCobrar) {
         Cobro = totalCobrar;
     }
-    
+
     public static double getCobro() {
         return Cobro;
     }
-    
+
     public static void setDias(double dias) {
         Dias = dias;
     }
-    
+
     public static double getDias() {
         return Dias;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -185,22 +181,37 @@ public class Cobrar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void frmCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmCobrarActionPerformed
-        Inicio.calcularTotal();
-        setCobro(TotalNeto);
-        setDias(DiasRenta);
-        sql.Facturas.RegistrarRenta(sql.Empleado.getIdEmpleado(), gui.BuscarCliente.getIdCliente(), 
-                                    gui.BuscarVehiculo.getIdVehiculo(), Fechas.getFechaActual(), 
-                                    Inicio.getFechaRegreso());
-        Ticket ticket = new Ticket();
-        ticket.setLocationRelativeTo(this);
-        ticket.setVisible(true);
-    
-        this.dispose();
+
+        cobrar();
     }//GEN-LAST:event_frmCobrarActionPerformed
 
     private void txtEntregadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEntregadoKeyReleased
         cambio();
     }//GEN-LAST:event_txtEntregadoKeyReleased
+
+    public void cobrar() {
+        DefaultTableModel venta = (DefaultTableModel) Inicio.jTable1.getModel();
+        int x;
+        if (sql.Facturas.RegistrarRenta(sql.Empleado.getIdEmpleado(), gui.BuscarCliente.getIdCliente(),
+                gui.BuscarVehiculo.getIdVehiculo(), Fechas.getFechaActual(),
+                Inicio.getFechaRegreso())) {
+            JOptionPane.showMessageDialog(this, "Renta registrada con exito.");
+            Ticket ticket = new Ticket();
+            ticket.setLocationRelativeTo(this);
+            ticket.setVisible(true);
+            int y;
+            while (Inicio.jTable1.getRowCount()>0){
+            venta.removeRow(0);
+            }
+            Inicio.calcularTotal();
+            setCobro(TotalNeto);
+            setDias(DiasRenta);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al registrar la renta.");
+        }
+
+    }
 
     /**
      * @param args the command line arguments

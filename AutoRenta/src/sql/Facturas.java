@@ -23,7 +23,7 @@ public class Facturas {
      * @return 
      */
     
-    public static void RegistrarRenta(int idEmpleado, int idCliente, int idVehiculo,
+    public static boolean RegistrarRenta(int idEmpleado, int idCliente, int idVehiculo,
                                       String fechaRenta, String fechaEntrega){
         sql.Conexion mysql = new sql.Conexion();
         Connection link = mysql.Conectar();
@@ -40,8 +40,10 @@ public class Facturas {
             stat.setString(4, fechaRenta);
             stat.setString(5, fechaEntrega);
             stat.executeUpdate();
+            return true;
         } catch (SQLException ex) {
-            Logger.getLogger(Empleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Facturas.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
     
