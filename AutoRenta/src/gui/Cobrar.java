@@ -188,7 +188,9 @@ public class Cobrar extends javax.swing.JFrame {
         Inicio.calcularTotal();
         setCobro(TotalNeto);
         setDias(DiasRenta);
-        sql.Facturas.RegistrarRenta(sql.Empleado.getIdEmpleado(), DiasRenta, WIDTH, Fechas.getFechaActual(), Inicio.getFechaRegreso());
+        sql.Facturas.RegistrarRenta(sql.Empleado.getIdEmpleado(), gui.BuscarCliente.getIdCliente(), 
+                                    gui.BuscarVehiculo.getIdVehiculo(), Fechas.getFechaActual(), 
+                                    Inicio.getFechaRegreso());
         Ticket ticket = new Ticket();
         ticket.setLocationRelativeTo(this);
         ticket.setVisible(true);

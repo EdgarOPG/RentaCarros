@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author Dani
@@ -20,7 +19,8 @@ import javax.swing.table.DefaultTableModel;
 public class BuscarVehiculo extends javax.swing.JFrame {
     
     int count = 0;
-
+    static int IdVehiculo;
+    
     /**
      * Creates new form BuscarVehiculo
      */
@@ -207,6 +207,14 @@ public class BuscarVehiculo extends javax.swing.JFrame {
             Inicio.obtenerCodigo(codigo);
             JOptionPane.showMessageDialog(this, "Vehiculo seleccionado exitosamente.");
             this.dispose();
+    }
+    
+    public static void setIdVehiculo(int id) {
+        IdVehiculo = id;
+    }
+    
+    public static int getIdVehiculo() {
+        return IdVehiculo;
     }
     /**
      * @param args the command line arguments

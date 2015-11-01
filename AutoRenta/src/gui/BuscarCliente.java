@@ -21,6 +21,7 @@ public class BuscarCliente extends javax.swing.JFrame {
     
     int count = 0;
     static String nombreCliente;
+    static int IdCliente;
     
 
     /**
@@ -210,6 +211,14 @@ public class BuscarCliente extends javax.swing.JFrame {
     
     public static String getNombreCliente() {
         return nombreCliente;
+    }
+    
+    public static void setIdCliente(int id) {
+        IdCliente = id;
+    }
+    
+    public static int getIdCliente() {
+        return IdCliente;
     }
     /**
      * @param args the command line arguments

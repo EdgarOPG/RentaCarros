@@ -215,7 +215,7 @@ public class Empleado {
         nombreUsuario = user;
     }
     
-    public static String nombreEmpleado() {
+    public static String getNombreEmpleado() {
         return nombreUsuario;
     }
     
@@ -234,7 +234,7 @@ public class Empleado {
         String Query;
         ResultSet val = null;
 
-        Query = "SELECT NOMBRE FROM EMPLEADOS WHERE USUARIO=?";
+        Query = "SELECT NOMBRE, ID_EMPLEADO FROM EMPLEADOS WHERE USUARIO=?";
 
         try {
             PreparedStatement stat = link.prepareStatement(Query);

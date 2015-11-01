@@ -1,4 +1,4 @@
-select * from empleados;
+select * from facturas;
 
 CREATE DATABASE RENTA;
 

@@ -184,6 +184,7 @@ public class Vehiculos {
             ResultSet codigo = stat.executeQuery();
             if (codigo.next()) {
                 Codigo = codigo.getString("ID_VEHICULO");
+                
                 return Codigo;
             } else {
                 return null;

@@ -609,7 +609,7 @@ public class Inicio extends javax.swing.JFrame {
     }
     
     public static void obtenerNombreEmpleado() {
-        lblNombreEmpleado.setText(sql.Empleado.nombreEmpleado());
+        lblNombreEmpleado.setText(sql.Empleado.getNombreEmpleado());
     }
     
     public static int getDiasRenta(){
@@ -634,8 +634,8 @@ public class Inicio extends javax.swing.JFrame {
     {
         java.util.Date ahora = new java.util.Date();
         String Regreso = Fechas.sumarFechasDias(ahora, getDiasRenta());
-        setFechaRegreso(Regreso);
         mostrarFechaRegreso(Regreso);
+        setFechaRegreso(Regreso);
     }
     
     

@@ -152,7 +152,7 @@ public class Ticket extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public static void LlenarTicket(){
-    lblNomEmpTicket.setText("Le Atendio: " + sql.Empleado.nombreEmpleado());
+    lblNomEmpTicket.setText("Le Atendio: " + sql.Empleado.getNombreEmpleado());
     lblNomClienTicket.setText("Sr(a): " + BuscarCliente.getNombreCliente());
     lblFechaHoy.setText("Ticket expedido el: " + Fechas.getFechaActual());
     lblDiasRenta.setText("Rentado(s) por: " + String.valueOf(Cobrar.getDias()) +" dias.");
