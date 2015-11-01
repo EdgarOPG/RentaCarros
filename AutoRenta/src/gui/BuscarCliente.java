@@ -5,10 +5,12 @@
  */
 package gui;
 
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -96,6 +98,11 @@ public class BuscarCliente extends javax.swing.JFrame {
                 jTable1MouseClicked(evt);
             }
         });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -157,14 +164,7 @@ public class BuscarCliente extends javax.swing.JFrame {
         count++;
         //Evalua si el renglon de la tabla es clickeado dos veces.
         if (count == 2) {
-            int row = jTable1.getSelectedRow();
-            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-            //Toma el valor del String en la posicion 1 del renglon, es decir el nombre y obtiene el Id 
-            //con el metodo obtenerCodigo que esta en la clase Inicio.
-            String nombre = (String) modelo.getValueAt(row, 1);
-            setNombreCliente(nombre);
-            Inicio.obtenerNombreCliente(nombre);
-            this.dispose();
+            pasarDatos();
             count = 0;
         }
     }//GEN-LAST:event_jTable1MouseClicked
@@ -186,6 +186,24 @@ public class BuscarCliente extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            pasarDatos();
+        }
+    }//GEN-LAST:event_jTable1KeyPressed
+
+    public void pasarDatos(){
+         int row = jTable1.getSelectedRow();
+            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+            //Toma el valor del String en la posicion 1 del renglon, es decir el nombre y obtiene el Id 
+            //con el metodo obtenerCodigo que esta en la clase Inicio.
+            String nombre = (String) modelo.getValueAt(row, 1);
+            setNombreCliente(nombre);
+            Inicio.obtenerNombreCliente(nombre);
+            JOptionPane.showMessageDialog(this, "Cliente seleccionado exitosamente.");
+            this.dispose();
+    }
+    
     public static void setNombreCliente(String nombre) {
         nombreCliente = nombre;
     }
