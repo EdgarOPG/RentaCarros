@@ -40,6 +40,7 @@ public class Ticket extends javax.swing.JFrame {
         lblFechaHoy = new javax.swing.JLabel();
         lblTotalCobro = new javax.swing.JLabel();
         sasdad = new javax.swing.JLabel();
+        lblFechaRegreso = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,6 +94,8 @@ public class Ticket extends javax.swing.JFrame {
         sasdad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         sasdad.setText("Total: ");
 
+        lblFechaRegreso.setText("Fecha Vencimiento: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,17 +107,18 @@ public class Ticket extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblNomEmpTicket)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblNomClienTicket)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblDiasRenta)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDiasRenta)
+                            .addComponent(lblFechaRegreso))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(sasdad)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblTotalCobro, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblTotalCobro, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNomEmpTicket)
+                            .addComponent(lblNomClienTicket))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(222, 222, 222)
@@ -129,14 +133,16 @@ public class Ticket extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNomEmpTicket)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblNomClienTicket)
                         .addGap(18, 18, 18)
                         .addComponent(lblDiasRenta)
-                        .addGap(31, 31, 31))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblFechaRegreso)
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(sasdad)
                         .addComponent(lblTotalCobro))))
@@ -150,6 +156,7 @@ public class Ticket extends javax.swing.JFrame {
     lblNomClienTicket.setText("Sr(a): " + BuscarCliente.getNombreCliente());
     lblFechaHoy.setText("Ticket expedido el: " + Fechas.getFechaActual());
     lblDiasRenta.setText("Rentado(s) por: " + String.valueOf(Cobrar.getDias()) +" dias.");
+    lblFechaRegreso.setText("Fecha de Entrega: " + Inicio.getFechaRegreso());
     }
     
     /**
@@ -194,6 +201,7 @@ public class Ticket extends javax.swing.JFrame {
     public static javax.swing.JTable jTable2;
     public static javax.swing.JLabel lblDiasRenta;
     public static javax.swing.JLabel lblFechaHoy;
+    public static javax.swing.JLabel lblFechaRegreso;
     public static javax.swing.JLabel lblNomClienTicket;
     public static javax.swing.JLabel lblNomEmpTicket;
     static javax.swing.JLabel lblTotalCobro;

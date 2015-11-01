@@ -6,17 +6,12 @@
 package gui;
 
 import java.awt.event.KeyEvent;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import sql.Vehiculos;
 
 /**
  *
@@ -24,6 +19,7 @@ import sql.Vehiculos;
  */
 public class Inicio extends javax.swing.JFrame {
 
+    static String fechaRegreso;
     static Double totalNeto = 0.0;
     String marca;
     String modelo;
@@ -50,6 +46,7 @@ public class Inicio extends javax.swing.JFrame {
         cmbDiasRenta.addItem(3);
         cmbDiasRenta.addItem(4);
         cmbDiasRenta.addItem(5);
+        //setFechaRegreso(Regreso);
     }
 
     public static void obtenerCodigo(String codigo) {
@@ -530,7 +527,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void cmbDiasRentaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDiasRentaItemStateChanged
-        setFechaRegreso();
+        calcularFechaRegreso();
     }//GEN-LAST:event_cmbDiasRentaItemStateChanged
 
     public boolean comprobarRepetidos() {
@@ -620,12 +617,27 @@ public class Inicio extends javax.swing.JFrame {
         return Dias;
     }
      
-    public static void setFechaRegreso()
-    {
-    java.util.Date ahora = new java.util.Date();
-    String Regreso = Fechas.sumarFechasDias(ahora, getDiasRenta());
-    lblFechaEntrega.setText("Fecha de entrega:" + Regreso);
+    public static void setFechaRegreso(String fecha) {
+        fechaRegreso = fecha;
     }
+    
+    public static String getFechaRegreso() {
+        return fechaRegreso;
+    }
+    
+    public static void mostrarFechaRegreso(String regreso)
+    {
+    lblFechaEntrega.setText("Fecha de entrega: " + regreso);
+    }
+    
+    public static void calcularFechaRegreso()
+    {
+        java.util.Date ahora = new java.util.Date();
+        String Regreso = Fechas.sumarFechasDias(ahora, getDiasRenta());
+        setFechaRegreso(Regreso);
+        mostrarFechaRegreso(Regreso);
+    }
+    
     
 //    public static void asignarDiferenciaFechas(){
 //        java.util.Date ahora = new java.util.Date();
