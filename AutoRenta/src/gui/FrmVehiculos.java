@@ -279,8 +279,8 @@ public class FrmVehiculos extends javax.swing.JFrame {
         String color = txtColor.getText();
         String transmision = txtTrans.getText();
         try {
-            float precio = Float.parseFloat(txtPrice.getText());
-            float tanque = Float.parseFloat(txtFuel.getText());
+            precio = Float.parseFloat(txtPrice.getText());
+            tanque = Float.parseFloat(txtFuel.getText());
         } catch (NumberFormatException e) {
             
         }
