@@ -81,14 +81,15 @@ public class Cobrar extends javax.swing.JFrame {
 
 
     public void cobrar() {
+        java.util.Date ahora = new java.util.Date();
+        String Regreso = Fechas.sumarFechasDias(ahora, Inicio.getDiasRenta());
         int x;
         int tipoPago = 1;
         double entregado = Double.parseDouble(pagar_entregado.getText());
         DefaultTableModel venta = (DefaultTableModel) Inicio.frm_renta.getModel();
 
         if (sql.Facturas.RegistrarRenta(sql.Empleado.getIdEmpleado(), gui.BuscarCliente.getIdCliente(),
-                gui.BuscarVehiculo.getIdVehiculo(), Fechas.getFechaActual(),
-                Inicio.getFechaRegreso())) {
+                gui.BuscarVehiculo.getIdVehiculo(), Fechas.getFechaActual(), Regreso)){
             for (x = venta.getRowCount(); x > 0; x--) {
                 venta.removeRow(0);
             }
