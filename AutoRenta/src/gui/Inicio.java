@@ -772,7 +772,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     public static javax.swing.JLabel lblFechaEntrega;
     public static javax.swing.JLabel lblNombCliente;
-    private static javax.swing.JLabel lblNombreEmpleado;
+    public static javax.swing.JLabel lblNombreEmpleado;
     private javax.swing.JLabel sasdad;
     private javax.swing.JTabbedPane tbpAdmin;
     private javax.swing.JPanel tbpBajas;

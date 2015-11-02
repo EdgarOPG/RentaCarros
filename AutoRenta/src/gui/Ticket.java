@@ -20,6 +20,7 @@ public class Ticket extends javax.swing.JFrame {
         initComponents();
         LlenarTicket();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setTitle("Ticket");
     }
 
     /**
