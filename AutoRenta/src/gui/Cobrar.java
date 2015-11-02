@@ -34,7 +34,7 @@ public class Cobrar extends javax.swing.JFrame {
     //Declaramos esta varianble para almacenar el valor que regresa el metodo calcularTotal().
     double Total = Inicio.calcularTotal();
     int DiasRenta = Inicio.getDiasRenta();
-    public double TotalNeto = Total * DiasRenta;
+    public double TotalNeto = Total;
     double entregado = 0;
     String ent = "";
 

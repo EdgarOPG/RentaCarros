@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Dani
  */
 public class Inicio extends javax.swing.JFrame {
-
+    static double Total;
     static String fechaRegreso;
     static Double totalNeto = 0.0;
     String marca;
@@ -512,6 +512,7 @@ public class Inicio extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "No ha seleccionado a un cliente.");
             }else{
              rentar();
+             setTotal(calcularTotal());
         } 
         }
         
@@ -552,6 +553,7 @@ public class Inicio extends javax.swing.JFrame {
         String Regreso = Fechas.sumarFechasDias(ahora, getDiasRenta());
         setFechaRegreso(Regreso);
         mostrarFechaRegreso(Regreso);
+        calcularTotal();
     }//GEN-LAST:event_cmbDiasRentaItemStateChanged
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -598,7 +600,8 @@ public class Inicio extends javax.swing.JFrame {
             for (x = 0; x < venta.getRowCount(); x++) {
                 String tmpTotal = String.valueOf(venta.getValueAt(x, 6));
                 Double tmpTotal1 = Double.parseDouble(tmpTotal);
-                totalNeto = totalNeto + tmpTotal1;
+                int DiasRenta = getDiasRenta();
+                totalNeto = (totalNeto + tmpTotal1) * DiasRenta;
             }
         }
         total_venta.setText(Format.Mxn(totalNeto));
@@ -667,6 +670,14 @@ public class Inicio extends javax.swing.JFrame {
         String Regreso = Fechas.sumarFechasDias(ahora, getDiasRenta());
         setFechaRegreso(Regreso);
         mostrarFechaRegreso(Regreso);
+    }
+    
+     public static void setTotal(double total){
+        Total = total;
+    }
+    
+    public static double getTotal(){
+        return Total;
     }
     
     

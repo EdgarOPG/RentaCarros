@@ -28,8 +28,8 @@ public class Facturas {
         sql.Conexion mysql = new sql.Conexion();
         Connection link = mysql.Conectar();
         String Query = "insert into FACTURAS(ID_EMPLEADO, ID_CLIENTE, ID_VEHICULO,"
-                        + " FECHA, FECHA_ENTREGA) "
-                        + " VALUES(?, ?, ?, ?, ?)";
+                        + " FECHA, FECHA_ENTREGA, ESTADO)"
+                        + " VALUES(?, ?, ?, ?, ?, 0)";
         try {
 
             PreparedStatement stat = link.prepareStatement(Query);

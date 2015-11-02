@@ -14,12 +14,16 @@ public class Ticket extends javax.swing.JFrame {
     /**
      * Creates new form Ticket
      */
+    
+    
+
     public Ticket() {
         initComponents();
         LlenarTicket();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        lblTotalCobro.setText(String.valueOf(Cobrar.getCobro()));
     }
+    
+    double Total = Inicio.calcularTotal();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,8 +159,9 @@ public class Ticket extends javax.swing.JFrame {
     lblNomEmpTicket.setText("Le Atendio: " + sql.Empleado.getNombreEmpleado());
     lblNomClienTicket.setText("Sr(a): " + BuscarCliente.getNombreCliente());
     lblFechaHoy.setText("Ticket expedido el: " + Fechas.getFechaActual());
-    lblDiasRenta.setText("Rentado(s) por: " + String.valueOf(Cobrar.getDias()) +" dias.");
+    lblDiasRenta.setText("Rentado(s) por: " + String.valueOf(Cobrar.getDias()) + " dias.");
     lblFechaRegreso.setText("Fecha de Entrega: " + Inicio.getFechaRegreso());
+    lblTotalCobro.setText(String.valueOf(Inicio.getTotal()));
     }
     
     /**
