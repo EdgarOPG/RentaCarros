@@ -94,6 +94,11 @@ public class Cobrar extends javax.swing.JFrame {
                 venta.removeRow(0);
             }
             Inicio.calcularTotal();
+            Ticket ticket = new Ticket();
+        ticket.setLocationRelativeTo(this);
+        ticket.setVisible(true);
+    
+        this.dispose();
         }
 
     }

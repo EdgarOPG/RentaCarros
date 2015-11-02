@@ -652,6 +652,14 @@ public class Inicio extends javax.swing.JFrame {
         }
     }
 
+     public static void setTotal(double total){
+        Total = total;
+    }
+    
+    public static double getTotal(){
+        return Total;
+    }
+
     public void visibilidad() {
         if (sql.Empleado.isAdmin()) {
             tbpAdmin.setEnabled(true);
@@ -699,13 +707,7 @@ public class Inicio extends javax.swing.JFrame {
         mostrarFechaRegreso(Regreso);
     }
     
-     public static void setTotal(double total){
-        Total = total;
-    }
     
-    public static double getTotal(){
-        return Total;
-    }
     
     
 //    public static void asignarDiferenciaFechas(){
