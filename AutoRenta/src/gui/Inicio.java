@@ -249,8 +249,6 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel4.setText("Numero de Dias:");
 
-        lblNombCliente.setText("No se ha seleccionado ningun cliente.");
-
         jButton8.setText("Buscar Cliente");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -282,7 +280,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(149, 149, 149)
                         .addComponent(lblNombCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -437,11 +435,12 @@ public class Inicio extends javax.swing.JFrame {
 
     private void frm_codigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_frm_codigoKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (frm_codigo.getText().equals("")) {
-
-                JOptionPane.showMessageDialog(null, "Introduzca un codigo");
-
-            } else {
+            if (frm_codigo.getText().equals("")) 
+            {
+                    JOptionPane.showMessageDialog(null, "Introduzca un codigo");
+            } 
+            else 
+            {
                 DefaultTableModel venta = (DefaultTableModel) jTable1.getModel();
                 int codigo = Integer.parseInt(frm_codigo.getText());
 
@@ -490,7 +489,13 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_frm_codigoKeyPressed
 
     private void btnCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarActionPerformed
-         rentar();
+         if(lblNombCliente.getText().equals("")){
+             JOptionPane.showMessageDialog(null, "No ha seleccionado un cliente, si no esta dado de alta registrelo primero");
+         }
+         else
+         {
+             rentar();
+         }    
     }//GEN-LAST:event_btnCobrarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
