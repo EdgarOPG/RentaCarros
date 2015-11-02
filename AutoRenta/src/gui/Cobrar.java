@@ -5,6 +5,7 @@
  */
 package gui;
 
+import static gui.Inicio.getDiasRenta;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -192,9 +193,13 @@ public class Cobrar extends javax.swing.JFrame {
     public void cobrar() {
         DefaultTableModel venta = (DefaultTableModel) Inicio.jTable1.getModel();
         int x;
+        
+        java.util.Date ahora = new java.util.Date();
+        String Regreso = Fechas.sumarFechasDias(ahora, Inicio.getDiasRenta());
+        
         if (sql.Facturas.RegistrarRenta(sql.Empleado.getIdEmpleado(), gui.BuscarCliente.getIdCliente(),
-                gui.BuscarVehiculo.getIdVehiculo(), Fechas.getFechaActual(),
-                Inicio.getFechaRegreso())) {
+                gui.BuscarVehiculo.getIdVehiculo(), Fechas.getFechaActual(), Regreso)) 
+        {
             JOptionPane.showMessageDialog(this, "Renta registrada con exito.");
             Inicio.calcularTotal();
             setCobro(TotalNeto);

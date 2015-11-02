@@ -5,6 +5,8 @@
  */
 package gui;
 
+import static gui.Inicio.getDiasRenta;
+
 /**
  *
  * @author eopg9
@@ -154,11 +156,13 @@ public class Ticket extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public static void LlenarTicket(){
+    java.util.Date ahora = new java.util.Date();
+    String Regreso = Fechas.sumarFechasDias(ahora, (int) Cobrar.getDias());
     lblNomEmpTicket.setText("Le Atendio: " + sql.Empleado.getNombreEmpleado());
     lblNomClienTicket.setText("Sr(a): " + BuscarCliente.getNombreCliente());
     lblFechaHoy.setText("Ticket expedido el: " + Fechas.getFechaActual());
     lblDiasRenta.setText("Rentado(s) por: " + String.valueOf(Cobrar.getDias()) + " dias.");
-    lblFechaRegreso.setText("Fecha de Entrega: " + Inicio.getFechaRegreso());
+    lblFechaRegreso.setText("Fecha de Entrega: " + Regreso);
     lblTotalCobro.setText(String.valueOf(Cobrar.getCobro()));
     }
     
