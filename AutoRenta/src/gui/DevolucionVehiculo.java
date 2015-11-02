@@ -7,6 +7,9 @@ package gui;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -29,11 +32,13 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         txtBuscar.requestFocus();
         this.setLocationRelativeTo(null);
+        
     }
     
     /**
      * Metodo para enlistar los vehiculos, faltan las busquedas sql
      */
+    
      private void listInfo(String x) {
         int y;
         DefaultTableModel modelo1 = (DefaultTableModel) jTable1.getModel();
@@ -47,12 +52,28 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
                 String nombre = data.getString("CLIENTES.NOMBRE");
                 String fecha = data.getString("FACTURAS.FECHA");
                 String fechaEntrega = data.getString("FACTURAS.FECHA_ENTREGA");
-               
+                float PrecioRenta = data.getFloat("VEHICULO.PRECIO_RENTA");
+                //Convertir el String fechaEntrega a Date.
+                SimpleDateFormat formateador = new SimpleDateFormat("yy-MM-dd");
+                Date FechaEntregaDate = formateador.parse(fechaEntrega);
+                Date Hoy = new Date();
+                int Diferencia = Fechas.diferenciasEntreFechas(FechaEntregaDate, Hoy);
+                float MultaTotal = 0;
+                float Porcentaje = (float) 1.5;
+                if(Diferencia > 0){
+                    MultaTotal = Porcentaje*(PrecioRenta*Diferencia);
+                }
+                else
+                {
+                    MultaTotal = 0;
+                }
                 //float multa = data.getFloat("MULTA");
-                modelo1.addRow(new Object[]{codigo, nombre, fecha, fechaEntrega});
+                modelo1.addRow(new Object[]{codigo, nombre, fecha, fechaEntrega, MultaTotal});
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmBorrarVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(DevolucionVehiculo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

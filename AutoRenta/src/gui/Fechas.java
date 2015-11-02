@@ -29,7 +29,7 @@ public class Fechas {
     }
     
     
-    public static synchronized int diferenciasDeFechas(Date fechaInicial, Date fechaFinal)
+    public static synchronized int diferenciasEntreFechas(Date fechaInicial, Date fechaFinal)
     {
 
         DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
