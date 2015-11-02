@@ -21,7 +21,7 @@ public class Cobrar extends javax.swing.JFrame {
     Double total = Inicio.calcularTotal();
     boolean ready = false;
     static double Cobro;
-     static double Dias;
+    static double Dias;
 
     /**
      * Creates new form cobrar
@@ -62,7 +62,7 @@ public class Cobrar extends javax.swing.JFrame {
             cmdCobrar.setEnabled(false);
         }
     }
-    
+
     public static void setCobro(double totalCobrar) {
         Cobro = totalCobrar;
     }
@@ -79,7 +79,6 @@ public class Cobrar extends javax.swing.JFrame {
         return Dias;
     }
 
-
     public void cobrar() {
         java.util.Date ahora = new java.util.Date();
         String Regreso = Fechas.sumarFechasDias(ahora, Inicio.getDiasRenta());
@@ -89,16 +88,27 @@ public class Cobrar extends javax.swing.JFrame {
         DefaultTableModel venta = (DefaultTableModel) Inicio.frm_renta.getModel();
 
         if (sql.Facturas.RegistrarRenta(sql.Empleado.getIdEmpleado(), gui.BuscarCliente.getIdCliente(),
-                gui.BuscarVehiculo.getIdVehiculo(), Fechas.getFechaActual(), Regreso)){
+                gui.BuscarVehiculo.getIdVehiculo(), Fechas.getFechaActual(), Regreso)) {
+
+            Ticket ticket = new Ticket();
+            ticket.setLocationRelativeTo(this);
+
+            DefaultTableModel modelo = (DefaultTableModel) Ticket.jTable2.getModel();
+            for (int i = 0; i < venta.getRowCount(); i++) {
+                Object fila[] = new Object[venta.getColumnCount()];
+                for (int j = 0; j < venta.getColumnCount(); j++) {
+                    fila[j] = venta.getValueAt(i, j);
+                }
+                modelo.addRow(fila);
+            }
+           
+            ticket.setVisible(true);
+            setCobro(total);
             for (x = venta.getRowCount(); x > 0; x--) {
                 venta.removeRow(0);
             }
             Inicio.calcularTotal();
-            Ticket ticket = new Ticket();
-        ticket.setLocationRelativeTo(this);
-        ticket.setVisible(true);
-    
-        this.dispose();
+            this.dispose();
         }
 
     }
