@@ -235,6 +235,18 @@ public class Vehiculos {
             
 
             stat.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Query = "UPDATE FACTURAS SET ESTADO=1 WHERE ID_VEHICULO=?";
+        try {
+            PreparedStatement stat = link.prepareStatement(Query);
+
+            stat.setInt(1, idVehiculo);
+            
+
+            stat.executeUpdate();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
@@ -250,7 +262,7 @@ public class Vehiculos {
         Query = "select empleados.NOMBRE, vehiculo.ID_VEHICULO, vehiculo.PRECIO_RENTA, facturas.FECHA, facturas.FECHA_ENTREGA, clientes.nombre from facturas\n" +
 "inner join empleados on empleados.ID_EMPLEADO = facturas.ID_EMPLEADO\n" +
 "inner join vehiculo on vehiculo.ID_VEHICULO = facturas.ID_VEHICULO\n" +
-"inner join clientes on clientes.ID_CLIENTE = facturas.ID_CLIENTE WHERE clientes.nombre like ? AND vehiculo.ESTADO = 0  ";
+"inner join clientes on clientes.ID_CLIENTE = facturas.ID_CLIENTE WHERE clientes.nombre like ? AND facturas.ESTADO = 0  ";
 
         try {
             PreparedStatement stat = link.prepareStatement(Query);

@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -20,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Dani
  */
 public class DevolucionVehiculo extends javax.swing.JFrame {
-    
+
     int count = 0;
 
     /**
@@ -32,14 +33,13 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         txtBuscar.requestFocus();
         this.setLocationRelativeTo(null);
-        
+
     }
-    
+
     /**
      * Metodo para enlistar los vehiculos, faltan las busquedas sql
      */
-    
-     private void listInfo(String x) {
+    private void listInfo(String x) {
         int y;
         DefaultTableModel modelo1 = (DefaultTableModel) jTable1.getModel();
         for (y = jTable1.getRowCount() - 1; y >= 0; y--) {
@@ -60,11 +60,9 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
                 int Diferencia = Fechas.diferenciasEntreFechas(FechaEntregaDate, Hoy);
                 float MultaTotal = 0;
                 float Porcentaje = (float) 1.5;
-                if(Diferencia > 0){
-                    MultaTotal = Porcentaje*(PrecioRenta*Diferencia);
-                }
-                else
-                {
+                if (Diferencia > 0) {
+                    MultaTotal = Porcentaje * (PrecioRenta * Diferencia);
+                } else {
                     MultaTotal = 0;
                 }
                 //float multa = data.getFloat("MULTA");
@@ -115,6 +113,11 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -183,22 +186,21 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
             //Toma el valor del String en la posicion 1 del renglon, es decir el nombre y obtiene el Id 
             //con el metodo obtenerCodigo que esta en la clase Inicio.
             int id = (Integer) modelo.getValueAt(row, 0);
-            if(sql.Vehiculos.devolverVehiculo(id)){
+            if (sql.Vehiculos.devolverVehiculo(id)) {
                 JOptionPane.showMessageDialog(this, "Vehiculo Devuelto.");
                 listInfo("");
                 txtBuscar.setText(null);
                 txtBuscar.requestFocus();
                 count = 0;
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Error al devolver vehiculo.");
             }
-            
-            
+
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void txtBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyPressed
-       
+
     }//GEN-LAST:event_txtBuscarKeyPressed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
@@ -207,12 +209,37 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
-      
+
     }//GEN-LAST:event_txtBuscarKeyTyped
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-       
+
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            int row = jTable1.getSelectedRow();
+            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+            //Toma el valor del String en la posicion 1 del renglon, es decir el nombre y obtiene el Id 
+            //con el metodo obtenerCodigo que esta en la clase Inicio.
+            int id = (Integer) modelo.getValueAt(row, 0);
+            float multa = (Float) modelo.getValueAt(row, 4);
+            if (multa > 0.0) {
+                Cobrar cobrar = new Cobrar();
+                cobrar.setVisible(true);
+            } else {
+                if (sql.Vehiculos.devolverVehiculo(id)) {
+                    JOptionPane.showMessageDialog(this, "Vehiculo Devuelto.");
+                    listInfo("");
+                    txtBuscar.setText(null);
+                    txtBuscar.requestFocus();
+                    count = 0;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al devolver vehiculo.");
+                }
+            }
+        }
+    }//GEN-LAST:event_jTable1KeyPressed
 
     /**
      * @param args the command line arguments
