@@ -22,8 +22,6 @@ public class Ticket extends javax.swing.JFrame {
         LlenarTicket();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
-    
-    double Total = Inicio.calcularTotal();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -161,7 +159,7 @@ public class Ticket extends javax.swing.JFrame {
     lblFechaHoy.setText("Ticket expedido el: " + Fechas.getFechaActual());
     lblDiasRenta.setText("Rentado(s) por: " + String.valueOf(Cobrar.getDias()) + " dias.");
     lblFechaRegreso.setText("Fecha de Entrega: " + Inicio.getFechaRegreso());
-    lblTotalCobro.setText(String.valueOf(Inicio.getTotal()));
+    lblTotalCobro.setText(String.valueOf(Cobrar.getCobro()));
     }
     
     /**

@@ -196,16 +196,17 @@ public class Cobrar extends javax.swing.JFrame {
                 gui.BuscarVehiculo.getIdVehiculo(), Fechas.getFechaActual(),
                 Inicio.getFechaRegreso())) {
             JOptionPane.showMessageDialog(this, "Renta registrada con exito.");
+            Inicio.calcularTotal();
+            setCobro(TotalNeto);
+            setDias(DiasRenta);
             Ticket ticket = new Ticket();
             ticket.setLocationRelativeTo(this);
             ticket.setVisible(true);
             int y;
-            while (Inicio.jTable1.getRowCount()>0){
+            while (Inicio.jTable1.getRowCount()>0)
+            {
             venta.removeRow(0);
             }
-            Inicio.calcularTotal();
-            setCobro(TotalNeto);
-            setDias(DiasRenta);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Error al registrar la renta.");
