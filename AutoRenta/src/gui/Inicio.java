@@ -505,6 +505,7 @@ public class Inicio extends javax.swing.JFrame {
     private void btnCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarActionPerformed
         DefaultTableModel venta = (DefaultTableModel) frm_renta.getModel();
              row = venta.getRowCount();
+             int x;
                 System.out.println(row);
         if (row < 1) {
             JOptionPane.showMessageDialog(this, "No hay vehiculos seleccionados");
@@ -512,8 +513,15 @@ public class Inicio extends javax.swing.JFrame {
          if(lblNombCliente.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "No ha seleccionado a un cliente.");
             }else{
+             if(row>=2){
+                 JOptionPane.showMessageDialog(this, "No puede rentar mas de un carro por cliente.");
+                 for (x = venta.getRowCount(); x > 0; x--) {
+                venta.removeRow(0);
+            }
+             }else{
              rentar();
              setTotal(calcularTotal());
+             }
         } 
         }
         

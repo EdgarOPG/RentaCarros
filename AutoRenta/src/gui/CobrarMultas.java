@@ -1,10 +1,12 @@
 package gui;
 
+import static gui.DevolucionVehiculo.jTable1;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -16,9 +18,9 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Tux
  */
-public class Cobrar extends javax.swing.JFrame {
+public class CobrarMultas extends javax.swing.JFrame {
 
-    Double total = Inicio.calcularTotal();
+    float total = DevolucionVehiculo.MultaTotal;
     boolean ready = false;
     static double Cobro;
     static double Dias;
@@ -26,7 +28,7 @@ public class Cobrar extends javax.swing.JFrame {
     /**
      * Creates new form cobrar
      */
-    public Cobrar() {
+    public CobrarMultas() {
         initComponents();
         val.efectivo(pagar_entregado);
         cobrar_total.setText(Format.Mxn(total));
@@ -72,13 +74,6 @@ public class Cobrar extends javax.swing.JFrame {
         return Cobro;
     }
 
-    public static void setDias(double dias) {
-        Dias = dias;
-    }
-
-    public static double getDias() {
-        return Dias;
-    }
 
     public void cobrar() {
         java.util.Date ahora = new java.util.Date();
@@ -87,32 +82,23 @@ public class Cobrar extends javax.swing.JFrame {
         int tipoPago = 1;
         double entregado = Double.parseDouble(pagar_entregado.getText());
         DefaultTableModel venta = (DefaultTableModel) Inicio.frm_renta.getModel();
-
-        if (sql.Facturas.RegistrarRenta(sql.Empleado.getIdEmpleado(), gui.BuscarCliente.getIdCliente(),
-                gui.BuscarVehiculo.getIdVehiculo(), Fechas.getFechaActual(), Regreso)) {
-
-            Ticket ticket = new Ticket();
-            ticket.setLocationRelativeTo(this);
-
-            DefaultTableModel modelo = (DefaultTableModel) Ticket.jTable2.getModel();
-            for (int i = 0; i < venta.getRowCount(); i++) {
-                Object fila[] = new Object[venta.getColumnCount()];
-                for (int j = 0; j < venta.getColumnCount(); j++) {
-                    fila[j] = venta.getValueAt(i, j);
+        DefaultTableModel venta1 = (DefaultTableModel) DevolucionVehiculo.jTable1.getModel();
+        int row = jTable1.getSelectedRow();
+        int id = (Integer) venta1.getValueAt(row, 0);
+       if (sql.Vehiculos.devolverVehiculo(id)) {
+                    JOptionPane.showMessageDialog(this, "Vehiculo Devuelto.");
+                    DevolucionVehiculo.listInfo("");
+                    DevolucionVehiculo.txtBuscar.setText(null);
+                    DevolucionVehiculo.txtBuscar.requestFocus();
+                    DevolucionVehiculo.count = 0;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al devolver vehiculo.");
                 }
-                modelo.addRow(fila);
-            }
-           
-            ticket.setVisible(true);
-            setCobro(total);
-            for (x = venta.getRowCount(); x > 0; x--) {
-                venta.removeRow(0);
-            }
-            Inicio.calcularTotal();
             this.dispose();
         }
 
-    }
+
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -249,14 +235,18 @@ public class Cobrar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cobrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CobrarMultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cobrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CobrarMultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cobrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CobrarMultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cobrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CobrarMultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -265,7 +255,7 @@ public class Cobrar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cobrar().setVisible(true);
+                new CobrarMultas().setVisible(true);
             }
         });
     }

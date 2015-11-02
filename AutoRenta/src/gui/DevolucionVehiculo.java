@@ -22,7 +22,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DevolucionVehiculo extends javax.swing.JFrame {
 
-    int count = 0;
+    static int count = 0;
+    static float MultaTotal;
 
     /**
      * Creates new form BuscarVehiculo
@@ -39,7 +40,7 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
     /**
      * Metodo para enlistar los vehiculos, faltan las busquedas sql
      */
-    private void listInfo(String x) {
+    public static void listInfo(String x) {
         int y;
         DefaultTableModel modelo1 = (DefaultTableModel) jTable1.getModel();
         for (y = jTable1.getRowCount() - 1; y >= 0; y--) {
@@ -58,7 +59,7 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
                 Date FechaEntregaDate = formateador.parse(fechaEntrega);
                 Date Hoy = new Date();
                 int Diferencia = Fechas.diferenciasEntreFechas(FechaEntregaDate, Hoy);
-                float MultaTotal = 0;
+                MultaTotal = 0;
                 float Porcentaje = (float) 1.5;
                 if (Diferencia > 0) {
                     MultaTotal = Porcentaje * (PrecioRenta * Diferencia);
@@ -186,16 +187,22 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
             //Toma el valor del String en la posicion 1 del renglon, es decir el nombre y obtiene el Id 
             //con el metodo obtenerCodigo que esta en la clase Inicio.
             int id = (Integer) modelo.getValueAt(row, 0);
-            if (sql.Vehiculos.devolverVehiculo(id)) {
-                JOptionPane.showMessageDialog(this, "Vehiculo Devuelto.");
-                listInfo("");
-                txtBuscar.setText(null);
-                txtBuscar.requestFocus();
-                count = 0;
+            float multa = (Float) modelo.getValueAt(row, 4);
+            if (multa > 0.0) {
+                CobrarMultas cobrar = new CobrarMultas();
+                cobrar.setVisible(true);
+                cobrar.setLocationRelativeTo(this);
             } else {
-                JOptionPane.showMessageDialog(this, "Error al devolver vehiculo.");
+                if (sql.Vehiculos.devolverVehiculo(id)) {
+                    JOptionPane.showMessageDialog(this, "Vehiculo Devuelto.");
+                    listInfo("");
+                    txtBuscar.setText(null);
+                    txtBuscar.requestFocus();
+                    count=0;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al devolver vehiculo.");
+                }
             }
-
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -225,15 +232,15 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
             int id = (Integer) modelo.getValueAt(row, 0);
             float multa = (Float) modelo.getValueAt(row, 4);
             if (multa > 0.0) {
-                Cobrar cobrar = new Cobrar();
+                CobrarMultas cobrar = new CobrarMultas();
                 cobrar.setVisible(true);
+                cobrar.setLocationRelativeTo(this);
             } else {
                 if (sql.Vehiculos.devolverVehiculo(id)) {
                     JOptionPane.showMessageDialog(this, "Vehiculo Devuelto.");
                     listInfo("");
                     txtBuscar.setText(null);
                     txtBuscar.requestFocus();
-                    count = 0;
                 } else {
                     JOptionPane.showMessageDialog(this, "Error al devolver vehiculo.");
                 }
@@ -281,7 +288,7 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
     private javax.swing.JLabel Nombre;
     private javax.swing.JButton jButton7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txtBuscar;
+    static javax.swing.JTable jTable1;
+    public static javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

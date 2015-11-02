@@ -402,6 +402,4 @@ public class FrmClientes extends javax.swing.JFrame {
     private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtRef;
     // End of variables declaration//GEN-END:variables
-Conexion cc = new Conexion();
-    Connection cn = cc.Conectar();
 }
