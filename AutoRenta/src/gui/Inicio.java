@@ -97,7 +97,6 @@ public class Inicio extends javax.swing.JFrame {
         cmbDiasRenta = new javax.swing.JComboBox();
         lblFechaEntrega = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         lblNombreEmpleado = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
@@ -114,7 +113,6 @@ public class Inicio extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
 
         jLabel1.setText("Id Del Vehiculo:");
 
@@ -286,13 +284,6 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        jButton10.setText("Borrar tabla");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -317,13 +308,9 @@ public class Inicio extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblNombCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jButton10))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -349,9 +336,7 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(cmbDiasRenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblFechaEntrega))
                     .addComponent(jButton5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton10)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 45, Short.MAX_VALUE))
         );
 
         jLabel6.setText("Empleado:");
@@ -578,10 +563,6 @@ public class Inicio extends javax.swing.JFrame {
         login.setVisible(true);
     }//GEN-LAST:event_jButton9ActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-       
-    }//GEN-LAST:event_jButton10ActionPerformed
-
     public static void VVLV(){
          int x;
         DefaultTableModel venta = (DefaultTableModel) frm_renta.getModel();
@@ -616,11 +597,13 @@ public class Inicio extends javax.swing.JFrame {
 
     public static Double calcularTotal() {
         int x;
+        
         totalNeto = 0.00;
         DefaultTableModel venta = (DefaultTableModel) frm_renta.getModel();
         //Si la cantidad de renglones es 0 es decir se hizo ninguna renta, mantiene la variable del total en 0.
         if (venta.getRowCount() == 0) {
             totalNeto = 0.00;
+            lblNombCliente.setText("");
         } else {
             //En un numero de iteraciones igual a la cantidad de renglones que tiene la tabla.
             //Guarda en una variable temporal de tipo String el texto que contiene la celda del precio. 
@@ -761,7 +744,6 @@ public class Inicio extends javax.swing.JFrame {
     private static javax.swing.JTextField frm_codigo;
     static javax.swing.JTable frm_renta;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

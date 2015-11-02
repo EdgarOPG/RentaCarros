@@ -25,7 +25,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
         format = new Format();
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
-
+        this.setTitle("Registrar Empleados");
     }
 
     /**

@@ -51,6 +51,33 @@ public class Cliente {
         }
     }
     
+    public static int clientesConRentas(String numLic){
+        sql.Conexion mysql = new sql.Conexion();
+        Connection link = mysql.Conectar();
+        ResultSet val = null;
+        int idClient=0;
+        String Query = "SELECT FACTURAS.ID_CLIENTE FROM FACTURAS "
+                + "INNER JOIN CLIENTES ON FACTURAS.ID_CLIENTE = CLIENTES.ID_CLIENTE"
+                + " WHERE ESTADO = 0 AND NUMERO_DE_LICENCIA=?";
+
+        try {
+            PreparedStatement stat = link.prepareStatement(Query);
+            stat.setString(1, numLic);
+            val = stat.executeQuery();
+            if (val.next()){
+                idClient=val.getInt("ID_CLIENTE");
+                return idClient;
+            }
+            else{
+                return idClient;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            return idClient;
+        }
+    }
+    
     /**
      * Metodo para obtener el nombre de los clientes de la base de datos
      * @return true si el query se ejecuto correctamente
@@ -78,12 +105,24 @@ public class Cliente {
      * @param nombre que es el nombre del empleados
      * @return true si el query se ejecuto correctamente
      */
-    public static boolean borrarCliente(String nombre){
+    public static boolean borrarCliente(String nombre, int idCliente){
         sql.Conexion mysql = new sql.Conexion();
         Connection link = mysql.Conectar();
         String Query;
 
-        Query = "DELETE FROM CLIENTES WHERE NOMBRE = ?";
+        Query = "DELETE FROM FACTURAS WHERE ID_CLIENTE = ?";
+       
+        try {
+            PreparedStatement stat = link.prepareStatement(Query);
+
+            stat.setInt(1, idCliente);
+
+            stat.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+         Query = "DELETE FROM CLIENTES WHERE NOMBRE = ?";
         try {
             PreparedStatement stat = link.prepareStatement(Query);
 

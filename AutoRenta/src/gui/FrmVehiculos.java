@@ -23,6 +23,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
+        this.setTitle("Registrar Vehiculos");
     }
 
     /**

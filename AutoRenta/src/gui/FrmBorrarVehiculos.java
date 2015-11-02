@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -29,6 +30,7 @@ public class FrmBorrarVehiculos extends javax.swing.JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         txtBuscar.requestFocus();
         this.setLocationRelativeTo(null);
+        this.setTitle("Borrar Vehiculos");
     }
 
     /**
@@ -97,6 +99,11 @@ public class FrmBorrarVehiculos extends javax.swing.JFrame {
                 jTable1MouseClicked(evt);
             }
         });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -158,8 +165,13 @@ public class FrmBorrarVehiculos extends javax.swing.JFrame {
         count++;
         if (count == 2) {
             int row = jTable1.getSelectedRow();
-            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-            int id = (Integer) modelo.getValueAt(row, 0);
+            DefaultTableModel modelo1 = (DefaultTableModel) jTable1.getModel();
+            int id = (Integer) modelo1.getValueAt(row, 0);
+            String marca = (String) modelo1.getValueAt(row, 0);
+            String modelo = (String) modelo1.getValueAt(row, 1);
+            String color = (String) modelo1.getValueAt(row, 2);
+            String transmision = (String) modelo1.getValueAt(row, 3);
+            float precio = (float) modelo1.getValueAt(row, 6);
             if (sql.Vehiculos.borrarVehiculo(id)) {
                 JOptionPane.showMessageDialog(this, "Vehiculo eliminado.");
                 listInfo("");
@@ -188,6 +200,29 @@ public class FrmBorrarVehiculos extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
 
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+        int row = jTable1.getSelectedRow();
+        DefaultTableModel modelo1 = (DefaultTableModel) jTable1.getModel();
+        int id = (Integer) modelo1.getValueAt(row, 0);
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(null, "¿Deseas eliminar el vehiculo seleccionado?", "Precaución", dialogButton);
+            if (dialogResult == JOptionPane.YES_OPTION) { //The ISSUE is here
+                String nombre = (String) modelo1.getValueAt(row, 1);
+                if (sql.Vehiculos.borrarVehiculo(id)) {
+                    JOptionPane.showMessageDialog(this, "Vehiculo eliminado.");
+                    listInfo("");
+                    txtBuscar.setText(null);
+                    txtBuscar.requestFocus();
+                    count = 0;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al tratar de eliminar vehiculo.");
+                }
+            }
+        }
+
+    }//GEN-LAST:event_jTable1KeyPressed
 
     /**
      * @param args the command line arguments

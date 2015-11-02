@@ -33,6 +33,7 @@ public class BuscarCliente extends javax.swing.JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         txtBuscar.requestFocus();
         this.setLocationRelativeTo(null);
+        this.setTitle("Buscar Clientes");
     }
     
     

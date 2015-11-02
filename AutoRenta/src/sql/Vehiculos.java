@@ -133,6 +133,18 @@ public class Vehiculos {
         sql.Conexion mysql = new sql.Conexion();
         Connection link = mysql.Conectar();
         String Query;
+        
+        Query = "DELETE FROM FACTURAS WHERE ID_VEHICULO = ?";
+       
+        try {
+            PreparedStatement stat = link.prepareStatement(Query);
+
+            stat.setInt(1, idVehiculo);
+
+            stat.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         Query = "DELETE FROM VEHICULO WHERE ID_VEHICULO= ?";
         try {
@@ -147,6 +159,8 @@ public class Vehiculos {
             return false;
         }
     }
+    
+     
     
     public static ResultSet buscarVehiculo(String marca) {
         String Query;
