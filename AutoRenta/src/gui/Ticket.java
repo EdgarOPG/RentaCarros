@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package gui;
-
-import static gui.Inicio.getDiasRenta;
-
 /**
  *
  * @author eopg9
@@ -157,13 +154,13 @@ public class Ticket extends javax.swing.JFrame {
 
     public static void LlenarTicket(){
     java.util.Date ahora = new java.util.Date();
-    String Regreso = Fechas.sumarFechasDias(ahora, (int) Cobrar.getDias());
+    String Regreso = Fechas.sumarFechasDias(ahora, Inicio.getDiasRenta());
     lblNomEmpTicket.setText("Le Atendio: " + sql.Empleado.getNombreEmpleado());
     lblNomClienTicket.setText("Sr(a): " + BuscarCliente.getNombreCliente());
     lblFechaHoy.setText("Ticket expedido el: " + Fechas.getFechaActual());
-    lblDiasRenta.setText("Rentado(s) por: " + String.valueOf(Cobrar.getDias()) + " dias.");
+    lblDiasRenta.setText("Rentado(s) por: " + String.valueOf(Inicio.getDiasRenta()) + " dias.");
     lblFechaRegreso.setText("Fecha de Entrega: " + Regreso);
-    lblTotalCobro.setText(String.valueOf(Cobrar.getCobro()));
+    lblTotalCobro.setText(String.valueOf(Inicio.getTotal()));
     }
     
     /**
