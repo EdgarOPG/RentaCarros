@@ -31,25 +31,26 @@ public class Vehiculos {
      * @param inventario
      * @return
      */
-    public static boolean addVehiculos(String marca, String modelo, String color,
+    public static boolean addVehiculos(String noSerie, String marca, String modelo, String color,
             String transmision, float precio, float tanque) {
         sql.Conexion mysql = new sql.Conexion();
         Connection link = mysql.Conectar();
-        String Query = "insert into VEHICULO(MARCA, MODELO,"
+        String Query = "insert into VEHICULO(NO_SERIE, MARCA, MODELO,"
                 + " COLOR, TRANSMISION,"
                 + " PRECIO_RENTA, TANQUE,"
                 + " ESTADO)"
-                + " VALUES (?, ?, ?, ?, ?, ?, 1)";
+                + " VALUES (?, ?, ?, ?, ?, ?, ?, 1)";
 
         try {
             PreparedStatement stat = link.prepareStatement(Query);
 
-            stat.setString(1, marca);
-            stat.setString(2, modelo);
-            stat.setString(3, color);
-            stat.setString(4, transmision);
-            stat.setFloat(5, precio);
-            stat.setFloat(6, tanque);
+            stat.setString(1, noSerie);
+            stat.setString(2, marca);
+            stat.setString(3, modelo);
+            stat.setString(4, color);
+            stat.setString(5, transmision);
+            stat.setFloat(6, precio);
+            stat.setFloat(7, tanque);
             stat.executeUpdate();
             return true;
 
@@ -273,7 +274,7 @@ public class Vehiculos {
         sql.Conexion mysql = new sql.Conexion();
         Connection link = mysql.Conectar();
 
-        Query = "select empleados.NOMBRE, vehiculo.ID_VEHICULO, vehiculo.PRECIO_RENTA, facturas.FECHA, facturas.FECHA_ENTREGA, clientes.nombre from facturas\n" +
+        Query = "select empleados.NOMBRE, vehiculo.ID_VEHICULO, vehiculo.PRECIO_RENTA, facturas.FECHA, vehiculo.NO_SERIE, facturas.FECHA_ENTREGA, clientes.nombre from facturas\n" +
 "inner join empleados on empleados.ID_EMPLEADO = facturas.ID_EMPLEADO\n" +
 "inner join vehiculo on vehiculo.ID_VEHICULO = facturas.ID_VEHICULO\n" +
 "inner join clientes on clientes.ID_CLIENTE = facturas.ID_CLIENTE WHERE clientes.nombre like ? AND facturas.ESTADO = 0  ";

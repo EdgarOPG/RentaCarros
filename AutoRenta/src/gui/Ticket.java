@@ -71,11 +71,11 @@ public class Ticket extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Marca", "Modelo", "Color", "Transmisión", "Tanque", "Precio"
+                "ID", "Marca", "Modelo", "Color", "Transmisión", "Tanque", "Precio", "No. Serie"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

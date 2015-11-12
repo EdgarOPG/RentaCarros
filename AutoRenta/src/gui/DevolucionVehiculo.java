@@ -53,6 +53,7 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
                 String nombre = data.getString("CLIENTES.NOMBRE");
                 String fecha = data.getString("FACTURAS.FECHA");
                 String fechaEntrega = data.getString("FACTURAS.FECHA_ENTREGA");
+                String noSerie = data.getString("VEHICULO.NO_SERIE");
                 float PrecioRenta = data.getFloat("VEHICULO.PRECIO_RENTA");
                 //Convertir el String fechaEntrega a Date.
                 SimpleDateFormat formateador = new SimpleDateFormat("yy-MM-dd");
@@ -67,7 +68,7 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
                     MultaTotal = 0;
                 }
                 //float multa = data.getFloat("MULTA");
-                modelo1.addRow(new Object[]{codigo, nombre, fecha, fechaEntrega, MultaTotal});
+                modelo1.addRow(new Object[]{codigo, nombre, fecha, fechaEntrega, MultaTotal, noSerie});
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmBorrarVehiculos.class.getName()).log(Level.SEVERE, null, ex);
@@ -100,11 +101,11 @@ public class DevolucionVehiculo extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID Vehiculo", "Nombre del Cliente", "Fecha de Renta", "Fecha de Entrega", "Multa"
+                "ID Vehiculo", "Nombre del Cliente", "Fecha de Renta", "Fecha de Entrega", "Multa", "No. Serie"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

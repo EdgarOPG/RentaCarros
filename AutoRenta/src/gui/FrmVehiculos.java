@@ -50,6 +50,8 @@ public class FrmVehiculos extends javax.swing.JFrame {
         txtTrans = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtNoSerie = new javax.swing.JTextField();
 
         jTextField8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +130,10 @@ public class FrmVehiculos extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("No. Serie:");
+
+        txtNoSerie.setText("12435676585");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -143,17 +149,21 @@ public class FrmVehiculos extends javax.swing.JFrame {
                                     .addComponent(jButton1)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel8)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                                            .addComponent(txtFuel, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                             .addComponent(jLabel7)
                                             .addGap(39, 39, 39)
                                             .addComponent(txtPrice))
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                             .addComponent(jLabel4)
                                             .addGap(43, 43, 43)
-                                            .addComponent(txtColor))))
+                                            .addComponent(txtColor))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel8)
+                                                .addComponent(jLabel1))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txtFuel, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                                                .addComponent(txtNoSerie)))))
                                 .addGap(104, 104, 104)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -198,7 +208,11 @@ public class FrmVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFuel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNoSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -216,8 +230,8 @@ public class FrmVehiculos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -272,6 +286,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
         txtTrans.setText("");
         txtPrice.setText("");
         txtFuel.setText("");
+        txtNoSerie.setText("");
     }
 
     public boolean guardar() {
@@ -279,11 +294,12 @@ public class FrmVehiculos extends javax.swing.JFrame {
         String modelo = txtModel.getText();
         String color = txtColor.getText();
         String transmision = txtTrans.getText();
+        String noSerie = txtNoSerie.getText();
         try {
             precio = Float.parseFloat(txtPrice.getText());
             tanque = Float.parseFloat(txtFuel.getText());
         } catch (NumberFormatException e) {
-            
+
         }
 
         if (!marca.equals("")) {
@@ -292,11 +308,16 @@ public class FrmVehiculos extends javax.swing.JFrame {
                     if (!transmision.equals("")) {
                         if (!txtPrice.getText().equals("")) {
                             if (!txtFuel.getText().equals("")) {
-                                if (sql.Vehiculos.addVehiculos(marca, modelo, color, transmision, precio, tanque)) {
-                                    JOptionPane.showMessageDialog(this, "Vehiculo Agregado");
-                                    return true;
+                                if (!noSerie.equals("")) {
+                                    if (sql.Vehiculos.addVehiculos(noSerie, marca, modelo, color, transmision, precio, tanque)) {
+                                        JOptionPane.showMessageDialog(this, "Vehiculo Agregado");
+                                        return true;
+                                    } else {
+                                        JOptionPane.showMessageDialog(this, "Ha ocurrido un error al tratar de agregar el vehiculo");
+                                    }
                                 } else {
-                                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error al tratar de agregar el vehiculo");
+                                    JOptionPane.showMessageDialog(this, "Debe de ingresar el No. de Serie del vehiculo.");
+                                    txtNoSerie.requestFocus();
                                 }
                             } else {
                                 JOptionPane.showMessageDialog(this, "Debe de ingresar que tanque tiene el vehiculo.");
@@ -365,6 +386,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -377,6 +399,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
     private javax.swing.JTextField txtColor;
     private javax.swing.JTextField txtFuel;
     private javax.swing.JTextField txtModel;
+    private javax.swing.JTextField txtNoSerie;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtTrans;
     // End of variables declaration//GEN-END:variables
