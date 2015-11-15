@@ -53,7 +53,8 @@ public class BuscarVehiculo extends javax.swing.JFrame {
                 String transmision = data.getString("TRANSMISION");
                 float precio = data.getFloat("PRECIO_RENTA");
                 float tanque = data.getFloat("TANQUE");
-                modelo1.addRow(new Object[]{codigo, marca, modelo, color, transmision, tanque, precio});
+                String noSerie = data.getString("NO_SERIE");
+                modelo1.addRow(new Object[]{codigo, marca, modelo, color, transmision, tanque, precio, noSerie});
             }
         } catch (SQLException ex) {
             Logger.getLogger(BuscarVehiculo.class.getName()).log(Level.SEVERE, null, ex);
@@ -84,11 +85,11 @@ public class BuscarVehiculo extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Marca", "Modelo", "Color", "Transmision", "Tanque", "Precio"
+                "ID", "Marca", "Modelo", "Color", "Transmision", "Tanque", "Precio", "No. Serie"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -139,10 +140,12 @@ public class BuscarVehiculo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton7))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
-                            .addComponent(txtBuscar))
-                        .addContainerGap(12, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 114, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

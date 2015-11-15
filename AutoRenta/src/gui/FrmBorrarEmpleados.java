@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -95,6 +96,11 @@ public class FrmBorrarEmpleados extends javax.swing.JFrame {
                 jTable1MouseClicked(evt);
             }
         });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -158,6 +164,10 @@ public class FrmBorrarEmpleados extends javax.swing.JFrame {
             int row = jTable1.getSelectedRow();
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
             String nombre = (String) modelo.getValueAt(row, 1);
+            String nombreEmpleado = Inicio.lblNombreEmpleado.getText();
+            if(nombre.equals(nombreEmpleado)){
+                JOptionPane.showMessageDialog(this, "No puedes eliminarte de empleados mientras estes en sesión iniciada.");
+            }else{
             if (Empleado.borrarEmpleado(nombre)) {
                 JOptionPane.showMessageDialog(this, "Empleado eliminado.");
                 listInfo("");
@@ -167,7 +177,7 @@ public class FrmBorrarEmpleados extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Error al tratar de eliminar empleado.");
             }
-
+            }
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -187,6 +197,28 @@ public class FrmBorrarEmpleados extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
 
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            int row = jTable1.getSelectedRow();
+            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+            String nombre = (String) modelo.getValueAt(row, 1);
+            String nombreEmpleado = Inicio.lblNombreEmpleado.getText();
+            if(nombre.equals(nombreEmpleado)){
+                JOptionPane.showMessageDialog(this, "No puedes eliminarte de empleados mientras estes en sesión iniciada.");
+            }else{
+            if (Empleado.borrarEmpleado(nombre)) {
+                JOptionPane.showMessageDialog(this, "Empleado eliminado.");
+                listInfo("");
+                txtBuscar.setText(null);
+                txtBuscar.requestFocus();
+                count = 0;
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al tratar de eliminar empleado.");
+            }
+            }
+        }
+    }//GEN-LAST:event_jTable1KeyPressed
 
     /**
      * @param args the command line arguments

@@ -52,7 +52,8 @@ public class FrmBorrarVehiculos extends javax.swing.JFrame {
                 String transmision = data.getString("TRANSMISION");
                 float precio = data.getFloat("PRECIO_RENTA");
                 float tanque = data.getFloat("TANQUE");
-                modelo1.addRow(new Object[]{codigo, marca, modelo, color, transmision, tanque, precio});
+                String noSerie = data.getString("NO_SERIE");
+                modelo1.addRow(new Object[]{codigo, marca, modelo, color, transmision, tanque, precio, noSerie});
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmBorrarVehiculos.class.getName()).log(Level.SEVERE, null, ex);
@@ -83,11 +84,11 @@ public class FrmBorrarVehiculos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Marca", "Modelo", "Color", "Transmision", "Tanque", "Precio"
+                "ID", "Marca", "Modelo", "Color", "Transmision", "Tanque", "Precio", "No. Serie"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -138,10 +139,9 @@ public class FrmBorrarVehiculos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton7))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
-                            .addComponent(txtBuscar))
-                        .addContainerGap(12, Short.MAX_VALUE))))
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(140, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,19 +167,19 @@ public class FrmBorrarVehiculos extends javax.swing.JFrame {
             int row = jTable1.getSelectedRow();
             DefaultTableModel modelo1 = (DefaultTableModel) jTable1.getModel();
             int id = (Integer) modelo1.getValueAt(row, 0);
-            String marca = (String) modelo1.getValueAt(row, 0);
-            String modelo = (String) modelo1.getValueAt(row, 1);
-            String color = (String) modelo1.getValueAt(row, 2);
-            String transmision = (String) modelo1.getValueAt(row, 3);
-            float precio = (float) modelo1.getValueAt(row, 6);
-            if (sql.Vehiculos.borrarVehiculo(id)) {
-                JOptionPane.showMessageDialog(this, "Vehiculo eliminado.");
-                listInfo("");
-                txtBuscar.setText(null);
-                txtBuscar.requestFocus();
-                count = 0;
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al tratar de eliminar vehiculo.");
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(null, "¿Deseas eliminar el vehiculo seleccionado?", "Precaución", dialogButton);
+            if (dialogResult == JOptionPane.YES_OPTION) { //The ISSUE is here
+                String nombre = (String) modelo1.getValueAt(row, 1);
+                if (sql.Vehiculos.borrarVehiculo(id)) {
+                    JOptionPane.showMessageDialog(this, "Vehiculo eliminado.");
+                    listInfo("");
+                    txtBuscar.setText(null);
+                    txtBuscar.requestFocus();
+                    count = 0;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al tratar de eliminar vehiculo.");
+                }
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
