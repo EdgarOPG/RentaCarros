@@ -37,6 +37,7 @@ public class Inicio extends javax.swing.JFrame {
     float precio;
     String nombreEmpleado;
     String nombreCliente;
+    String noSerie;
     Dimension dim;
     static int row;
     
@@ -284,11 +285,11 @@ public class Inicio extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Marca", "Modelo", "Color", "Transmisión", "Tanque", "Precio"
+                "ID", "Marca", "Modelo", "Color", "Transmisión", "Tanque", "Precio", "No. Serie"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -529,6 +530,7 @@ public class Inicio extends javax.swing.JFrame {
                         transmision = prod.getString("TRANSMISION");
                         tanque = prod.getFloat("TANQUE");
                         precio = prod.getFloat("PRECIO_RENTA");
+                        noSerie = prod.getString("NO_SERIE");
                         total = /*cantidad **/ precio;
 
                         /*if (inventario < cantidad) {
@@ -542,7 +544,7 @@ public class Inicio extends javax.swing.JFrame {
                          } else {
                          if (comprobarRepetidos() == false) {
                          inventario = inventario - cantidad;*/
-                        venta.addRow(new Object[]{codigo, marca, modelo, color, transmision, tanque, precio});
+                        venta.addRow(new Object[]{codigo, marca, modelo, color, transmision, tanque, precio, noSerie});
                         /*}*/
                         frm_codigo.setText("");
                         frm_codigo.requestFocus();
@@ -572,7 +574,7 @@ public class Inicio extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "No ha seleccionado a un cliente.");
             }else{
              if(row>=2){
-                 JOptionPane.showMessageDialog(this, "No puede rentar mas de un carro por cliente.");
+                 JOptionPane.showMessageDialog(this, "No puede rentar mas de un carro por factura.");
                  for (x = venta.getRowCount(); x > 0; x--) {
                 venta.removeRow(0);
             }
