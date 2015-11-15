@@ -6,11 +6,13 @@
 package gui;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +21,30 @@ import javax.swing.table.DefaultTableModel;
  * @author Dani
  */
 public class Inicio extends javax.swing.JFrame {
+
+    public class Imagen extends javax.swing.JPanel {
+
+        public Imagen() {
+        this.setSize(300, 400); //se selecciona el tamaño del panel
+        }
+
+        //Se crea un método cuyo parámetro debe ser un objeto Graphics
+
+        public void paint(Graphics grafico) {
+        Dimension height = getSize();
+
+        //Se selecciona la imagen que tenemos en el paquete de la //ruta del programa
+
+        ImageIcon Img = new ImageIcon(getClass().getResource("../images/fondo.png")); 
+
+        //se dibuja la imagen que tenemos en el paquete Images //dentro de un panel
+
+        grafico.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
+
+        setOpaque(false);
+        super.paintComponent(grafico);
+        }
+    }
     static double Total;
     static String fechaRegreso;
     static Double totalNeto = 0.0;
@@ -52,8 +78,12 @@ public class Inicio extends javax.swing.JFrame {
         cmbDiasRenta.addItem(5);
         //setFechaRegreso(Regreso);
         
+        Imagen Imagen = new Imagen();
+        pnlFondo.add(Imagen);
+        pnlFondo.repaint();
                
     }
+    
     
  
     public static void obtenerCodigo(String codigo) {
@@ -73,7 +103,6 @@ public class Inicio extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         pnlFondo = new javax.swing.JPanel();
-        lblNombCliente = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         btnCobrar = new javax.swing.JButton();
         total_venta = new javax.swing.JLabel();
@@ -87,6 +116,7 @@ public class Inicio extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        lblNombCliente = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         tbpAdmin = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
@@ -209,7 +239,8 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(lblFechaEntrega))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(188, 188, 188)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNombCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -221,7 +252,9 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jLabel2)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(lblNombCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(9, 9, 9)
                         .addComponent(jLabel3))
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -436,10 +469,6 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnlFondoLayout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(lblNombCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -449,9 +478,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblNombCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(31, 31, 31)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
