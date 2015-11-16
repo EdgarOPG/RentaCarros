@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,7 +36,7 @@ public class Cobrar extends javax.swing.JFrame {
         pagar_entregado.requestFocus();
         pagar_entregado.selectAll();
         ready = true;
-
+        this.getContentPane().setBackground(Color.getColor("#8e8ed1"));
     }
 
     /**
@@ -154,6 +155,7 @@ public class Cobrar extends javax.swing.JFrame {
 
         pago_cambio.setText("$ 0.00");
 
+        cmdCobrar.setBackground(new java.awt.Color(255, 255, 255));
         cmdCobrar.setText("Cobrar");
         cmdCobrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

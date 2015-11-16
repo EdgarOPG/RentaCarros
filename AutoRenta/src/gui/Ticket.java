@@ -4,15 +4,40 @@
  * and open the template in the editor.
  */
 package gui;
+
+import java.awt.Dimension;
+import java.awt.Graphics;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author eopg9
  */
 public class Ticket extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Ticket
-     */
+    public class Imagen extends javax.swing.JPanel {
+
+        public Imagen() {
+        this.setSize(550, 700); //se selecciona el tamaño del panel
+        }
+
+        //Se crea un método cuyo parámetro debe ser un objeto Graphics
+
+        public void paint(Graphics grafico) {
+        Dimension height = getSize();
+
+        //Se selecciona la imagen que tenemos en el paquete de la //ruta del programa
+
+        ImageIcon Img = new ImageIcon(getClass().getResource(".../images/fondoticket.jpg")); 
+
+        //se dibuja la imagen que tenemos en el paquete Images //dentro de un panel
+
+        grafico.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
+
+        setOpaque(false);
+        super.paintComponent(grafico);
+        }
+    }
     
     
 
@@ -21,6 +46,9 @@ public class Ticket extends javax.swing.JFrame {
         LlenarTicket();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setTitle("Ticket");
+//        Ticket.Imagen Imagen = new Ticket.Imagen();
+//        pnlFondo.add(Imagen);
+//        pnlFondo.repaint();
     }
 
     /**
@@ -34,15 +62,16 @@ public class Ticket extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        pnlFondo = new javax.swing.JPanel();
+        lblFechaRegreso = new javax.swing.JLabel();
+        lblDiasRenta = new javax.swing.JLabel();
         lblNomClienTicket = new javax.swing.JLabel();
+        sasdad = new javax.swing.JLabel();
+        lblTotalCobro = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        lblNomEmpTicket = new javax.swing.JLabel();
-        lblDiasRenta = new javax.swing.JLabel();
         lblFechaHoy = new javax.swing.JLabel();
-        lblTotalCobro = new javax.swing.JLabel();
-        sasdad = new javax.swing.JLabel();
-        lblFechaRegreso = new javax.swing.JLabel();
+        lblNomEmpTicket = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -64,7 +93,17 @@ public class Ticket extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        lblFechaRegreso.setText("Fecha Vencimiento: ");
+
+        lblDiasRenta.setText("Rentado por: X dias. ");
+
         lblNomClienTicket.setText("Cliente:");
+
+        sasdad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        sasdad.setText("Total: ");
+
+        lblTotalCobro.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        lblTotalCobro.setText("$0.00");
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -84,70 +123,71 @@ public class Ticket extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable2);
 
-        lblNomEmpTicket.setText("Le atendio:");
-
-        lblDiasRenta.setText("Rentado por: X dias. ");
-
         lblFechaHoy.setText("Fecha Hoy:");
 
-        lblTotalCobro.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        lblTotalCobro.setText("$0.00");
+        lblNomEmpTicket.setText("Le atendio:");
 
-        sasdad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        sasdad.setText("Total: ");
-
-        lblFechaRegreso.setText("Fecha Vencimiento: ");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlFondoLayout = new javax.swing.GroupLayout(pnlFondo);
+        pnlFondo.setLayout(pnlFondoLayout);
+        pnlFondoLayout.setHorizontalGroup(
+            pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFondoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlFondoLayout.createSequentialGroup()
+                        .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblDiasRenta)
                             .addComponent(lblFechaRegreso))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(sasdad)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTotalCobro, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlFondoLayout.createSequentialGroup()
+                        .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNomClienTicket)
                             .addComponent(lblNomEmpTicket)
-                            .addComponent(lblNomClienTicket))
+                            .addGroup(pnlFondoLayout.createSequentialGroup()
+                                .addGap(212, 212, 212)
+                                .addComponent(lblFechaHoy)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(222, 222, 222)
-                .addComponent(lblFechaHoy)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(4, 4, 4)
+        pnlFondoLayout.setVerticalGroup(
+            pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFondoLayout.createSequentialGroup()
                 .addComponent(lblFechaHoy)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNomEmpTicket)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlFondoLayout.createSequentialGroup()
                         .addComponent(lblNomClienTicket)
                         .addGap(18, 18, 18)
                         .addComponent(lblDiasRenta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblFechaRegreso)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(sasdad)
-                        .addComponent(lblTotalCobro))))
+                        .addComponent(lblTotalCobro)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlFondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(pnlFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -210,6 +250,7 @@ public class Ticket extends javax.swing.JFrame {
     public static javax.swing.JLabel lblNomClienTicket;
     public static javax.swing.JLabel lblNomEmpTicket;
     static javax.swing.JLabel lblTotalCobro;
+    private javax.swing.JPanel pnlFondo;
     private javax.swing.JLabel sasdad;
     // End of variables declaration//GEN-END:variables
 }

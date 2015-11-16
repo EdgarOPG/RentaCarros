@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import sql.Vehiculos;
@@ -24,6 +25,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         this.setTitle("Registrar Vehiculos");
+        this.getContentPane().setBackground(Color.getColor("#8e8ed1"));
     }
 
     /**
@@ -123,6 +125,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
 
         jLabel2.setText("Marca:");
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

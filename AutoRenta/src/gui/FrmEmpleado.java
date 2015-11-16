@@ -65,6 +65,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
 
         jLabel1.setText("Datos Empleado");
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Aceptar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +119,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
             }
         });
 
+        dchFechaNacimiento.setBackground(new java.awt.Color(255, 255, 255));
         dchFechaNacimiento.setDateFormatString("yy-MM-dd");
 
         jLabel7.setText("Email");

@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,6 +32,7 @@ public class FrmBorrarVehiculos extends javax.swing.JFrame {
         txtBuscar.requestFocus();
         this.setLocationRelativeTo(null);
         this.setTitle("Borrar Vehiculos");
+        this.getContentPane().setBackground(Color.getColor("#8e8ed1"));
     }
 
     /**

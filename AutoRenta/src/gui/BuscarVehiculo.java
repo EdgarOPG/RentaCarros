@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,6 +32,7 @@ public class BuscarVehiculo extends javax.swing.JFrame {
         txtBuscar.requestFocus();
         this.setLocationRelativeTo(null);
         this.setTitle("Buscar Vehiculo");
+        this.getContentPane().setBackground(Color.getColor("#8e8ed1"));
     }
     
     /**
@@ -76,7 +78,7 @@ public class BuscarVehiculo extends javax.swing.JFrame {
         txtBuscar = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Nombre.setText("Marca del Vehiculo:");
 

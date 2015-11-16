@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,6 +33,7 @@ public class FrmClientes extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         this.setTitle("Registrar Clientes");
+        this.getContentPane().setBackground(Color.getColor("#8e8ed1"));
     }
 
     /**
@@ -139,6 +141,7 @@ public class FrmClientes extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +149,7 @@ public class FrmClientes extends javax.swing.JFrame {
             }
         });
 
+        dchFechaNacimiento.setBackground(new java.awt.Color(255, 255, 255));
         dchFechaNacimiento.setDateFormatString("yy-MM-dd");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

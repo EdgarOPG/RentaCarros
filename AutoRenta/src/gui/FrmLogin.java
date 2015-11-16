@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,6 +28,7 @@ public class FrmLogin extends javax.swing.JFrame {
     public FrmLogin() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.getColor("#8e8ed1"));
     }
 
     /**
@@ -45,12 +47,14 @@ public class FrmLogin extends javax.swing.JFrame {
         txtContra = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(142, 142, 209));
         setUndecorated(true);
 
         jLabel1.setText("Usuario");
 
         jLabel2.setText("Contraseña");
 
+        btnAceptar.setBackground(new java.awt.Color(255, 255, 255));
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
