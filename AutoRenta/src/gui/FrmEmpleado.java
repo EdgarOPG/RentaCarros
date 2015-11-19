@@ -380,7 +380,7 @@ public class FrmEmpleado extends javax.swing.JFrame {
                                                 }
 
                                             } else {
-                                                JOptionPane.showMessageDialog(this, "Las contraeñas no coinciden");
+
                                             }
                                         } else {
                                             JOptionPane.showMessageDialog(this, "Debe de ingresar un telefono fijo.");
