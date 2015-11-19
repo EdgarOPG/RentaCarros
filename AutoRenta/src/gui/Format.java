@@ -53,4 +53,61 @@ import java.util.regex.Pattern;
             return false;
         }        
     }
+    
+    public static boolean isLicencia(String numero) {
+        //Las siguientes dos clases son instanseadas de la libreria de Expresiones Regulares de Java.
+        Pattern pat = null;
+        Matcher mat = null;        
+        //Aqui se declara el patron que se utilizara para identificar si es un Email
+        pat = Pattern.compile("^([0-9]{7})$");
+        mat = pat.matcher(numero);
+        //Si cumple la condicion regresa true, de otra manera falso.
+        if (mat.find()) 
+        {
+            //System.out.println("[" + mat.group() + "]");
+            return true;
+        }
+        else
+        {
+            return false;
+        }        
+    }
+    
+    public static boolean isNumeroTel(String numero) {
+        //Las siguientes dos clases son instanseadas de la libreria de Expresiones Regulares de Java.
+        Pattern pat = null;
+        Matcher mat = null;        
+        //Aqui se declara el patron que se utilizara para identificar si es un Email
+        pat = Pattern.compile("^([0-9]{10})$");
+        mat = pat.matcher(numero);
+        //Si cumple la condicion regresa true, de otra manera falso.
+        if (mat.find()) 
+        {
+            //System.out.println("[" + mat.group() + "]");
+            return true;
+        }
+        else
+        {
+            return false;
+        }     
+    }
+     
+    public static boolean isNombre(String nombre) {
+        //Las siguientes dos clases son instanseadas de la libreria de Expresiones Regulares de Java.
+        Pattern pat = null;
+        Matcher mat = null;        
+        //Aqui se declara el patron que se utilizara para identificar si es un Email
+        pat = Pattern.compile("^([a-zA-Z]*)$");
+        mat = pat.matcher(nombre);
+        //Si cumple la condicion regresa true, de otra manera falso.
+        if (mat.find()) 
+        {
+            //System.out.println("[" + mat.group() + "]");
+            return true;
+        }
+        else
+        {
+            return false;
+        }   
+    }
 }

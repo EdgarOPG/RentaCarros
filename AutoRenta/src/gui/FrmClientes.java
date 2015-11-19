@@ -296,6 +296,8 @@ public class FrmClientes extends javax.swing.JFrame {
         String direccion = txtAddress.getText();
         String referencia = txtRef.getText();
         String numLic = txtLic.getText();
+        
+        
         try {
             java.util.Date date = dchFechaNacimiento.getDate();
             //El formato de fecha "yy-MM-dd" declarado aqui y el que tiene el objeto JDateChooser 
@@ -309,13 +311,13 @@ public class FrmClientes extends javax.swing.JFrame {
         }
         String telefono = txtPhone.getText();
 
-        if (!nombre.equals("")) {
+        if (!nombre.equals("") && Format.isNombre(nombre)) {
             if (!ciudad.equals("")) {
                 if (!direccion.equals("")) {
-                    if (!referencia.equals("")) {
-                        if (!numLic.equals("")) {
+                    if (!referencia.equals("") && Format.isNombre(referencia)) {
+                        if (!numLic.equals("") && (Format.isLicencia(numLic))) {
                             if (!fechaNacimiento.equals("")) {
-                                if (!telefono.equals("")) {
+                                if (!telefono.equals("") && (Format.isNumeroTel(telefono))) {
                                     if (sql.Cliente.addCliente(nombre, ciudad, referencia, fechaNacimiento, direccion, telefono, numLic)) {
                                         JOptionPane.showMessageDialog(this, "Cliente registrado");
                                         return true;
@@ -323,12 +325,12 @@ public class FrmClientes extends javax.swing.JFrame {
                                         JOptionPane.showMessageDialog(this, "Ha ocurrido un error al tratar de registrar al cliente");
                                     }
                                 } else {
-                                    JOptionPane.showMessageDialog(this, "Debe de ingresar un telefono.");
+                                    JOptionPane.showMessageDialog(this, "Debe de ingresar un telefono a 10 digitos.");
                                     txtPhone.requestFocus();
                                 }
                             }
                         } else {
-                            JOptionPane.showMessageDialog(this, "Debe de ingresar un numero de licencia.");
+                            JOptionPane.showMessageDialog(this, "Debe de ingresar un numero de licencia correcto a 7 digitos.");
                             txtLic.requestFocus();
                         }
                     } else {

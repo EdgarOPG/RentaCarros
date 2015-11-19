@@ -356,12 +356,12 @@ public class FrmEmpleado extends javax.swing.JFrame {
         if (!usuario.equals("")) {
             if (!contra.equals("")) {
                 if (!contraRepet.equals("")) {
-                    if (!nombre.equals("")) {
+                    if (!nombre.equals("") && Format.isNombre(nombre)) {
                         if (!fechaNacimiento.equals("")) {
                             if (!direccion.equals("")) {
                                 if (!email.equals("")) {
-                                    if (!telefono.equals("")) {
-                                        if (!telefonoCasa.equals("")) {
+                                    if (!telefono.equals("") && Format.isNumeroTel(telefono)) {
+                                        if (!telefonoCasa.equals("") && Format.isNumeroTel(telefonoCasa)) {
                                             if (sql.Empleado.validarContrasenia(contra, contraRepet)) {
                                                 //Validar correo
                                                 if (format.isEmail(txtEmail.getText())) {
@@ -383,11 +383,11 @@ public class FrmEmpleado extends javax.swing.JFrame {
 
                                             }
                                         } else {
-                                            JOptionPane.showMessageDialog(this, "Debe de ingresar un telefono fijo.");
+                                            JOptionPane.showMessageDialog(this, "Debe de ingresar un telefono fijo a 10 digitos.");
                                             txtTelefonoCasa.requestFocus();
                                         }
                                     } else {
-                                        JOptionPane.showMessageDialog(this, "Debe de ingresar un telefono.");
+                                        JOptionPane.showMessageDialog(this, "Debe de ingresar un telefono a 10 digitos.");
                                         txtTelefono.requestFocus();
                                     }
                                 } else {
