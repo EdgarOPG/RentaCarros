@@ -271,6 +271,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="12435676585"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNoSerieKeyTyped"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
